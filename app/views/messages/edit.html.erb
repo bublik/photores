@@ -1,0 +1,21 @@
+<h2><%= top_forum_link(@message.forum, '')%></h2>
+
+<div class="c">
+  <table class="c border">
+    <tr><th>Редактирование</th></tr>
+    <tr>
+      <td class="c">
+        <% form_for(@message, :html => {:multipart => true}) do -%>
+          <%= render :partial => 'form' %>
+          <%= submit_tag 'Сохранить', :disable_with => 'Загрузка' %>
+        <% end -%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= link_to('Просмотреть', @message) %> |
+        <%= link_to('Назад', list_messages_path) %>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,17 @@
+<h1>Редактирование комментария</h1>
+
+<%= error_messages_for :bcomment %>
+
+<% form_for([@blog,@bcomment]) do |f| %>
+  <p>
+    <b>Body</b><br />
+    <%= f.text_area :body, :size => '60x10'%>
+  </p>
+
+  <p>
+    <%= submit_tag "Обновить", :disable_with => 'Загрузка' %>
+  </p>
+<% end %>
+
+<%#= link_to 'Show', @bcomment %> 
+<%= link_to 'Назад', blog_path(@blog) %>

@@ -1,0 +1,5 @@
+advert_host: "yourdomain.com" # your domain
+charset: "UTF-8"
+force_show_code: false #true for indexing site
+cache_lifetime: 3600 # seconds
+get_links: false #false - для разработки что бы не конектиться к sape для получения ссылок

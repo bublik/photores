@@ -1,0 +1,34 @@
+.note {
+  display: none;
+  background: url('/image/spacer.gif');
+  border: 2px solid rgb(255, 255, 255);
+  overflow: hidden;
+  position: absolute;
+  z-index: 0;
+  cursor: text;
+}
+
+.notep {
+  display: none;
+  background: #eee;
+  font-size: 8pt;
+  margin-top: 0px;
+  padding: 2px;
+  position: absolute;
+  width: auto;
+  max-width: 200px;
+  cursor: text;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border-color: #777;
+}
+
+#noteform {
+  display: none;
+  position: absolute;
+  width: 190px;
+}
+
+#noteform textarea{
+  width: 170px;
+}

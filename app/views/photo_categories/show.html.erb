@@ -1,0 +1,7 @@
+<% title(@photo_category.title) 
+keywords(@photo_category.identifier)
+description(@photo_category.title)
+%>
+<h1><%=  yield :title %></h1>
+<%= content_tag(:div, link_to(t('general.edit'), edit_photo_category_path(@photo_category), :class => 'button'), :class => 'pagination right') if is_admin? %>
+<%= slide_show_photos_list(@photos, true, true, false) %>

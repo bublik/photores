@@ -1,0 +1,100 @@
+<h1><%= APP_CONFIG['site_name'] %></h1>
+Сообщество людей, объединенных общим интересом к фотографии и фото технике.
+<div class="pad5">
+  Мы даем возможность обсуждения своих работ, размещение без ограничений своих фото работ.
+  В будущем получение персональный страниц (личного доменного имени) для портфолио.
+  Так же в далеких планах дать возможность авторам продавать свои работы через сайт.
+</div>
+<h2>Правила</h2>
+Регистрируясь здесь Вы берете на себя обязательства по потношению к другми
+участникам ресурса и администрации о этическом отношении и взаимовежливости.
+<div class="pad5">
+  Перед написанием высказывания о реботе или отвечая другим пользователям,
+  всегда вести себя в рамках приличия, иначе администрация берет на себя
+право о блокировании аккаунта.</div>
+
+<div class="pad5">Запрещается создания рекламных тем, кроме тех разделов которые предназначены для этого.</div>
+
+<h2>Права</h2>
+Любые тексты, фотографии и прочие материалы, опубликованные участникамина данном ресурсе, защищаются авторским правом на равне общественными ресурсами.
+Обладателями прав на размещенную информацию считаются участники ресурса разместившие данную информацию.
+
+<div class="pad5">Администрация ресурса предполагает, что размещенные фото материалы и их владельци и авторы
+самостоятельно урегулировали вопросы по отношению с лицами размещенными на фотографиях и не прнимает претензий к размещенным фото работам.</div>
+
+<div class="pad5"><%= APP_CONFIG['site_name'] %> не несет ответственности за содержание материалов, опубликованных участниками Форума.</div>
+
+<div class="pad5">По всем вопросам связанным с использвоанием материалов и фотографий опубликовынных на сайте для использвоания в каких-либо целях следует обращаться к их автору,
+всю необходимую контактную информацию вы можете найти на странице профайла пользователя, елси он пожелал ее размещать.</div>
+
+<div class="pad5">Размещение фотографий и изображений, а так же текстов и прочих материалов означает согласие с этими условиями.</div>
+
+<div class="pad5">В свою очередь администрация гарантирует не разглашение третьим лицам личных данных пользователей зарегистрированных на сайте.</div>
+
+<h2>Помощь в развитии</h2>
+Вы можете помочь нам привлечь новых посетителей.  <br/>
+Разместив этот код на своем сайте:
+<pre>
+<% if APP_CONFIG['domain'].eql?('nikon-club.com.ua') %>
+  <%= h("
+    <script type=\"text/javascript\" src=\"http://www.netvibes.com/js/UWA/load.js.php?env=BlogWidget2\"></script>
+    <script type=\"text/javascript\">
+    var BW = new UWA.BlogWidget({moduleUrl:'http://www.netvibes.com/modules/multipleFeeds/multipleFeeds.php?provider=custom&url=http%3A%2F%2Feco.netvibes.com%2Fuwa%2Fmultifeed%2F307%2F799'});
+    BW.setConfiguration({'title':'Никон фото клуб', 'height':292});
+    </script>
+    ") %>
+<% elsif APP_CONFIG['domain'].eql?('canon-club.com.ua') %>
+  <%= h("<script type=\"text/javascript\" src=\"http://www.netvibes.com/js/UWA/load.js.php?env=BlogWidget2\"></script>
+    <script type=\"text/javascript\">
+    var BW = new UWA.BlogWidget({moduleUrl:'http://www.netvibes.com/modules/multipleFeeds/multipleFeeds.php?provider=custom&url=http%3A%2F%2Feco.netvibes.com%2Fuwa%2Fmultifeed%2F307%2F802'});
+    BW.setConfiguration({'title':'Фото клуб любителей Canon', 'height':292, 'color':'red'});
+    </script>") %>
+<% elsif APP_CONFIG['domain'].eql?('pentax-club.com.ua') %>
+  <%= h("<script type=\"text/javascript\" src=\"http://www.netvibes.com/js/UWA/load.js.php?env=BlogWidget2\"></script>
+    <script type=\"text/javascript\">
+    var BW = new UWA.BlogWidget({moduleUrl:'http://www.netvibes.com/modules/multipleFeeds/multipleFeeds.php?provider=custom&url=http%3A%2F%2Feco.netvibes.com%2Fuwa%2Fmultifeed%2F307%2F804'});
+    BW.setConfiguration({'title':'Фото клуб Пентакс.', 'height':292});
+    </script>") %>
+<% end %>
+</pre>
+
+Посетители и вы сможете увидеть новые фотографии, последние сообщения на форуме и в блогах.<br/>
+Внешний вид блока будет выглядеть так, если вы хотите изменитьего под свой сайт, можете воспользоваться ссылкой
+<br/>
+<h3>Виджет</h3>
+Ширина будет автоматически учеличена до свободного пространства.
+<div style="width: 250px;">
+  <% if APP_CONFIG['domain'].eql?('nikon-club.com.ua') %>
+http://eco.netvibes.com/export/blog/307799
+    <script type="text/javascript" src="http://www.netvibes.com/js/UWA/load.js.php?env=BlogWidget2"></script>
+    <script type="text/javascript">
+        var BW = new UWA.BlogWidget({moduleUrl:'http://www.netvibes.com/modules/multipleFeeds/multipleFeeds.php?provider=custom&url=http%3A%2F%2Feco.netvibes.com%2Fuwa%2Fmultifeed%2F307%2F799'});
+        BW.setConfiguration({'title':'Никон фото клуб', 'height':292});
+    </script>
+  <% elsif APP_CONFIG['domain'].eql?('canon-club.com.ua') %>
+http://eco.netvibes.com/export/blog/307802
+    <script type="text/javascript" src="http://www.netvibes.com/js/UWA/load.js.php?env=BlogWidget2"></script>
+    <script type="text/javascript">
+        var BW = new UWA.BlogWidget({moduleUrl:'http://www.netvibes.com/modules/multipleFeeds/multipleFeeds.php?provider=custom&url=http%3A%2F%2Feco.netvibes.com%2Fuwa%2Fmultifeed%2F307%2F802'});
+        BW.setConfiguration({'title':'Фото клуб любителей Canon', 'height':292, 'color':'red'});
+    </script>
+  <% elsif APP_CONFIG['domain'].eql?('pentax-club.com.ua') %>
+http://eco.netvibes.com/export/blog/307804
+    <script type="text/javascript" src="http://www.netvibes.com/js/UWA/load.js.php?env=BlogWidget2"></script>
+    <script type="text/javascript">
+        var BW = new UWA.BlogWidget({moduleUrl:'http://www.netvibes.com/modules/multipleFeeds/multipleFeeds.php?provider=custom&url=http%3A%2F%2Feco.netvibes.com%2Fuwa%2Fmultifeed%2F307%2F804'});
+        BW.setConfiguration({'title':'Фото клуб Пентакс.', 'height':292});
+    </script>
+  <% end %>
+</div>
+<br/>
+<h2>Наша кнопка</h2>
+<div>
+  Возможно Вы просто захотите установить нашу кнопку:<br/>
+
+  <%= render :partial => '/friend_sites/linked_text' %>
+  <div>Вот код:</div>
+  <textarea rows="4" cols="50">
+<%= render :partial => '/friend_sites/linked_text' %>
+  </textarea>
+</div>

@@ -1,0 +1,14 @@
+<% title(@user.full_name)
+description(@user.full_name)
+%>
+<div>Сообщения за которые проголосовал <span class='b'><%= link_to_user(@user) %></span></div>
+
+<%#= small_profile(@user) %>
+
+<%= will_paginate @messages %>
+<%= @messages.empty? ? content_tag(:h3,'Не найдены') : render(:partial => 'messages_table') %>
+<%= will_paginate @messages %>
+
+<div class="right">
+  <%=  link_to(' ', url_for(:controller => 'messages', :action => 'rss',:id => params[:forum]), :class => 'ico ico-rss')%>
+</div>

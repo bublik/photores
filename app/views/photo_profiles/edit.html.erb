@@ -1,0 +1,6 @@
+<% title("Изменение фото профайла") %>
+<%= content_tag(:h1, yield(:title)) %>
+
+<% form_for(@photo_profile) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f, :profile => @photo_profile} %>
+<% end %>

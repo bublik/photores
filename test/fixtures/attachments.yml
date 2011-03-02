@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: attachments
+#
+#  id              :integer         not null, primary key
+#  user_id         :integer
+#  attachable_id   :integer
+#  filename        :string(255)     not null
+#  size            :integer         default(0), not null
+#  content_type    :string(255)
+#  height          :integer
+#  width           :integer
+#  parent_id       :integer
+#  thumbnail       :string(255)
+#  attachable_type :string(255)
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: attachments
+#
+#  id         :integer(4)      not null, primary key
+#  user_id    :integer(4)      not null
+#  message_id :string(255)     default(""), not null
+#  filename   :string(255)     default(""), not null
+#  filesize   :integer(4)      default(0), not null
+#
+
+--- {}
+

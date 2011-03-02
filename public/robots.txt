@@ -1,0 +1,8 @@
+User-agent: *
+Sitemap: /sitemap.xml
+Disallow: /finder/find
+Disallow: /photos/*complaint$
+Disallow: /photos/add_comment/*
+Disallow: /login/auth
+Allow: /
+

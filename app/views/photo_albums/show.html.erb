@@ -1,0 +1,24 @@
+<% title("Альбом (#{@photo_album.name}) / Автор #{@photo_album.user.full_name}")
+keywords("фото, альбом, #{@photo_album.name}, #{@photo_album.user.full_name}")
+description(yield(:title))
+%>
+
+<%= content_tag(:h1, h(@photo_album.name), :class => 'c') %>
+<%= google_advert_horizont_links %>
+<div class="left">
+  <%= small_profile(@photo_album.user,true) %>
+  </div>
+<div class="center w450 ml15">
+  <dd class="pad center inline">
+    <% if @photo_album.photos.empty? %>
+      <%= content_tag(:h3, 'Фотографий  нет') %>
+    <% else %>
+      <%= slide_show_photos_list(@photo_album.photos, false) %>
+    <% end -%>
+    <div class="b">Навигация слайдшоу с помощью стрелок клавиатуры < > </div>
+    <div>Для просмотра слайшоу кликайте по изображению, елси есть желание добавить
+    комментарий или перейти к странице фотографии воспользуйтесь ссылкой.</div>
+    <%= add_new_photo_link %>
+  </dd>
+</div>
+<%= content_tag(:div, '' ,:class => 'clear') %>

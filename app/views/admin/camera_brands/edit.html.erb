@@ -1,0 +1,16 @@
+<h1>Editing camera_brand</h1>
+
+<% form_for(@camera_brand) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= submit_tag "Update", :disable_with => 'Загрузка' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @camera_brand %> |
+<%= link_to 'Back', camera_brands_path %>

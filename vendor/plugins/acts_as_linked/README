@@ -1,0 +1,45 @@
+ActsAsLinked
+============
+Links exchange system for thematicks sites with youe site.
+All questions send to my forum http://rubyclub.com.ua/
+
+
+Example
+=======
+Add next line to your routes.rb file
+
+  map.resources :sites_categories, :has_many => :friend_sites
+  map.friend_site_activate '/friend_sites_activation/:id/:state', :controller => 'friend_sites', :action => 'activation'
+  map.friend_site_remote_validation '/friend_sites_validation/:id', :controller => 'friend_sites', :action => 'remote_validation'
+
+== Add method +is_admin?+
+to your application_helper.rb
+for manage links categories [CRUD]
+
+== Add to your application_helper.rb methos for create exchange link
++site_title+
++site_description+
+
+== Run migrate for create tables [Sites, FriendSites] in your database
+rake linked:migrate_down
+rake linked:migrate_up
+
+== Add Sites Catalog link your views
+<%= link_to('Sites catalog', sites_categories_path) %>
+
+== Customize optimize text
+app/views/friend_sites/_linked_text.html.erb
+add to file your link information
+
+Pkugin default use layout
+layout 'index'
+
+Requirenments
+============
+will_paginate
+hpricot
+
+
+=========
+Copyright (c) 2008 [Voloshin Ruslan], released under the MIT license
+Visit to my forum http://rubyclub.com.ua/

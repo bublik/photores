@@ -1,0 +1,76 @@
+<%= f.error_messages({:header_message => 'Возникли некоторые ошибки при работе с фотографией.',
+    :message => 'Для продолжения исправьте следующие ошибки.'}) %>
+<div id="about_photo">
+  <% if user.photo_albums.empty? -%>
+    Для начала работы с вашей галерей <%= link_to('создайте', new_photo_album_path) %> хотя бы один альбом
+  <% else -%>
+    <div class="left">
+      <dl>
+        <dt>Фото </dt>
+        <dd><%= photo.new_record? ? f.file_field(:uploaded_data) : thumb_image(photo) %>
+          <div class="c" >
+            <%= photo.new_record? ? "Размер файла должен быть не менее #{APP_CONFIG['max_photo_size']} килобайт." : rotate_buttons(photo, 'edit_page') %>
+          </div>
+        </dd>
+        <dt>Оборудование</dt>
+        <dd><%= user.photo_profiles.empty? ? link_to('добавить фототехнику', new_photo_profile_path, :class => 'small') : f.select(:photo_profile_id, user.photo_profiles.collect{|p| [p.full_description, p.id]}, { :include_blank => false }) %></dd>
+        <% if photo.new_record? && !Contest.current_konkurses.empty? %>
+          <dt>Конкурс</dt>
+          <dd><%= content_tag(:div, f.radio_button(:contest_id, '')+ 'не посылать на конкурс') %>
+            <%= Contest.current_konkurses.collect{|k| content_tag(:div, f.radio_button(:contest_id, k.id)+ k.title)} %>
+            <div class="small">елси вы решили <b>послать фотографию на конкурс</b>,<br/>
+              <b>выберите конкурс сейчас</b>, иначе позже не будет возможность ее добавить. </div>
+          </dd>
+        <% end %>
+        <dt>Название работы:</dt>
+        <dd><%= f.text_area :title , :maxsize => 255, :rows => 2, :cols => 30 %></dd>
+        <dt>Ключевые слова</dt>
+        <dd><%= f.text_field :tag_list, {:value => params[:photo] ? params[:photo][:tag_list] : photo.tags.collect{|t| t.name+' '}, :size => 40} %>
+          <div><i>разделяйте пробелами</i><br/>
+            ключевые слова позволят вам и друзьям быстрее их находить
+          </div>
+        </dd>
+        <dt>Альбомы</dt>
+        <dd class="tricol">
+          <ul>
+            <% user.photo_albums.collect do |album| -%>
+              <%= content_tag(:li,
+                check_box_tag("photo[photo_album_ids][]", album.id, photo.photo_albums.include?(album) || user.photo_albums.size.eql?(1))+
+                  h(album.name)) -%>
+            <% end -%>
+            <li><%= link_to('создать новый', new_photo_album_path, :class => 'small') -%></li>
+          </ul>
+        </dd>
+        <dt>Жанры</dt>
+        <dd class="tricol">
+          <ul>
+            <%= @cats.collect{ |cat|
+              content_tag(:li, check_box_tag("photo[photo_category_ids][]", cat.id, photo.photo_category_ids.include?(cat.id)) + cat.title)} -%>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+      <div class="right">
+        <dl>
+          <dt>Клубный доступ</dt>
+          <dd><%= f.check_box :registred %>
+            <div>установите, что бы показывать  и загружать в хорошем разрешении могли
+              только авторизированные пользователи</div>
+          </dd>
+          <dt>Попросить критики</dt>
+          <dd><%= f.check_box :want_critic %>
+            <div>Если вы хотите услышать критику к этой работе, установите галочку.</div>
+            И на странице с фотографией будет информация, о том что вы ожидаете критики от посетителей.
+          </dd>
+          <dt>Комментaрии</dt>
+          <dd><%= f.check_box :auto_approve %> без модерации
+            <div><i>при установленном значении</i> все комментарии к фото будут <i>автоматически размещаться</i> на странице с фотографией.<br/>
+              при <i>отключенном</i> значении размещение комментариев <i>необходимо будет подтверждать</i> на странице просмотра фотографии.
+            </div>
+          </dd>
+        </dl>
+        <%= map_block(@map, [500, 290], f) %>
+      </div>
+      <div class="clear c" ><%= submit_tag 'Отправить' %></div>
+    <% end -%>
+  </div>

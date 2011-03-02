@@ -1,0 +1,25 @@
+<h1>Редактирование групы форума</h1>
+
+<% form_for(@fgroup) do |f| %>
+  <%= f.error_messages %>
+  <dl>
+    <dt>
+      Название:
+    </dt>
+    <dd>
+      <%= f.text_field :name %>
+    </dd> 
+    <dt>
+      Видимый:
+    </dt>
+    <dd>
+      <%= f.check_box :is_visible %>
+    </dd>
+    <dd>
+      <%= submit_tag "Update", :disable_with => 'Загрузка' %>
+    </dd>
+  </dl>
+<% end %>
+
+<%= link_to 'Show', @fgroup %> |
+<%= link_to 'Back', fgroups_path %>

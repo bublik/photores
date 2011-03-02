@@ -1,0 +1,10 @@
+<% title(t('general.registration'))
+description(t('general.registration_new_user'))
+%>
+<%= content_tag(:h1, yield(:title)) %>
+<div class="c">
+  <% form_for(@user, :url => {:controller => 'users', :action => 'create'}, :html => {:class => 'left'}) do |f|-%>
+    <%= error_messages_for 'user' %>
+    <%= render :partial => 'new', :locals => {:f => f, :user => @user}%>
+  <% end -%>
+</div>

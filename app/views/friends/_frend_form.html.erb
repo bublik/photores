@@ -1,0 +1,44 @@
+<p>
+    <strong>Дружба</strong><br />
+    <%= f.radio_button :xfn_friendship, :xfn_contact %> встречался
+    <%= f.radio_button :xfn_friendship, :xfn_acquaintance %> знаком
+    <%= f.radio_button :xfn_friendship, :xfn_friend %> друг
+    <%= f.radio_button :xfn_friendship, false %> нет
+  </p>
+
+  <p>
+    <strong>Физически</strong><br />
+    <%= f.check_box :xfn_met %> встречал
+  </p>
+
+  <p>
+    <strong>Профессионально</strong><br />
+    <%= f.check_box :xfn_coworker %> вместе работа(ем/ли)
+    <%= f.check_box :xfn_colleague %> колега
+  </p>
+
+  <p>
+    <strong>Географически</strong><br />
+    <%= f.radio_button :xfn_geographical, :xfn_coresident %> земляки
+    <%= f.radio_button :xfn_geographical, :xfn_neighbor %> соседи
+    <%= f.radio_button :xfn_geographical, false %> нет
+  </p>
+
+  <p>
+    <strong>Семейные связи</strong><br />
+    <%= f.radio_button :xfn_family, :xfn_child %> ребёнок
+    <%= f.radio_button :xfn_family, :xfn_parent %> родитель
+    <%= f.radio_button :xfn_family, :xfn_sibling %> муж
+    <%= f.radio_button :xfn_family, :xfn_spouse %> жена
+    <%= f.radio_button :xfn_family, :xfn_kin %> родственик
+    <%= f.radio_button :xfn_family, false %> нет
+  </p>
+
+  <p>
+    <strong>Романтическая связь</strong><br />
+    <%= f.check_box :xfn_muse %> муза
+    <%= f.check_box :xfn_crush %> вас посорили
+    <%= f.check_box :xfn_date %> вас сватали
+    <%= f.check_box :xfn_sweetheart %> вы близки или состоите в браке
+  </p>
+  

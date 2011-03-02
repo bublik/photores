@@ -1,0 +1,56 @@
+<%= error_messages_for :header_message => 'Возникли ошибки при работе с сообщением.',
+  :message => 'Для продолжения исправьте следующие ошибки.' %>
+<%= markitup_requirements %>
+<table class="noborder pad5">
+  <tr><td class="l b"><%= t('general.tema') %></td>
+    <td class="l"><%= text_field(:message, :name,
+        {:value => (@to_replay ? "RE: #{@to_replay.name}" :@message.name), :size => 60} )%>
+    </td>
+  </tr>
+  <tr><td class="l b"><%= t('general.tags_word') %></td>
+    <td class="l"> <%= text_field(:message, :tag_list, {:value => @message.tags.collect{|t| t.name+' '}, :size => 60}) %>
+    </td>
+  </tr>
+  <tr><td class="l w200"><span class="b"><%= t('general.message') %></span>
+      <div><%= check_box('message', 'described') + label('message', 'described', ' Отсылать письмо о новых сообщениях') %> 
+        <%= '<br/>' + check_box('message', 'openclose') + label('message', 'openclose', msg_status('openclose')) if is_admin? || (@re && @re.parent.created_by?(current_user)) %>
+        <%= ' <br/>' + check_box('message', 'stickunstick') + label('message', 'stickunstick', msg_status('stickunstick')) if is_admin? -%>
+      </div>
+    </td>
+    <td class="l">
+      <script type="text/javascript" >
+        $(document).ready(function() { $("#markItUp").markItUp(mySettings); });
+      </script>
+      <%= text_area(:message, :message,
+        {:value => (@re ? '' : @message.message), :id =>'markItUp', :cols => 90, :rows => 15}) %>
+    </td>
+  </tr>
+  <% unless @message.attachments.empty? -%>
+    <tr>
+      <td>Удалить файлы:</td>
+      <td class="l">
+        <% @message.attachments.each do |attach| -%>
+          <div id='attach_<%= attach.id %>' class="small">
+            <%= attach.title + ' '+ link_to_remote('',
+              :url => {:controller => 'attachments', :action => 'destroy', :id => attach}, 
+              :method => :delete, :html => {:class => 'ico ico-cancel'}) %><br/>
+          </div>
+        <% end -%>
+      </td>
+    </tr>
+  <% end -%>
+  <tr><td class="l">Добавить файлы: <div class="small g">max file size: 2mb</div></td>
+    <td class="l" id="attach">
+      <%= javascript_tag("var num=0; function attach_file(block){ ++num;
+  $(block).after('<input type=\"file\" size=\"30\" name=\"file[img'+num+']\"  class=\"block\"/>'); }")%>
+      <%= link_to_function "Прикрепить файл", "attach_file('#msg_files');"%>
+      <div id="msg_files" style="display: none;" />
+    </td>
+  </tr>
+</table>
+<div>
+  <%= msg_icon.collect{ |key,val|
+    content_tag(:label,
+      radio_button_tag("message[icon]", key, (key.eql?(1) ? true : false)) + image_tag(val, :alt => val),
+      :title => val)}.to_s -%>
+</div>

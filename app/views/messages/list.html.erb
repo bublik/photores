@@ -1,0 +1,17 @@
+<% title(@forum.name); description(@forum.description) -%>
+
+<%= content_tag(:h1, top_forum_link(@forum,'')) %>
+Темы раздела: <span class='b'><%= yield :title %></span>
+
+<%= content_tag(:div, will_paginate(@messages), :class => 'r') %>
+<%= new = content_tag(:div,
+  link_to( t('general.new'), {:action => 'new',:forum=>@forum.id},:class=>'button'),
+  :class => 'pagination') if current_user %>
+
+<%= content_tag(:div, render(:partial => 'messages_table'), :class => 'c') %>
+<%= new -%>
+
+<div class="r">
+  <%= will_paginate @messages %>
+  <%= link_to(' ',  url_for(:controller=>'messages', :action => 'rss',:id=>params[:forum]), :class => 'pad5 ico ico-rss')%>
+</div>

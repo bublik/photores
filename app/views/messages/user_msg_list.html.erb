@@ -1,0 +1,12 @@
+<% title(@user.full_name)
+description(@user.full_name)
+%>
+<div>Сообщения которые оставил <span class='b'><%= link_to_user(@user) %></span></div>
+
+<div class="pagination" style="display: none;">
+  <%= small_profile(@user) %>
+</div>
+<%= will_paginate @messages %>
+<%= render :partial => 'messages_table' %>
+<%= will_paginate @messages %>
+<div class="r"><%=  link_to(' ', url_for(:controller => 'messages', :action => 'rss', :id => params[:forum]), :class => 'pad5 ico ico-rss')%></div>

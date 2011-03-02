@@ -1,0 +1,15 @@
+<div id="activation">
+  <% form_remote_for(:user,:url=>{:controller=>'login',:action=>'check_reactivate'}) do -%>
+    <%= link_to(t('general.request_activate') ,{:controller=>'login',:action=>'form_reactivate'},:class=>'small') %>
+    <table  class="w450">
+      <tr><th colspan="2"><%=t('general.request_activate') %> </th></tr>
+      <tr>
+        <td class="w50proc" >Логин:</td>
+        <td> <%= text_field "user", "login", "size" => 20 %> </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="c"><%= submit_tag t('general.send'), :disable_with => 'Загрузка' %></td>
+      </tr>
+    </table>
+  <% end -%>
+</div>

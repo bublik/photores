@@ -1,0 +1,4 @@
+page.replace_html 'flash', flash[:notice]
+#page.show 'flash'
+
+page.redirect_to '/'

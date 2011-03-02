@@ -1,0 +1,98 @@
+# == Schema Information
+#
+# Table name: photo_categories
+#
+#  id         :integer         not null, primary key
+#  title      :string(255)
+#  identifier :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+g1:
+  title: "Красота"
+  identifier: "Gallery-of-the-Beauty"
+g2:
+  title: "Портрет"
+  identifier: "Portrait"
+g3:
+  title: "Папарацци"
+  identifier: "Paparacci"
+g4:
+  title: "Реклама"
+  identifier: "Advertising-photo"
+g5:
+  title: "Город"
+  identifier: "City"
+g6:
+  title: "Архитектура"
+  identifier: "Architecture"
+g7:
+  title: "Макро"
+  identifier: "Macro-Insect"
+g8:
+  title: "Натюрморт"
+  identifier: "Still-life"
+g9:
+  title: "Цветы"
+  identifier: "Flowers"
+g10:
+  title: "Природа"
+  identifier: "Nature"
+g11:
+  title: "Животные"
+  identifier: "Animals"
+g12:
+  title: "ФотоОхота"
+  identifier: "Photo-hunting"
+g14:
+  title: "Закаты"
+  identifier: "Dawnings-sundowns"
+g15:
+  title: "Спорт"
+  identifier: "Sport"
+g16:
+  title: "Из жизни"
+  identifier: "From-life"
+g17:
+  title: "Репортаж"
+  identifier: "Reporting"
+g18:
+  title: "Монтаж"
+  identifier: "Digital-phpoto-montage"
+g19:
+  title: "Юмор"
+  identifier: "Humour"
+g20:
+  title: "Дети"
+  identifier: "Children"
+g21:
+  title: "Жанр"
+  identifier: "Genre"
+g22:
+  title: "Разное"
+  identifier: "Miscellaneous"
+g23:
+  title: "Фото АРТ"
+  identifier: "Photo-art"
+g24:
+  title: "Бизнес"
+  identifier: "Business"
+g25:
+  title: "Объекты"
+  identifier: "Objects"
+g26:
+  title: "Авто/мото"
+  identifier: "Auto-is-paved"
+g27:
+  title: "Женщины"
+  identifier: "Womens"
+g28:
+  title: "Обои"
+  identifier: "wallpaper"
+g29:
+  title: "Старые фото"
+  identifier: "Old-photo"
+g30:
+  title: "НЮ"
+  identifier: "NU"

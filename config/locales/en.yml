@@ -1,0 +1,35 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  exif:
+    make: Производитель
+    model: Модель
+    software: Программа
+    date_time_original: Дата
+    pixel_y_dimension: Высота
+    pixel_x_dimension: Ширина
+    flash: Вспышка
+    focal_length_in_35mm_film: Фокус (35мм)
+    focal_length: Фокус
+    iso_speed_ratings: ISO
+    user_comment: Коментарии
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+      date: "%Y-%m-%d"
+      md:  "%m-%d"
+      presentable_datetime: "%a %b %d, %Y %H:%M"
+      presentable_date:  "%a %b %d, %Y"
+      descr: "%d %b %Y"
+  time:
+    formats:
+      default: "%a, %d %b %Y, %H:%M:%S %z"
+      time: "%H:%M"
+      short: "%d %b, %H:%M"
+      long: "%d %B %Y, %H:%M"
+      date: "%Y-%m-%d"
+      md: "%m-%d"
+      descr: "%d %b %Y"

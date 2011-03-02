@@ -1,0 +1,12 @@
+<% unless  @blogs.empty?
+  title(h("#{params[:id]} / "+ (@blogs.first ? @blogs.first.title : '')))
+  keywords(yield(:title))
+  description(yield(:title))
+end
+%>
+<h1>Затегированы темы </h1>
+<%#= link_to(h(params[:id]), {:action => 'blogs', :action => 'tag'}, :class => '')%>
+<% @blog_title = "#{params[:id]} / "+ (@blogs.first ? @blogs.first.title : '') %>
+<%= @blogs.collect{|blog|  render_blog_msg(blog) }.to_s %>
+<%= will_paginate(@blogs) %>
+<%= link_to(' ', '/blogs.atom', :class => 'ico ico-rss')%>

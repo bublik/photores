@@ -1,0 +1,8 @@
+unless @hide_id.nil?
+  page.replace_html 'flash', flash[:notice]
+  page.remove "msg_#{@hide_id}"
+  page.remove "head_msg_#{@hide_id}"
+else
+  page.replace_html 'flash', flash[:notice]
+end
+#page.show 'flash'

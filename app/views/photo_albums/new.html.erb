@@ -1,0 +1,5 @@
+<% title("Новый альбом") %>
+<%= content_tag(:h1, yield(:title)) %>
+<% form_for(@photo_album) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f, :album => @photo_album} %>
+<% end %>

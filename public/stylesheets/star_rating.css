@@ -1,0 +1,114 @@
+.star-rating,
+.star-rating a:hover,
+.star-rating a:active,
+.star-rating a:focus,
+.star-rating .current-rating{
+  background: url('/images/star.gif') left -1000px repeat-x;
+}
+.star-rating{
+  position:relative;
+  width:125px;
+  height:25px;
+  overflow:hidden;
+  list-style:none;
+  margin:0;
+  padding:0;
+  background-position: left top;
+}
+.star-rating li{
+  display: inline;
+}
+.star-rating a, 
+.star-rating .current-rating{
+  position:absolute;
+  top:0;
+  left:0;
+  text-indent:-1000em;
+  height:25px;
+  padding-left:0;
+  outline:none;
+  overflow:hidden;
+  border: none;
+
+}
+.star-rating a:hover,
+.star-rating a:active,
+.star-rating a:focus{
+  background-position: left bottom;
+}
+.star-rating a.one-star{
+  width:20%;
+  z-index:6;
+}
+.star-rating a.two-stars{
+  width:40%;
+  z-index:5;
+}
+.star-rating a.three-stars{
+  width:60%;
+  z-index:4;
+}
+.star-rating a.four-stars{
+  width:80%;
+  z-index:3;
+}
+.star-rating a.five-stars{
+  width:100%;
+  z-index:2;
+}
+
+.star-rating .current-rating{
+  z-index:1;
+  background-position: left center;
+  line-height: 25px;
+  padding: 0;
+  height: 25px;
+}
+
+/* for an inline rater */
+.inline-rating{
+  padding: 0;
+  display: -moz-inline-block;
+  display: -moz-inline-box;
+  display: inline;
+  vertical-align: middle;
+}
+
+/* smaller star */
+.small-star{
+  list-style:none;
+  margin: 0px;
+  padding:0px;
+  width: 50px;
+  height: 10px;
+  position: relative;
+  background: url('/images/star_small.gif') top left repeat-x;
+}
+.small-star li{
+  padding:0px;
+  margin:0px;
+  float: left;
+}
+.small-star li a{
+  display:block;
+  width:10px;
+  height: 10px;
+  text-decoration: none;
+  text-indent: -9000px;
+  z-index: 20;
+  position: absolute;
+  padding: 0px;
+}
+.small-star li a:hover, .small-star li.current-rating{
+  background: url('/images/star_small.gif') left bottom;
+  height: 10px;
+  z-index: 1;
+  left: 0px;
+  padding: 0;
+}
+#last_photos li.current-rating {
+  height:10px;
+  line-height:10px;
+  text-align:center;
+  padding: 0;
+}

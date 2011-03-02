@@ -1,0 +1,38 @@
+<table class="msg border">
+  <tr>
+    <th width="2%"> </th>
+    <th>Темы</th>
+    <th width="15%">Последнее</th>
+    <th width="5%">Ответов</th>
+    <th width="5%">Просмотров</th>
+  </tr>
+  <% @messages.each do |msg|  -%>
+    <tr class="<%= cycle("bgrow1", "bgrow2") -%>">
+      <td class="c bgwhite">
+        <%= msg.stickunstick.eql?(1) ?
+          content_tag(:span,'', :class => 'ico ico-icon_alert') :
+          image_tag(msg_icon[msg.icon],:vspace=>'3',:hspace=>'3') -%>
+        <%= content_tag(:span, '', :class => 'ico ico-icon_padlock') if msg.openclose.eql?(1) -%>
+      </td>
+      <td class="l" >
+        <h2><%= link_to( h(msg.name), {:controller => 'messages', :action => 'show', :id => msg},
+            :class=>'mtitle', :title => h(msg.name))%></h2>
+        от <%= link_to_user(msg.user)%>
+        <div class="small"><small>[<%= msg.created_at.to_s(:db) %>]</small></div>
+        <%= mesg_tags(msg) %>
+        <% if is_admin? %>
+          <%= link_to_function('', "Element.toggle('edit_#{msg.id}')", :class => 'ico ico-page_edit') %>
+          <div class="r" id="edit_<%=msg.id%>" style="display: none;">
+            <%= link_to( t('general.edit'), {:controller=> 'messages', :action => 'edit',:id => msg}, :class=>'button' )%>
+            <%= link_to( t('general.delete'), {:controller=> 'messages', :action => 'destroy',:id => msg}, :confirm => "Are you sure?", :class=>'button'  )%>
+          </div>
+        <%end%>
+      </td>
+      <td class="c lp">
+        <%= distance_of_time_in_words(Time.now(),msg.updated_at)%>
+      </td>
+      <td class="c lp"><%=msg.posts%></td>
+      <td class="c lp"><%=msg.views%></td>
+    </tr>
+  <% end -%>
+</table>

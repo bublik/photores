@@ -1,0 +1,46 @@
+# == Schema Information
+#
+# Table name: forums
+#
+#  id          :integer         not null, primary key
+#  fgroup_id   :integer
+#  name        :string(100)     not null
+#  description :string(255)
+#  sort        :integer         default(0)
+#  last_msg    :integer         default(0)
+#  updated_at  :datetime        not null
+#  state       :integer         default(0)
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: forums
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(100)     default(""), not null
+#  description :string(255)
+#  sort        :integer(4)
+#  last_msg    :integer(4)      default(0)
+#  updated_at  :timestamp       not null
+#  state       :integer(4)      default(0)
+#  fgroup_id   :integer(4)
+#
+
+--- 
+forums_001: 
+  name: ddddd
+  updated_at: 2008-04-15 11:53:09
+  last_msg: "0"
+  id: "1"
+  description: sdfg sdfg
+  sort: 
+  state: "0"
+forums_002: 
+  name: asdf asdf a
+  updated_at: 2008-04-15 12:54:29
+  last_msg: "0"
+  id: "2"
+  description: rails news
+  sort: 
+  state: "0"

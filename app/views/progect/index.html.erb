@@ -1,0 +1,62 @@
+<!-- UNUSED NOW DEPRICATED-->
+<table class="noborder l" >
+  <tr>
+    <td class="w200">
+      <h2>Форум</h2>
+      <% @forums.each do |f| %>
+        <h2><%= link_to( f.name, {:controller => 'messages', :action => 'list', :forum => f.id}, :class=> 'b block') %></h2>
+      <% end -%>
+      <h2>Фото разделы</h2>
+      <ul class="nolist">
+        <%= PhotoCategory.all.collect do |c|
+          content_tag(:li,  link_to(c.title, photo_category_path(c, :html), :title => c.title) + ' ' +
+              content_tag(:sup, c.photos.count, :class => 'small') )
+        end %>
+      </ul>
+<%#= hot_tags %>
+    </td>
+    <td class="l">
+      <% if @news && !params[:page] %>
+        <h2> <%= link_to(@news.name,
+            {:controller=>'messages', :action=>'show', :id=>@news},
+            :name => @news.to_params) %></h2>
+        <div class='b small'>
+          <%= @news.created_at.to_s(:db)%> / <%= link_to_user(@news.user) %> / <%= @news.replays.count %> коментариев
+        </div>
+        <div class="message">
+          <%= sanitize(@news.message) -%>
+        </div>
+        <%= link_to('подробней', :controller => 'messages', :action => 'show', :id => @news) if @news%>
+      <% end -%>
+      <!-- photos-->
+
+      <h2>Последние фото</h2>
+      <div class="inline pad5 nolist">
+        <ul id = "last_photos">
+          <% for photo in Photo.limit(27).parents %>
+            <li><%= small_image(photo) %>
+              <% if false -%>
+                <%= link_to 'Edit', edit_photo_path(photo) %>
+                <%= link_to 'Destroy', photo, :confirm => 'Are you sure?', :method => :delete %>
+              <% end -%>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <!-- end photos-->
+      <br class="clear" />
+      <h2>Последние сообщения на форуме</h2>
+      <%= will_paginate @messages %>
+      <%= render :partial => '/messages/messages_table'%>
+      <%= will_paginate @messages %>
+    </td>
+    <td class="w200">
+      <h2>Фото комментарии</h2>
+      <%= last_photo_comments %>
+
+      <h2>Темы в блогах</h2>
+      <%= blog_last_posts %>
+      <%= frends %>
+    </td>
+  </tr>
+</table>

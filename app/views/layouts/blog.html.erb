@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ru">
+  <head>
+    <title><%= yield(:title) %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" lang="ru" content="<%= yield(:keywords) %>" />
+    <meta name="description" lang="ru" content="<%= yield(:description) %>" />
+    <meta name="author" lang="en" content="<%= APP_CONFIG['author'] %>" />
+    <meta name="Document-state" content ="Dynamic" />
+    <meta name="robots" content="index,follow" />
+    <meta name="Revisit" content="1" />
+    <link rel="shortcut icon" href="/ico.gif" type="image/gif" />
+    <meta name="google-site-verification" content="<%=  APP_CONFIG['google_verify'][APP_CONFIG['domain']] %>" />
+<%#= javascript_include_tag 'jquery-1.4.2.min', 'jquery-ui-1.7.2.custom.min', 'jquery.tools.min', 'jrails', 'application' -%>
+    <%= include_stylesheets :common, :media => 'all' %>
+    <%= rss_include(controller.controller_name) %>
+    <%= include_javascripts :workspace %>
+  </head>
+  <body>
+    <%= render :partial=>'layouts/head' %>
+    <div class="container">
+      <!--page-->
+      <div id="page">
+        <!--flash and notice-->
+        <%= flash_and_find(flash, controller.controller_name) %>
+        <%= yield %>
+        <%= content_tag(:div, '', :id => 'footnotes_holder') if RAILS_ENV.eql?('development') %>
+        <br class="clear"/>
+      </div>
+    </div>
+    <%= slide_block %>
+    <%= footer(controller.controller_name) %>
+    <div class="c"><%= google_analytics %></div>
+  </body>
+</html>

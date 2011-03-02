@@ -1,0 +1,3 @@
+page.replace_html 'tdmanage',  :file => 'users/edit_attachment', :locals => {:pmsg=>@attachments}
+page.replace_html 'flash', ''
+#page.show 'flash'

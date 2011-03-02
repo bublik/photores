@@ -1,0 +1,9 @@
+<h1>Новая заметка</h1>
+<%= javascript_include_tag :fckeditor -%>
+<% form_for(@wiki, :html => {:multipart => true}) do |f| -%>
+  <%= render :partial => 'form' %>
+  <%= f.submit 'Сохранить' %>
+<% end -%>
+
+
+<%= link_to 'В начало', wikis_path %>

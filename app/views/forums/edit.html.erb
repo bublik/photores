@@ -1,0 +1,11 @@
+<div class="c">
+  <br/>
+  <% form_for(:forums,@forums,:url =>{:action => 'update', :id => @forums}) do  %>
+    <%= render :partial => 'form' %>
+    <%= submit_tag t('general.save'), :disable_with => 'Загрузка' %>
+  <% end %>
+</div>
+<div class="pagination">
+  <%= link_to( t('general.show'), {:action => 'show', :id => @forums}, :class => 'button') %> |
+  <%= link_to( t('general.back'), {:action => 'list'}, :class => 'button' )%>
+</div>

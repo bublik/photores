@@ -1,0 +1,10 @@
+case params[:change_to]
+when 'new'
+  page.remove "manage_comment_#{@cid}"
+  page.visual_effect(:highlight, "comment_#{@cid}", :duration => 0.5)
+when 'delete'
+  page.remove "comment_#{@cid}"
+else
+  page.replace_html "comment_#{@cid}", flash.now[:notice]
+  page.visual_effect(:highlight, "comment_#{@cid}", :duration => 0.5)
+end

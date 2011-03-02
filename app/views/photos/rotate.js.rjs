@@ -1,0 +1,6 @@
+if params[:page].eql?('edit_page')
+  page.replace_html 'medium_photo', image_tag(@photo.public_filename(:thumb) + '?' + params[:to])
+else
+  page.replace_html 'medium_photo', image_tag(@photo.public_filename(:medium) + '?' + params[:to])
+  page.replace_html 'photo_row', photo_row(@photo)  
+end

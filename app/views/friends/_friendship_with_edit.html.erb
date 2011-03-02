@@ -1,0 +1,15 @@
+<dt id="friendname" class="<%= cycle('bgrow1', 'bgrow2') %>">
+  <%= link_to friendship_with_edit.friend.full_name,
+    user_path(friendship_with_edit.friend),
+    :class => 'xfnRelationship',
+    :rel => xfn_rel_tag(@user, friendship_with_edit.friend),
+    :id => "friend-#{friendship_with_edit.friend.id}", :title => 'перейти на его профайл' %>
+  <%= link_to('', edit_user_friend_url(:user_id => @user, :id => friendship_with_edit.friend),
+    :class => 'ico ico-page_edit', :title => 'изменить отношения с ним') -%>
+  </dt>
+  <dd id="activity">
+    <% if friendship_with_edit.friend.last_activity_at %>
+      <%= friendship_with_edit.friend.last_activity %> около
+      <%= time_ago_in_words(friendship_with_edit.friend.last_activity_at) %> назад
+    <% end %>
+  </dd>

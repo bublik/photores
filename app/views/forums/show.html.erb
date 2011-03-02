@@ -1,0 +1,15 @@
+<% title t('general.forum') %>
+<% description t('general.forum') %>
+<br/>
+<table class="border c" >
+  <tr><th colspan="2"><%= yield :title %></th></tr>
+  <tr><td>Название</td><td><%=h @forums.name  %></td> </tr>
+  <tr><td>Краткое описание</td><td><%=h @forums.description  %></td></tr>
+  <tr><td>Порядок сортировки</td><td><%=@forums.sort  %></td> </tr>
+  <tr><td>Статус</td><td> <%=state_list.index(@forums.state)  %></td></tr>
+</table>
+
+<div class="pagination">
+  <%= link_to( t('general.edit'), { :action => 'edit', :id => @forums}, :class => 'button') %> |
+  <%= link_to( t('general.back'), { :action => 'list'}, :class => 'button' )%>
+</div>

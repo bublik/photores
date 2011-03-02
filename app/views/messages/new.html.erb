@@ -1,0 +1,21 @@
+<%= content_tag(:h2, top_forum_link(@forum, '')) -%>
+<%= back = content_tag(:div, link_to(t('general.back'), {:action => 'list', :forum => @forum.id}, :class => 'button'), :class => 'pagination') %>
+<table class="border c">
+  <tr>
+    <th><%= t('general.new_message') -%></th>
+  </tr>
+  <tr>
+    <td align="center" class="pad5">
+      <!--start from add post-->
+      <%  form_for(:message, @message,
+        :url=>{:controller => 'messages', :action => 'create'},
+        :html=>{:multipart => true}) do -%>
+        <%= hidden_field_tag("message[forum_id]", @forum.id) -%>
+        <%= render :partial => 'form' -%>
+        <%= submit_tag t('general.create'), :disable_with => 'Загрузка' -%>
+      <% end -%>
+      <!--end from add post-->
+    </td>
+  </tr>
+</table>
+<%= back -%>

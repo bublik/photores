@@ -1,0 +1,12 @@
+<% title(@message.name)
+description(@message.message[0,80])
+keywords(@message.name.split("\s").join(', ') + @message.tag_list)
+%>
+<h1><%= top_forum_link(@message.forum,@message) %></h1>
+<div id='notice'></div>
+<%= show_edition(@message) %>
+<% [@message, @message.replays].flatten.each do  |mesg| -%>
+  <%= render :partial => "msg", :locals => { :mesg => mesg } -%>
+<% end -%>
+<div id="replay_block"></div>
+<%= show_edition(@message) %>

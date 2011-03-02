@@ -1,0 +1,8 @@
+<% title('Редактирование фотографии') %>
+<h1><%= yield :title %></h1>
+<div>
+  <% form_for(@photo) do |f| %>
+    <%= render :partial => 'form', :locals => {:f => f, :photo => @photo, :user => @photo.user} %>
+  <% end %>
+</div>
+

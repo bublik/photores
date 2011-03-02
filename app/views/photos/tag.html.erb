@@ -1,0 +1,16 @@
+<% title("Фото #{params[:tag_name]}") 
+description("#{params[:tag_name]} #{@photos.first.title}")
+keywords(params[:tag_name])
+%>
+
+<div class="inline">
+  <% unless @photos.empty? %>
+    <h2>Фотографи с <i><%= params[:tag_name] %></i></h2>
+    <ul>
+      <% for photo in @photos %>
+        <li><%= small_image(photo) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+<%= will_paginate(@photos) %>

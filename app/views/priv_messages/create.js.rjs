@@ -1,0 +1,7 @@
+  page.replace_html 'flash', flash[:notice] 
+if session[:msg_to]
+  page.hide 'page'
+else
+  page.show 'page'
+  page.remove 'modal_window'
+end

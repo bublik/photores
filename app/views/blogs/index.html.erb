@@ -1,0 +1,21 @@
+<% if @blogs.first
+  title(@blogs.first.title )
+  description(yield(:title))
+end
+%>
+
+<div id="mainblog" class="left">
+  <%= @blogs.collect{|blog| render_blog_msg(blog)}.to_s %>
+</div>
+<div id="sidebar" class="right">
+  <%= small_profile(@subdomain_owner) %>
+  <div class="pad5"><%= hot_blog_tags %></div>
+  <div class="pad5">
+    <h2>Новости</h2>
+    <%= link_to('Atom','/blogs.atom', :class => 'ico ico-rss') +
+      link_to('Rss','/blogs.rss', :class => 'ico ico-rss') -%>
+  </div>
+</div>
+
+<br clear="all" />
+<div class="right"><%= will_paginate(@blogs) %></div>

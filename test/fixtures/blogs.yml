@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: blogs
+#
+#  id         :integer         not null, primary key
+#  user_id    :integer
+#  title      :string(255)
+#  body       :text
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: blogs
+#
+#  id         :integer(4)      not null, primary key
+#  user_id    :integer(4)
+#  title      :string(255)
+#  body       :text
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+--- {}
+

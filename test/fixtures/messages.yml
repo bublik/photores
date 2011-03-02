@@ -1,0 +1,286 @@
+# == Schema Information
+#
+# Table name: messages
+#
+#  id           :integer         not null, primary key
+#  parent_id    :integer
+#  user_id      :integer         not null
+#  forum_id     :integer         not null
+#  name         :string(250)     not null
+#  message      :text
+#  posts        :integer         default(0)
+#  views        :integer         default(0)
+#  openclose    :integer         default(0)
+#  stickunstick :integer         default(0)
+#  icon         :integer
+#  ip           :string(50)
+#  described    :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  rating_count :integer
+#  rating_total :decimal(, )
+#  rating_avg   :decimal(10, 2)
+#  toreplay_id  :integer
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: messages
+#
+#  id           :integer(4)      not null, primary key
+#  parent_id    :integer(4)
+#  user_id      :integer(4)      not null
+#  forum_id     :integer(4)      not null
+#  name         :string(250)     default(""), not null
+#  message      :text
+#  created_at   :datetime
+#  updated_at   :datetime
+#  posts        :integer(4)      default(0)
+#  views        :integer(4)      default(0)
+#  openclose    :integer(4)      default(0)
+#  stickunstick :integer(4)      default(0)
+#  icon         :integer(4)
+#  ip           :string(50)
+#  described    :integer(4)
+#  rating_count :integer(4)
+#  rating_total :integer(10)
+#  rating_avg   :decimal(10, 2)
+#
+
+--- 
+messages_003: 
+  message: wertwertwert
+  name: wertwert
+  updated_at: 2008-04-21 11:30:36
+  described: "1"
+  icon: "1"
+  openclose: "0"
+  id: "4"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "0"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:30:36
+messages_004: 
+  message: wertwertwert
+  name: wertwert
+  updated_at: 2008-04-21 11:42:38
+  described: "1"
+  icon: "1"
+  openclose: "0"
+  id: "5"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "2"
+  forum_id: "2"
+  posts: "1"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:42:39
+messages_005: 
+  message: ads fasdf asdf
+  name: "RE: wertwert"
+  updated_at: 2008-04-21 11:42:37
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "6"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "0"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: "5"
+  created_at: 2008-04-21 11:42:37
+messages_006: 
+  message: gggggggggggggggg
+  name: gggggggggggggggggggggg
+  updated_at: 2008-04-21 11:43:48
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "7"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "1"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:46:12
+messages_007: 
+  message: asdfasdf asdf asdf
+  name: asdfasdf asdf
+  updated_at: 2008-04-21 11:46:25
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "8"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "1"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:48:02
+messages_008: 
+  message: ssdfg sdfg sdfg
+  name: sfdgsdfg ss
+  updated_at: 2008-04-21 11:48:13
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "9"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "1"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:48:46
+messages_010: 
+  message: asdf asdf asdf
+  name: "asdfasdfasd df "
+  updated_at: 2008-04-21 11:50:36
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "11"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "0"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:50:36
+messages_009: 
+  message: asdf asdf asdf
+  name: "asdfasdfasd df "
+  updated_at: 2008-04-21 11:48:58
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "10"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "0"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:48:58
+messages_011: 
+  message: asdf asdf asdf
+  name: "asdfasdfasd df "
+  updated_at: 2008-04-21 11:50:44
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "12"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "0"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:50:44
+messages_012: 
+  message: asdf asdf asdf
+  name: "asdfasdfasd df "
+  updated_at: 2008-04-21 11:51:19
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "13"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "3"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:55:34
+messages_001: 
+  message: " asdf asdf\r\n\
+    <code>\r\n    def silence\r\n\
+    39:         old_logger_level, logger.level = logger.level, Logger::ERROR if logger\r\n\
+    40:         yield\r\n\
+    41:       ensure\r\n\
+    42:         logger.level = old_logger_level if logger\r\n\
+    43:       end\r\n\
+    </code>\r\n\
+    <ruby>\r\n    def silence\r\n\
+    39:         old_logger_level, logger.level = logger.level, Logger::ERROR if logger\r\n\
+    40:         yield\r\n\
+    41:       ensure\r\n\
+    42:         logger.level = old_logger_level if logger\r\n\
+    43:       end\r\n\
+    </ruby>"
+  name: asdf asdf a
+  updated_at: 2008-04-15 11:59:16
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "1"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "23"
+  forum_id: "1"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-15 13:28:29
+messages_002: 
+  message: |-
+    sdfg 
+    <code>
+    require 'syntax/convertors/html'
+    require 'Win32API'
+    require 'win32/clipboard'
+    include Win32
+    
+    in_data = Clipboard.data
+    convertor = Syntax::Convertors::HTML.for_syntax "ruby"
+    code_html = convertor.convert(in_data)
+    Clipboard.set_data(code_html)
+    </code>
+    asdf asdf asdf
+    asdf asdf
+     asdf
+     asdf
+     asdf
+    
+    <ruby>
+    require 'syntax/convertors/html'
+    require 'Win32API'
+    require 'win32/clipboard'
+    include Win32
+    
+    in_data = Clipboard.data
+    convertor = Syntax::Convertors::HTML.for_syntax "ruby"
+    code_html = convertor.convert(in_data)
+    Clipboard.set_data(code_html)
+    </ruby>
+  name: sdfg sdfg s
+  updated_at: 2008-04-21 09:58:40
+  described: "0"
+  icon: "1"
+  openclose: "0"
+  id: "2"
+  ip: 127.0.0.1
+  stickunstick: "0"
+  views: "8"
+  forum_id: "2"
+  posts: "0"
+  user_id: "1"
+  parent_id: 
+  created_at: 2008-04-21 11:30:19

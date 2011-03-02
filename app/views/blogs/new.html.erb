@@ -1,0 +1,10 @@
+<h1>Новая запись</h1>
+
+<%= error_messages_for :blog, 
+  :header_message => 'Чтобы создать сообщение.',
+  :message => 'Исправьте следующие ошибки.'
+%>
+
+<%= render :partial => 'form_msg', :locals => {:blog => @blog}%>
+  
+<%= link_to 'Назад', blogs_path %>

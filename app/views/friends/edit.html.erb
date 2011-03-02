@@ -1,0 +1,20 @@
+<h2>Изменение отношений с <strong class="orange"><%= @friend.full_name %></strong></h2>
+
+<%= error_messages_for :friendship %>
+
+<% form_for(:friendship,
+            :url => user_friend_path(:user_id => current_user,
+            :friend_id => @friend),
+            :html => { :multipart => true, :method => :put }) do |f| %>
+
+  <%= render :partial => 'frend_form', :locals => {:f => f} %>
+  <p>
+    <%= submit_tag 'Сохранить', :disable_with => 'Загрузка' %> или <%= link_to 'отменить', user_path(@friend) %>
+  </p>
+  <p>
+  <%= link_to 'Разорвать все связи с ним',
+              user_friend_path(:user_id => current_user, :id => @friend),
+                          :method => :delete %>
+  </p>
+
+<% end %>

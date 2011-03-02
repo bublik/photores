@@ -1,0 +1,82 @@
+# == Schema Information
+#
+# Table name: photos
+#
+#  id               :integer         not null, primary key
+#  title            :string(255)
+#  user_id          :integer
+#  parent_id        :integer
+#  size             :integer
+#  content_type     :string(255)
+#  filename         :string(255)
+#  height           :integer
+#  width            :integer
+#  thumbnail        :string(255)
+#  registred        :boolean
+#  auto_approve     :boolean         default(TRUE)
+#  views            :integer         default(0)
+#  complaint        :integer         default(0)
+#  downloads        :integer         default(0)
+#  comments_count   :integer         default(0)
+#  comment_at       :date
+#  show_at          :date
+#  download_at      :date
+#  created_at       :datetime
+#  updated_at       :datetime
+#  photo_profile_id :integer
+#  contest_id       :integer
+#  is_moderated     :boolean         default(TRUE)
+#  exif             :text
+#  want_critic      :boolean         default(TRUE)
+#  lat              :decimal(15, 10)
+#  lng              :decimal(15, 10)
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: photos
+#
+#  id               :integer(4)      not null, primary key
+#  title            :string(255)
+#  user_id          :integer(4)
+#  parent_id        :integer(4)
+#  views            :integer(4)      default(0)
+#  downloads        :integer(4)      default(0)
+#  size             :integer(4)
+#  content_type     :string(255)
+#  filename         :string(255)
+#  height           :integer(4)
+#  width            :integer(4)
+#  thumbnail        :string(255)
+#  registred        :boolean(1)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  auto_approve     :boolean(1)      default(TRUE)
+#  photo_profile_id :integer(4)
+#  complaint        :integer(4)      default(0)
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  user_id: 1
+  size: 1
+  content_type: MyString
+  filename: MyString
+  height: 1
+  width: 1
+  parent_id: 1
+  thumbnail: MyString
+
+two:
+  title: MyString
+  user_id: 1
+  size: 1
+  content_type: MyString
+  filename: MyString
+  height: 1
+  width: 1
+  parent_id: 1
+  thumbnail: MyString

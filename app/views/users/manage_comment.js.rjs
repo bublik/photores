@@ -1,0 +1,8 @@
+case params[:change_to]
+when 'new'
+  page.hide "manage_comment_#{@comment.id}"
+when 'delete'
+  page.hide "comment_#{@comment.id}"
+else
+  page.replace_html 'flash', flash.now[:notice]
+end

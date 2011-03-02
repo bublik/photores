@@ -1,0 +1,21 @@
+<%= error_messages_for :bcomment %>
+<%= markitup_requirements %>
+<% form_for([blog, bcomment]) do |f| %>
+  <script type="text/javascript" >
+    $(document).ready(function() { $("#markItUp").markItUp(mySettings); });
+  </script>
+  <dl>
+    <dt class="b">Новый комментарий </dt>
+    <dd>
+      <%= f.text_area :body, :size => '60x10', :id =>'markItUp' %>
+    </dd>
+    <% unless current_user -%>
+      <dd class="small"> зарегистрируйтесь для добавления сообщений</dd>
+    <% end -%>
+    <dd>
+      <%= submit_tag "Создать", :disable_with => 'Загрузка' %>
+    </dd>
+  </dl>
+<% end %>
+
+<%#= link_to 'Назад', blog_bcomments_path(blog) %>

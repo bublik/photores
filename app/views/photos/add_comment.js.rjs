@@ -1,0 +1,9 @@
+unless @photo.auto_approve
+  page.replace_html 'comments_form', content_tag(:div, flash[:notice], :class => 'b orange', :id => 'waiting_approve')
+  page.visual_effect(:highlight, 'waiting_approve', :duration => 0.5)
+else
+  page.replace_html 'comments_form', ''
+  page.insert_html :bottom, 'comments', render_comment(@photo,@comment)
+  page.visual_effect(:highlight, "comment_#{@comment.id}", :duration => 0.5)
+end
+ 

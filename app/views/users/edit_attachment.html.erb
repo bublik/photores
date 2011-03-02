@@ -1,0 +1,17 @@
+<% title(t('users.attachment_list')) %>
+<%= profile_menu %>
+<h1><%= yield(:title) %></h1>
+<% if current_user.attachments.empty? -%>
+  <%= t('users.not_found_attachment_list') %>
+<% else -%>
+  <table class="fleft">
+    <% current_user.attachments.each do |file| -%>
+      <tr>
+        <td> <%= link_to(file.message.name, {:controller => 'messages', :action => 'show', :id => file.message }, :target => '_blank')%></td>
+        <td> <%= file.is_image? ?
+            link_to(file.is_exist_thumb? ? image_tag(file.public_filename(:thumb)) : file.title,  file.public_filename, :class => 'slide') :
+            link_to(file.filename, attachment_url(file)) %> </td>
+      </tr>
+    <% end -%>
+  </table>
+<% end %>

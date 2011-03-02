@@ -1,0 +1,27 @@
+<% title("Список вашей фото техники") %>
+
+<div class="left"><%= profile_menu %></div>
+
+
+<%= content_tag(:h1, yield(:title)) %>
+<ul class="nolist">
+  <% for photo_profile in @photo_profiles %>
+    <li>
+      <span class="pad5">
+        <%= link_to_if photo_profile.photos.empty?, ' ', photo_profile, :class => 'ico ico-page_delete', :title => 'Удалить профайл', :confirm => 'Вы уверены?', :method => :delete %>
+        <%= link_to ' ', edit_photo_profile_path(photo_profile), :class => 'ico ico-page_edit', :title => 'Изменить профайл' %>
+      </span>
+      <%=h photo_profile.camera_brand.name %> (<%=h photo_profile.description %>)
+      <%= radio_button(:photo_profile, :is_default, photo_profile.is_default)  %>
+    </li>
+  <% end %>
+</ul>
+
+<p class="padtop15">
+  <%= link_to('создать новый профайл', new_photo_profile_path, :class => 'ico ico-page_new')%>
+</p>
+
+<div class="small">
+  Создавайте новый профайлы, для оборудования которое вы используете. <br/>
+  Далее, при загрузке фотографий вы сможете выбрать одну из созданных конфигураций своей фото техники.
+</div>

@@ -1,0 +1,22 @@
+<h1>Listing fgroups</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Is visible</th>
+  </tr>
+
+<% for fgroup in @fgroups %>
+  <tr>
+    <td><%=h fgroup.name %></td>
+    <td><%=h fgroup.is_visible %></td>
+    <td><%= link_to 'Show', fgroup %></td>
+    <td><%= link_to 'Edit', edit_fgroup_path(fgroup) %></td>
+    <td><%= link_to 'Destroy', fgroup, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New fgroup', new_fgroup_path %>

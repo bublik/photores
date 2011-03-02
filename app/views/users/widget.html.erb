@@ -1,0 +1,64 @@
+<table>
+  <tr>
+    <td class="w200">
+      <%= profile_menu %>
+    </td>
+    <td class="l">
+      <h1>Виджет для размещения на других сайтах</h1>
+      <div>Внешний вид виджетов настриваем, ниже приведены два варианта виджета.
+        Первый - настройка по умолчанию, и второй как пример возможной растройки, вам доступны следующие пераметры:</div>
+      <ul>
+        <li><i>limit</i> - лимит фотографий</li>
+        <li><i>width</i> - ширина блока в пикселях </li>
+        <li><i>height</i> - высота блока в пикселях</li>
+        <li><i>charset</i> - кодировка для отображения на вашем сайте (может быть windows-1251, по умолчанию utf-8)</li>
+      </ul>
+
+      <div class="left">
+
+        <h2>Случайные фоторафии <%= current_user.full_name %></h2>
+        <div class="left">
+          <textarea cols="70" rows="2"><%= h("<script language=\"Javascript\" type=\"text/javascript\" src=\"http://#{APP_CONFIG['domain']}/widget_user_photos.js?login=#{current_user.login}\"></script>") %></textarea>
+        </div>
+        <script language="Javascript" type="text/javascript" src="http://<%= APP_CONFIG['domain'] %>/widget_user_photos.js?login=<%= current_user.login %>"></script>
+
+        <hr/>
+        <div class="left">
+          пример с настраиваемыми внешним видом<br/>
+          <textarea cols="70" rows="2"><%= h("<script language=\"Javascript\" type=\"text/javascript\" src=\"http://#{APP_CONFIG['domain']}/widget_user_photos.js?login=#{current_user.login}&limit=8&width=200&height=300\"></script>") %></textarea>
+        </div>
+        <script language="Javascript" type="text/javascript" src="http://<%= APP_CONFIG['domain'] %>/widget_user_photos.js?login=<%= current_user.login%>&limit=8&width=200&height=300"></script>
+
+
+        <h2>Последние фотографии на нашем сайте</h2>
+        <div class="left">
+          <textarea cols="70" rows="2"><%= h("<script language=\"Javascript\" type=\"text/javascript\" src=\"http://#{APP_CONFIG['domain']}/widget_last_photos.js\"></script>") %></textarea>
+        </div>
+        <script language="Javascript" type="text/javascript" src="http://<%= APP_CONFIG['domain'] %>/widget_last_photos.js"></script>
+
+        <hr/>
+        <div class="left">
+          пример с настраиваемыми внешним видом<br/>
+          <textarea cols="70" rows="2"><%= h("<script language=\"Javascript\" type=\"text/javascript\" src=\"http://#{APP_CONFIG['domain']}/widget_last_photos.js?limit=8&width=200&height=300\"></script>") %></textarea>
+        </div>
+        <script language="Javascript" type="text/javascript" src="http://<%= APP_CONFIG['domain'] %>/widget_last_photos.js?limit=8&width=200&height=300"></script>
+
+
+        <h2>Случайные фотографии нашего сайта</h2>
+        <div class="left">
+          <textarea cols="70" rows="2"><%= h("<script language=\"Javascript\" type=\"text/javascript\" src=\"http://#{APP_CONFIG['domain']}/widget_random_photos.js\"></script>") %></textarea>
+        </div>
+        <script language="Javascript" type="text/javascript" src="http://<%= APP_CONFIG['domain'] %>/widget_random_photos.js"></script>
+
+        <hr/>
+        <div class="left">
+          пример с настраиваемыми внешним видом<br/>
+          <textarea cols="70" rows="2"><%= h("<script language=\"Javascript\" type=\"text/javascript\" src=\"http://#{APP_CONFIG['domain']}/widget_random_photos.js?limit=8&width=200&height=300\"></script>") %></textarea>
+        </div>
+        <script language="Javascript" type="text/javascript" src="http://<%= APP_CONFIG['domain'] %>/widget_random_photos.js?limit=8&width=200&height=300"></script>
+
+      </div>
+
+    </td>
+  </tr>
+</table>

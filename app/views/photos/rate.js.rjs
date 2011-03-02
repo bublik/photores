@@ -1,0 +1,1 @@
+page.replace_html("rate_#{@photo.id}", render_rating(@photo))

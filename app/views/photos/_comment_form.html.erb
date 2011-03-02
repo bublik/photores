@@ -1,0 +1,16 @@
+<% if request.get? %>
+  <h1><%= t('activerecord.models.photo') +': '+ @photo.title %></h1>
+  <div id="medium_photo">
+    <%= image_tag(@photo.public_filename(@photo.registred && !logged_in? ? :thumb : :medium), :alt => @photo.alt, :title => @photo.alt) %>
+    <%= content_tag(:h4, 'Автор закрыл гостевой просмотр и загрузку в большом разрешении ('+ link_to('зарегистрироваться', new_user_path)+ ').') if @photo.registred && !logged_in?  %>
+  </div>
+<% end %>
+<h3><%= t('activerecord.models.bcomment') %></h3>
+<div class="center">
+  <% form_remote_for([@photo, @comment], :url => photo_comment_path(@photo), :html =>{:href => photo_comment_path(@photo)}) do |f| %>
+    <%= text_area(:comment, :comment, :rows => 10) %>
+    <div><%= submit_tag t('general.send') %>
+      <%= link_to_function(t('general.close'),"$('#comments_form').toggle()") %>
+    </div>
+  <% end %>
+</div>

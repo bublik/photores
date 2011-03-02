@@ -1,0 +1,5 @@
+page.replace_html 'flash', flash.now[:notice]
+#page.show 'flash'
+page.replace "photo_#{params[:id].to_i}", ''
+
+

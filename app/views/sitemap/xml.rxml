@@ -1,0 +1,63 @@
+xml.instruct! :xml, :version=>"1.0"
+xml.tag! 'urlset', "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
+  #README https://www.google.com/webmasters/tools/docs/ru/protocol.html
+  #TODO
+  #add tags (messages, logs, photos)list 
+  #add photos list
+  #
+  
+  #главная страница
+  xml.tag! 'url' do
+    xml.tag! 'loc', 'http://'+APP_CONFIG['domain']
+    xml.tag! 'lastmod', @last_updated.strftime("%Y-%m-%d")
+    xml.tag! 'changefreq', 'daily'
+    xml.tag! 'priority', '0.1'
+  end
+  #разедлы
+  xml.tag! 'url' do
+    xml.tag! 'loc', url_for(:only_path => false, :controller => 'forums', :action => 'list')
+    xml.tag! 'lastmod', @last_updated.strftime("%Y-%m-%d")
+    xml.tag! 'changefreq', 'daily'
+    xml.tag! 'priority', '0.1'
+  end
+
+  #Страницы блогов
+  @photos.each do |photo|
+    xml.tag! 'url' do
+      xml.tag! 'loc', photo_url(photo, :html)
+      xml.tag! 'lastmod', photo.updated_at.strftime("%Y-%m-%d")
+      xml.tag! 'changefreq', 'daily'
+      xml.tag! 'priority', '0.9'
+    end
+  end
+
+  #разделы форума
+  @forums.each do |f|
+    xml.tag! 'url' do
+      xml.tag! 'loc', url_for(:only_path => false, :controller => 'messages', :action => 'list', :forum => f.id)
+      xml.tag! 'lastmod', f.updated_at.strftime("%Y-%m-%d")
+      xml.tag! 'changefreq', 'monthly'
+      xml.tag! 'priority', '0.9'
+    end
+  end
+
+  #  #Страницы блогов
+  @blogs.each do |blog|
+    xml.tag! 'url' do
+      xml.tag! 'loc', blog_url(blog, :html)
+      xml.tag! 'lastmod', blog.updated_at.strftime("%Y-%m-%d")
+      xml.tag! 'changefreq', 'daily'
+      xml.tag! 'priority', '0.8'
+    end
+  end
+
+  #страницы сообщений на форуме
+  @messages.each do |page|
+    xml.tag! 'url' do
+      xml.tag! 'loc', url_for(:only_path => false, :controller => 'messages', :action => 'show', :id => page)
+      xml.tag! 'lastmod', page.updated_at.strftime("%Y-%m-%d")
+      xml.tag! 'changefreq', 'monthly'
+      xml.tag! 'priority', '0.7'
+    end
+  end
+end

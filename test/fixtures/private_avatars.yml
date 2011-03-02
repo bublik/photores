@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: private_avatars
+#
+#  id           :integer         not null, primary key
+#  user_id      :integer
+#  parent_id    :integer
+#  content_type :string(255)
+#  filename     :string(255)
+#  thumbnail    :string(255)
+#  size         :integer
+#  width        :integer
+#  height       :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: private_avatars
+#
+#  id           :integer(4)      not null, primary key
+#  user_id      :integer(4)
+#  parent_id    :integer(4)
+#  content_type :string(255)
+#  filename     :string(255)
+#  thumbnail    :string(255)
+#  size         :integer(4)
+#  width        :integer(4)
+#  height       :integer(4)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
+--- {}
+

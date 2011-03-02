@@ -1,0 +1,18 @@
+<div class="c pad5">
+  <table class="w50proc" class="border c">
+    <tr>
+      <td>Remote IP</td>
+      <td>Remote Name</td>
+    </tr>
+    <tr>
+      <td><%= @message.ip %></td>
+      <td><%= @remote_name%></td>
+    </tr>
+  </table>
+  <br/>
+  <%= link_to(t('general.back'), {
+      :action => 'show',
+      :id => @message.id,
+      :forum => @message.forum_id},
+    :class => 'button') -%>
+</div>

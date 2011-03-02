@@ -1,0 +1,7 @@
+<div class="pagination">
+  <%= link_to(t('general.users'), users_path) %>
+  <%= link_to('Оптимизировать базу', :controller => '/admin/manage',:action => 'db_optimization')%>
+  <%= link_to('Каталог брендов', :controller => '/admin/camera_brands')%>
+  <%= link_to('Письмо всем', :controller => '/admin/manage',:action => 'mail_new') %>
+  <%= link_to('Удалить не активированных пользователей', :controller => '/admin/manage',:action => 'destroy_inactiv_users')%>
+</div>

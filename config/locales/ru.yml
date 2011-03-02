@@ -1,0 +1,329 @@
+ru:
+  exif:
+    make: Производитель
+    model: Модель
+    software: Программа
+    date_time_original: Дата
+    pixel_y_dimension: Высота
+    pixel_x_dimension: Ширина
+    flash: Вспышка
+    focal_length_in_35mm_film: Фокус (35мм)
+    focal_length: Фокус
+    iso_speed_ratings: ISO
+    user_comment: Коментарии
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+      date: "%Y-%m-%d"
+      md:  "%m-%d"
+      presentable_datetime: "%a %b %d, %Y %H:%M"
+      presentable_date:  "%a %b %d, %Y"
+      descr: "%d %b %Y"
+  time:
+    formats:
+      default: "%a, %d %b %Y, %H:%M:%S %z"
+      time: "%H:%M"
+      short: "%d %b, %H:%M"
+      long: "%d %B %Y, %H:%M"
+      date: "%Y-%m-%d"
+      md: "%m-%d"
+      descr: "%d %b %Y"
+  number:
+    # Used in number_with_delimiter()
+    # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'
+    format:
+      # Sets the separator between the units, for more precision (e.g. 1.0 / 2.0 == 0.5)
+      separator: ","
+      # Delimets thousands (e.g. 1,000,000 is a million) (always in groups of three)
+      delimiter: "."
+      # Number of decimals, behind the separator (1 with a precision of 2 gives: 1.00)
+      precision: 3
+
+    # Used in number_to_currency()
+    currency:
+      format:
+        # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
+        format: "%n %u"
+        unit: "$"
+        # These three are to override number.format and are optional
+        separator: ","
+        delimiter: "."
+        precision: 2
+
+    # Used in number_to_percentage()
+    percentage:
+      format:
+        # These three are to override number.format and are optional
+        # separator:
+        delimiter: ""
+        # precision:
+
+    # Used in number_to_precision()
+    precision:
+      format:
+        # These three are to override number.format and are optional
+        # separator:
+        delimiter: ""
+        # precision:
+
+    # Used in number_to_human_size()
+    human:
+      format:
+        # These three are to override number.format and are optional
+        # separator:
+        delimiter: ""
+        precision: 1
+      # Rails <= v2.2.2
+      # storage_units: [Bytes, KB, MB, GB, TB]
+      # Rails >= v2.3
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+
+  activerecord:
+    models:
+      wiki: 'Статья'
+      work: 'Вакансия'
+      user: 'Пользователь'
+      private_avatar: 'Аватар'
+      message: 'Сообщение'
+      blog: 'Блог'
+      bcomment: 'Комментарий'
+      comment: 'Комментарий'
+      attachment: 'Атачмент'
+      photo: 'Фото'
+      photo_album: 'Фото альбом'
+    attributes:
+      private_avatar:
+        content_type: 'Тип файла'
+        size: 'Размер файла'
+        filename: 'Имя файла'
+      wiki:
+        title: 'Тема'
+        message: 'Содержание'
+      user:
+        email: 'E-mail'
+        login: 'Логин'
+        password: 'Пароль'
+        captcha: 'Защитный код'
+      blog:
+        user_id: 'Пользователь'
+      bcomment:
+        body: 'Сообщение'
+        blog_id: 'Блог'
+        user_id: 'Пользователь'
+      attachment:
+        filename: 'Название файла'
+        filesize: 'Размер файла'
+      work:
+        company_name: Компания
+        salary: Зарплата
+        whu: Должность
+        description: Требования и условия
+        contact_email: Контактный емейл
+        location_job: Город вакансии
+      photo:
+        content_type: 'Тип файла'
+        size: 'Размер файла'
+        filename: 'Имя файла'
+        title: 'Поле коментария'
+      photo_album:
+        user: 'Пользователь'
+        name: 'Название альбома'
+  general:
+    welcom: 'Добро пожаловать,'
+    profile: Профайл
+    profile_manage: Кабинет
+    forum: Форум
+    exit: Выйти
+    enter: Войти
+    send: Отправить
+    about: 'О проекте:'
+    loading: Загрука
+    create: Создать
+    open: Открыт
+    save: Сохранить
+    close: Закрыть
+    private: Приватрый
+    activity: Активность
+    new: Новый
+    edit: Изменить
+    show: Посмотреть
+    hide: Скрыть
+    replay: Ответить
+    replay_priv: Личнoе
+    back: Назад
+    delete: Удалить
+    destroy: Удалить
+    upload: Загрузить
+    from: От
+    upload_avatar: Загрузить аватару
+    upload_avatar_size: аватара должна быть не более чем 80x80 и объемом менее 5 kb.
+    find: Поиск
+    forum: Форум
+    phrase: Фраза
+    droped: Удалено
+    next: Следующая
+    main: Главная
+    previous: Предыдущая
+    last: Последняя
+    first: Первая
+    pages: Страниц
+    more: больше
+    see_all: посмотреть все
+    tema: Тема
+    registration: Регистрация
+    registration_new_user: 'Регистрация нового пользователя'
+    login: Логин
+    avatar: Аватара
+    fio: ФИО
+    location: Живет
+    job: Работает
+    photos: Фотографий
+    last_visit: Заходил
+    posts: Сообщений
+    last_posts: Последние сообщения
+    users_list: Список пользователей
+    users: Пользователи
+    company: Компания
+    admin: Админ
+    moderator: Модератор
+    user: Пользователь
+    guest: Гость
+    guests_online: 'Гости: '
+    frends: 'Друзья'
+    users_online: 'Онлайн: '
+    unknown_user: Неизвестный
+    inter_frends: 'Веб друзья'
+    
+    page_not_found: страница не найдена
+    search_results: Результаты поиска
+    search_in: Искать в
+    extendet_search: Расширенный поиск
+    themes: Темах
+    responds: Ответах
+    forum_created: Форум создан
+    forum_updated: Форум обновлен
+    message: Сообщение
+    messages: Сообщения
+    new_message: Новое сообщение
+    attachments: Вложения
+    private_mails: Личные письма
+    private_messages: Личные сообщения
+    photo_profile: 'Фото Техника'
+    photo_albums: 'Фото альбомы'
+    user_info: 'Личные данные'
+    mail: 'Почта '
+    for_user: Для пользователя
+    profile: Профайл
+
+    auth: Аутентификация
+    notice_account_activated: Ваша учетная запись успешно активизирована!
+    notice_error_activated: Ошибка активизации учетной записи!
+    notice_logout: Вы отлогинились!
+    notice_register_add_msg: Для добавления сообщений зарегистрируйтесь!
+    notice_msg_created: Новая тема создана!
+    notice_msg_updated: Сообщение изменено!
+    notice_message_deleted: Сообщение удалено!
+    notice_message_empty: Слишком короткие поля!
+    notice_message_slosed: Сообщение закрыто!
+    notice_message_sended: Сообщение отправлено!
+    notice_message_sende_err: Ошибка отправки сообщений!
+    notice_messages_not_found: Сообщений нет!
+    notice_permissions_denie: У вас нет прав на выполнение данной операции!
+    notice_email_incorrect: Не правильный формат почтового ящика!
+    notice_user_id_incorrect: Не правильный UID пользователя!
+    notice_password_incorrect: Не верный пароль!
+    notice_user_created: <big>Пользователь создан!</big> <br/> Для активизации учетной записи перейдите по ссылке в письме.
+    notice_user_droped: Пользователь удален!
+    notice_user_unknown: Такого пользователя не существует!
+    avatar_updated: Аватара изменена.
+    avatar_updated_error: Ошибка при сохранении, выберите другое изображение!
+    current_password_incorrect: Не верный текущий пароль!
+    current_password_updated: Пароль изменен!
+    login_password_not_found: Логин/Пароль не верный
+    user_not_activated: Пользователь не активизирован.
+    request_activate: Активизация акаунта
+    request_password: Напоминание пароля
+    change_password: Смена пароля
+
+    content_updated: Данные изменены.
+    content_updated_error: Ошибка изменения данных!
+    content_incorrect: Данные не корректны!
+    passwords_different: Пароли не установлены или не совпадают!
+
+    reputation: Репутация
+    openclose: Закрыть после добавления сообщения.
+    stickunstick: Сделать важной после добавления сообщения.
+
+    mail_aply_register: Подтверждение регистриции
+    mail_describe_msg: Подписка на форуме
+    mail_new_msg: Новое сообщение
+    mail_new_comment: Новый комментарий
+    mail_new_privatemsg: Вы получили приватное сообщение
+    mail_change_password: Смена пароля
+    mail_reminde_password: Напоминание пароля
+    mail_link_send: Вам было отправлено письмо с дальнейшими инструкциями
+
+    tags_word: Ключевые слова<div class="small">разделять пробелами</div>
+    progect_links: Ресурсы
+
+  flash:
+    search_daemon_halt: 'Ошибка поискового вервиса. Повторите запрос через некоторое время и сообщие администратору.'
+  wm:
+    account_pay_add: Пожертвования на развитие ресурса.
+    payment_ok: Оплата выполнена успешно.
+    history: История пожертвований
+    donate: Пожертвовать на развитие
+    all_donation: 'Всего дали на развитие:'
+    payments_not_found: На данный момент платежей не поступало.
+
+    success:
+      internal_no: Внутренный номер оплаты
+      wm_inv_no: Номер инвойса
+      wm_no_paym: Номер WM транзакции
+      wm_paym_date: Дата
+  photo:
+    title: фото
+    upload: 'Загрузить фото'
+  users:
+    show_profile: 'Просмотр профиля:'
+    on_the_forum: 'На форуме:'
+    state: 'Состояние:'
+    active: 'Активирован'
+    not_active: 'Не активирован'
+    birth_day: 'Родился'
+    reg_date: 'Регистрировался:'
+    last_login: 'Заходил:'
+    messages: 'Сообщений:'
+    him_messages: 'Высказывался'
+    him_votes: 'Проголосовал'
+    internet_pagers: 'Интернет пейджеры'
+    addons_information: 'Дополнительная информация'
+    home_page: 'Домашняя страница'
+    location: 'Проживаю:'
+    description: 'Мой девиз'
+    interests: 'Интересуюсь'
+    job: 'Работаю'
+    promo: 'Кратко о себе'
+    attachment_list: 'Список приатаченных файлов'
+    not_found_attachment_list: 'У вас нет присоединенных файлов.'
+    change_password: 'Смена пароля'
+    new_password: 'Новый пароль'
+    old_password: 'Старый пароль'
+    confirmation_password: 'Подтвердите пароль'
+    flash:
+      profile_updated: 'Личные данные изменены.'
+      avatar_not_selected: 'Вы не выбрали аватар файла.'
+      user_not_found: 'User not found!'
+
+

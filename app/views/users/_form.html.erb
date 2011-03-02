@@ -1,0 +1,42 @@
+<%= error_messages_for :users,
+  :header_message => 'Возникли некоторые ошибки при работе с данными.',
+  :message => 'Для продолжения исправьте следующие ошибки.'
+%>
+
+<!--[form:users]-->
+<table class="fleft">
+  <tr><td class="b">Email</td>
+  <td><%= f.text_field 'email'  %><br/><%= f.check_box 'subscribed' %> Если вы не хотите получать извещения, снимите галочку.</td></tr>
+  <tr><td class="b">Имя</td>
+  <td><%= f.text_field 'first_name' %></td></tr>
+  <tr><td class="b">Фамилия</td>
+  <td><%= f.text_field 'last_name'  %></td></tr>
+  <tr><td class="b"><%= t('users.birth_day') %></td>
+  <td><%= f.date_select( 'birth_day',  :order => [:day, :month, :year], :end_year => 2007,:start_year=>1950)%></td></tr>
+  <tr><td class="b">Ваш сайт</td>
+  <td><%= f.text_field 'subdomain'  %><br/>
+<%= link_to(user_root_url(:subdomain => current_user.subdomain), user_root_url(:subdomain => current_user.subdomain), :class => 'small' ) %></td></tr>
+  <tr><td class="b">Название сайта</td>
+  <td><%= f.text_field 'blog_title'  %></td></tr>
+  <tr><td class="b">Icq </td>
+  <td><%= f.text_field 'icq_number'  %></td></tr>
+  <tr><td class="b">Skype </td>
+  <td><%= f.text_field  'skype_name'  %></td></tr>
+  <tr><td class="b"><%= t('users.home_page') %></td>
+  <td><%= f.text_field  'home_page'  %></td></tr>
+  <tr><td class="b"><%= t('users.location') %></td>
+  <td><%= f.text_field 'location'  %></td></tr>
+  <tr><td class="b"><%= t('users.promo') %><br/>(обо мне) (html)</td>
+    <td><%= f.text_area 'promo', :cols=>"50", :rows=>"7" %>
+      <div class="small pad5">добавьте код кнопок своих блогов, или ссылки на свои профайлы на других сайтах<br/>
+      они будут видны на странице вашего профайла и в блоге.</div>
+  </td></tr>
+  <tr><td class="b"><%= t('users.description') %></td>
+  <td><%= f.text_area 'description', :cols=>"50", :rows=>"5" %></td></tr>
+  <tr><td class="b"><%= t('users.interests') %></td>
+  <td><%= f.text_area 'interests', :cols=>"50", :rows=>"3" %></td></tr>
+  <tr><td class="b"><%= t('users.job') %></td>
+  <td><%= f.text_area 'job', :cols=>"50", :rows=>"6"  %></td></tr>
+  <tr><td colspan="2"><%= submit_tag 'Обновить' %></td></tr>
+</table>
+<!--[eoform:users]-->

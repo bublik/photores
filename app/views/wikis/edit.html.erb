@@ -1,0 +1,10 @@
+<%= title(@wiki.title)
+description(@wiki.title)
+keywords(@wiki.tag_list)
+%>
+<h1><%= yield(:title) %></h1>
+<%= javascript_include_tag :fckeditor -%>
+<% form_for(@wiki, :html => {:multipart => true}) do |f| -%>
+  <%= render :partial => 'form' %>
+  <%= f.submit 'Сохранить' %>
+<% end -%>

@@ -1,0 +1,8 @@
+if session[:msg_to] && @user
+  page.insert_html :after, 'page', :partial => 'form_replay_priv', :user => @user, :priv_message => @priv_message
+  page.show 'modal_window'
+  page.draggable('modal_window')
+  page << "$('#modal_window').center()"
+else
+  page.replace_html 'flash', flash[:notice] 
+end

@@ -1,0 +1,12 @@
+<%= error_messages_for 'forums' %>
+<!--[form:forums]-->
+<table class="l w450">
+  <tr><th colspan="2"><%=t('general.forum') %></th></tr>
+  <tr><td>Группа</td><td><%= select'forums', 'fgroup_id', Fgroup.all.collect{|g| [g.name,g.id]} %></td> </tr>
+  <tr><td>Название</td><td><%= text_field 'forums', 'name'  %></td> </tr>
+  <tr><td>Краткое описание</td><td><%= text_field 'forums', 'description'  %></td></tr>
+  <tr><td>Порядок сортировки</td><td><%= text_field 'forums', 'sort'  %></td> </tr>
+  <tr><td>Статус</td><td> <%=select("forums", "state", state_list)  %></td></tr>
+</table>
+<!--[eoform:forums]-->
+<br/>

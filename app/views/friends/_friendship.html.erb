@@ -1,0 +1,14 @@
+
+  <dt id="friendname" class="<%= cycle('bgrow1', 'bgrow2') %>" >
+    <%= link_to friendship.friend.full_name,
+                user_path(friendship.friend),
+                :class => 'xfnRelationship',
+                :rel => xfn_rel_tag(@user, friendship.friend),
+                :id => "friend-#{friendship.friend.id}" , :title => 'перейти на его профайл' %>
+  </dt>
+  <dd id="activity">
+    <% if friendship.friend.last_activity_at %>
+      <%= friendship.friend.last_activity %> около 
+      <%= time_ago_in_words(friendship.friend.last_activity_at) %> назад
+    <% end %>
+  </dd>

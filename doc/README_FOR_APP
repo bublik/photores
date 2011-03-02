@@ -1,0 +1,71 @@
+# Search images colored
+#  def self.paginating_ferret_color_search(options)
+#    y =  66*(options[:r].to_i) + 129*(options[:g].to_i) +  25*(options[:b].to_i)
+#    u = -38*(options[:r].to_i) -  74*(options[:g].to_i) + 112*(options[:b].to_i)
+#    v = 112*(options[:r].to_i) -  94*(options[:g].to_i) -  18*(options[:b].to_i)
+#    puts "RGB=(#{options[:r]}, #{options[:g]}, #{options[:b]})"
+#    puts "YUV=(#{y}, #{u}, #{v})"
+#    sql = "SELECT a.*, COUNT(h.id) AS cnt " +
+#      "FROM artworks a LEFT OUTER JOIN histograms h ON (h.artwork_id = a.id) " +
+#      "WHERE SQRT( POWER(h.u - #{u}, 2) + POWER(h.v - #{v}, 2)) <= 10000 " +
+#      "GROUP BY a.id " +
+#      "HAVING cnt > 0 " +
+#      "ORDER BY h.count DESC "
+#    count = find_by_sql(sql).size
+#    puts "Found #{count} records by this color!"
+#    PagingEnumerator.new(options[:page_size], count, false, options[:current], 1) do |page|
+#      offset = get_offset(options)
+#      limit = options[:page_size]
+#      lim = " LIMIT #{offset}, #{limit} "
+#      puts lim
+#      find_by_sql(sql + lim)
+#    end
+#
+#  end
+
+################################################################################
+    require 'RMagick'
+    NUM_COLORS = 10
+    def self.do_rmagick_processing(record)
+        print "Updating artwork ", record.title_english, " histogram... "
+        img = Magick::Image.read(record.filename).first
+        make_histogram img, record
+        make_thumbs img, record
+        record.save
+    end
+    private
+    def self.make_histogram(input_img, record)
+        img = input_img.quantize(NUM_COLORS)
+        hist = img.color_histogram
+        #before creating the histogram records we destroy the old ones
+        #actually this is needed only when updating the artwork record with the new picture
+        #oldHistogramData = Histogram.find(:all, :conditions => [ "artwork_id = ?", record.id]) || []
+        ids = []
+        record.histograms.each do |old|
+            ids << old.id
+        end
+        Histogram.delete ids
+        #sort the pixels
+        pixels = hist.keys.sort_by {|pixel| hist[pixel] }
+        # make new Histogram objects
+        pixels.each do |pixel|
+            h = Histogram.new(:r => pixel.red,
+                    :g => pixel.green,
+                    :b => pixel.blue,
+                    :y =>  66*pixel.red + 129*pixel.green +  25*pixel.blue,
+                    :u => -38*pixel.red -  74*pixel.green + 112*pixel.blue,
+                    :v => 112*pixel.red -  94*pixel.green -  18*pixel.blue,
+                    :count => hist[pixel])
+            record.histograms << h
+        end
+    end
+
+###############################################################################
+r=Y+1.13983*V;
+g=Y-0.39465*U-0.58060*V;
+b=Y+2.03211*U;
+
+Y = 0.299*r + 0.587*g + 0.114*b;
+U = (b-(0.299*r + 0.587*g + 0.114*b))*0.5643+128;
+V = (r-(0.299*r + 0.587*g + 0.114*b))*0.7132+128;
+

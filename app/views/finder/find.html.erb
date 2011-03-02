@@ -1,0 +1,30 @@
+<%  unless @result %>
+  Ни одного документа не найдено.
+<% end %>
+<%= case @type
+when 'messages' 
+  content_tag(:h4, 'На форуме') +
+    @result.compact.collect{ |msg|
+    content_tag(:h4, link_to(msg.name, {:controller => 'messages', :action => 'show', :id => msg, :format => :html, :subdomain => false}) ) +
+      content_tag(:div,  link_to_user(msg.user) +' ' + msg.updated_at.to_s(:db), :class => 'small')  +
+      content_tag(:div, highlight(strip_tags(msg.message).mb_chars[0..200], params[:word], '<strong class="s3">\1</strong>') )
+  }.to_s.html_safe
+when 'blogs'
+  content_tag(:h4, 'На сайтах пользователей') +
+    @result.compact.collect{ |blog|
+    content_tag(:h4, link_to(blog.title, blog_url(blog,{:format => :html, :subdomain => blog.user.subdomain} ))) +
+      content_tag(:div,  link_to_user(blog.user) +' '.html_safe + blog.updated_at.to_s(:db), :class => 'small')  +
+      content_tag(:div, highlight(strip_tags(blog.body).mb_chars[0..200].html_safe, params[:word], '<strong class="s3">\1</strong>') )
+  }.to_s.html_safe
+when 'photos'
+  photo_list = ''
+  @result.in_groups_of(10, false){ |photo_row|
+    photo_list << content_tag(:ul, photo_row.collect{ |photo| content_tag(:li, small_image(photo, true), :id => "photo_#{photo.id}") if photo },  :class => 'clear')
+  }
+  content_tag(:h4,'В фотографиях')+
+    #@result.collect do |photo|
+  content_tag(:div,photo_list , :class => 'inline')
+end %>
+
+<br class="clear"/>
+<%= will_paginate(@result, {:params => params}) %>

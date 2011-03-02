@@ -1,0 +1,41 @@
+<table class="msg border" id="message_<%= mesg.id %>">
+  <th  class='c rsmall'><%= mesg.created_at.to_s(:db)%></th>
+  <th class='r'>
+    <% if logged_in? %>
+      <% if can_edit_message(mesg) -%>
+        <%= link_to(t('general.edit'), edit_message_path(mesg), :class=>'button') %>
+        <%= link_to(t('general.delete'), mesg, :confirm => 'Уверен?', :method => :delete , :class => 'button') %>
+      <% end -%>
+      <%= link_to_remote(t('general.replay'), {
+          :url => replay_message_path(mesg, :forum => mesg.forum_id),
+          :success => "Effect.ScrollTo('replay_block');"},
+        :href => replay_message_path(mesg, :forum => mesg.forum_id),
+        :class => 'button') if mesg.openclose.eql?(0) %>
+      <%= link_to('IP', {:controller=>'messages', :action=>'show_ip', :id => mesg.id}, :title => mesg.ip, :class=>'button') if is_admin? %>
+    <% end %>
+  </th>
+  <tr>
+    <td class="w150" rowspan="3"><%= small_profile(mesg.user) -%></td>
+    <td class="msg_title"><span style="float: right;" class="small grey" id="rate_<%= mesg.id %>"><%=  render_rating(mesg) %></span>
+      <%= link_to(h(mesg.name), mesg, :name => mesg.to_param, :title => h(mesg.name)) %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="msg_body">
+        <% cache(mesg.cache_key) do %><%= simple_format(mesg.message) -%><% end %>
+      </div>
+      <%= attachemts_list(mesg) %>
+      <%= content_tag(:div, '(Изм. ' + mesg.updated_at.to_s(:db) + ')', :class => 'small') unless mesg.updated_at.eql?(mesg.created_at)%>
+      <% unless mesg.user.description.blank? %>
+        <br />------------
+        <div class="small"><%=h mesg.user.description %></div>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td class="h22 small">
+      <%= mesg_tags(mesg) %>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,65 @@
+# == Schema Information
+#
+# Table name: friendships
+#
+#  id               :integer         not null, primary key
+#  user_id          :integer         not null
+#  friend_id        :integer         not null
+#  xfn_friend       :boolean         not null
+#  xfn_acquaintance :boolean         not null
+#  xfn_contact      :boolean         not null
+#  xfn_met          :boolean         not null
+#  xfn_coworker     :boolean         not null
+#  xfn_colleague    :boolean         not null
+#  xfn_coresident   :boolean         not null
+#  xfn_neighbor     :boolean         not null
+#  xfn_child        :boolean         not null
+#  xfn_parent       :boolean         not null
+#  xfn_sibling      :boolean         not null
+#  xfn_spouse       :boolean         not null
+#  xfn_kin          :boolean         not null
+#  xfn_muse         :boolean         not null
+#  xfn_crush        :boolean         not null
+#  xfn_date         :boolean         not null
+#  xfn_sweetheart   :boolean         not null
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: friendships
+#
+#  id               :integer(4)      not null, primary key
+#  user_id          :integer(4)      not null
+#  friend_id        :integer(4)      not null
+#  xfn_friend       :boolean(1)      not null
+#  xfn_acquaintance :boolean(1)      not null
+#  xfn_contact      :boolean(1)      not null
+#  xfn_met          :boolean(1)      not null
+#  xfn_coworker     :boolean(1)      not null
+#  xfn_colleague    :boolean(1)      not null
+#  xfn_coresident   :boolean(1)      not null
+#  xfn_neighbor     :boolean(1)      not null
+#  xfn_child        :boolean(1)      not null
+#  xfn_parent       :boolean(1)      not null
+#  xfn_sibling      :boolean(1)      not null
+#  xfn_spouse       :boolean(1)      not null
+#  xfn_kin          :boolean(1)      not null
+#  xfn_muse         :boolean(1)      not null
+#  xfn_crush        :boolean(1)      not null
+#  xfn_date         :boolean(1)      not null
+#  xfn_sweetheart   :boolean(1)      not null
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+valid_friendship:
+  id: 1
+  user_id: 1
+  friend_id: 2
+  xfn_met: true
+

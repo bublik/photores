@@ -1,0 +1,103 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id               :integer         not null, primary key
+#  login            :string(15)      not null
+#  email            :string(50)      not null
+#  first_name       :string(20)      not null
+#  last_name        :string(20)      not null
+#  description      :text            default("")
+#  avatar           :string(50)      not null
+#  privilegies      :integer         default(2)
+#  raiting          :integer         default(0)
+#  password         :string(32)      not null
+#  crypt_password   :string(32)      not null
+#  active           :boolean
+#  code_activate    :string(32)
+#  birth_day        :datetime        not null
+#  icq_number       :integer
+#  skype_name       :string(50)
+#  aim_name         :string(50)
+#  yahoo_handle     :string(50)
+#  msn_handle       :string(50)
+#  home_page        :string(100)
+#  location         :string(100)
+#  interests        :text
+#  job              :text
+#  posts            :integer         default(0)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  photos_count     :integer         default(0)
+#  last_activity    :string(255)
+#  last_activity_at :datetime
+#  subscribed       :boolean         default(TRUE), not null
+#  subdomain        :string(25)
+#  promo            :text
+#  blog_title       :string(255)
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: users
+#
+#  id               :integer(4)      not null, primary key
+#  login            :string(15)      default(""), not null
+#  email            :string(50)      default(""), not null
+#  first_name       :string(20)      default(""), not null
+#  last_name        :string(20)      default(""), not null
+#  avatar           :string(50)      default(""), not null
+#  privilegies      :integer(4)      default(2)
+#  raiting          :integer(4)      default(0)
+#  password         :string(32)      default(""), not null
+#  crypt_password   :string(32)      default(""), not null
+#  active           :boolean(1)
+#  code_activate    :string(32)
+#  birth_day        :timestamp       not null
+#  icq_number       :integer(4)
+#  skype_name       :string(50)
+#  aim_name         :string(50)
+#  yahoo_handle     :string(50)
+#  msn_handle       :string(50)
+#  home_page        :string(100)
+#  location         :string(100)
+#  interests        :string(100)
+#  job              :string(100)
+#  created_at       :timestamp       not null
+#  updated_at       :timestamp       not null
+#  posts            :integer(4)      default(0)
+#  description      :string(255)
+#  photos_count     :integer(4)      default(0)
+#  last_activity    :string(255)
+#  last_activity_at :datetime
+#
+
+--- 
+users_001: 
+  yahoo_handle: ""
+  updated_at: 2008-04-21 11:51:19
+  raiting: "0"
+  msn_handle: ""
+  skype_name: ""
+  home_page: http://fotolife.com.ua
+  aim_name: ""
+  code_activate: 5153d59d3ad6c305b8cb1357780ec12b
+  crypt_password: 21232f297a57a5a743894a0e4a801fc3
+  id: "1"
+  description: ""
+  icq_number: "207238348"
+  birth_day: 2008-04-15 11:49:33
+  job: Comodo Group
+  privilegies: "1"
+  avatar: /images/avatars/noimg.gif
+  posts: "10"
+  first_name: Ruslan
+  interests: php perl sql ruby rails
+  password: admin
+  last_name: Voloshin
+  login: admin
+  created_at: 2008-04-15 11:49:33
+  location: odessa
+  active: "1"
+  email: rebisall@gmail.com

@@ -1,0 +1,46 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id               :integer         not null, primary key
+#  title            :string(50)      default("")
+#  comment          :text
+#  is_approved      :boolean
+#  commentable_id   :integer         default(0), not null
+#  commentable_type :string(255)     default(""), not null
+#  user_id          :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: comments
+#
+#  id               :integer(4)      not null, primary key
+#  title            :string(50)      default("")
+#  comment          :text
+#  is_approved      :boolean(1)
+#  commentable_id   :integer(4)      default(0), not null
+#  commentable_type :string(255)     default(""), not null
+#  user_id          :integer(4)
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  comment: MyText
+  commentable_id: 2008-09-04 08:45:15
+  commentable_type: MyString
+  user_id: 1
+
+two:
+  title: MyString
+  comment: MyText
+  commentable_id: 2008-09-04 08:45:15
+  commentable_type: MyString
+  user_id: 1

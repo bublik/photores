@@ -1,0 +1,4 @@
+ page.replace_html('flash', flash[:notice]) 
+ page.remove("attach_#{params[:id]}") if @destroy
+ #page.replace_html("attach_#{params[:id]}" , "Нет файлов.") if @destroy && @last_attachments.nil?
+

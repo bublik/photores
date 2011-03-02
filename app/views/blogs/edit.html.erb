@@ -1,0 +1,9 @@
+<%= error_messages_for :blog, 
+  :header_message => 'Что бы сохранить сообщение.',
+  :message => 'Исправьте следующие ошибки.'
+%>
+
+<%= render :partial => 'form_msg', :locals => {:blog => @blog}%>
+  <div class="pagination" >
+    <%= link_to 'Посмотреть', @blog %> | <%= link_to 'Назад',  blogs_path %>
+  </div>

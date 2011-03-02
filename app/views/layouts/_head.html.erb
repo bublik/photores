@@ -1,0 +1,42 @@
+<%= google_analytix_adds %>
+<div class="header">
+  <h2 style="display: none;"><%= link_to(APP_CONFIG['site_name'], root_url(:subdomain => false), :title => APP_CONFIG['site_name']) %></h2>
+  <span id="topprofile">
+    <%= link_to(t('general.main'), root_url(:subdomain => false), :class => 'ico ico-home') %>  |
+    <noindex><%= link_to('Translate', "http://www.google.com/translate?u=#{request.env['REQUEST_URI']}&amp;hl=en&amp;ie=UTF8&amp;langpair=ru|en", :rel => 'nofollow', :class => 'ico ico-translate') -%></noindex>
+    &nbsp; &nbsp;&nbsp;&nbsp;
+    <% if logged_in? -%>
+      <%= [link_to(t('general.profile'), edit_user_path(current_user), :title => current_user.full_name, :class => 'ico ico-profile'),
+        link_to('мой сайт', user_root_url(:subdomain => current_user.subdomain), :title => 'мой сайт', :class => 'ico ico-icon_link'),
+        link_to(current_user.new_priv_messages.to_s, {:controller => :users, :action => :private_messages, :id => current_user},  :class => 'ico ico-icon_email'),
+        link_to('альбомы', user_photo_albums_path(current_user), :class => 'ico ico-folder_images'),
+        link_to(t('photo.title'), new_photo_path, :class => 'ico ico-image_new'),
+        link_to('статья', new_blog_path, :class => 'ico ico-page_new' ),
+        link_to('альбом', new_photo_album_path, :class => 'ico ico-folder_new'),
+        link_to_remote(t('general.exit'), :url => logout_url, :href => logout_url, :html => {:class => 'ico ico-logout', :title => t('general.exit') })
+      ].join('&nbsp; ') -%>
+    <% else -%>
+      <%= link_to_remote(t('general.enter'), :url => login_url, :href => login_url,
+        :html => {:class => 'ico ico-icon_security', :title => t('general.enter')} ) -%>
+    <% end -%>
+    &nbsp;
+  </span>
+  <%= content_tag(:h2, menu_links('header') , :id => 'topmenu', :class => 'topmenu') -%>
+
+  <%= link_to(image_tag("/images/#{APP_CONFIG['domain']}-button.gif", :alt => APP_CONFIG['site_name'] ), root_url(:subdomain => false),
+    :rel => 'home', :id => 'logo',:title => "на главную #{APP_CONFIG['site_name']}") -%>
+
+  <div class="block_search">
+    <div class="indent_search">
+      <% form_for(:search, @search, :url => search_url(:subdomain => false)) do -%>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
+        <input type="text" name="search_word" size="15" />
+        <input type="radio" name="ftype" value="photos" checked = "true"> фото
+        <input type="radio" name="ftype" value="messages"> форум
+        <input type="radio" name="ftype" value="blogs"> блоги
+        <%= submit_tag t('general.find') -%>
+      <% end -%>
+    </div>
+  </div>
+</div>
+

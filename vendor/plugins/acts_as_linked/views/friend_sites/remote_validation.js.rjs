@@ -1,0 +1,3 @@
+page.replace "site_#{@friend_site.id}", content_tag(:li, site_row(@friend_site), :id => "site_#{@friend_site.id}")
+page.replace_html 'flash', flash[:notice]
+page.show 'flash'

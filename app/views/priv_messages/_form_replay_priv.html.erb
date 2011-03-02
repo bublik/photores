@@ -1,0 +1,20 @@
+<div id="modal_window" class="pad5 c">
+  <% form_remote_for @priv_message do |f| -%>
+    <table class="border" style="width: auto">
+      <tr>
+        <th class="c rsmall" colspan="2">
+          <%= t('general.message') -%>
+        </th>
+      </tr>
+      <tr>
+        <td class="l pad5" class="w150"><%= small_profile(@user) -%></td>
+        <td class="l pad5">
+          <div class="r"><%= link_to_function ' ', "$('#page').show(); $('#modal_window').remove();", :class => 'ico ico-cancel' %></div>
+          <%= f.text_area(:data, {:size => "60x10",:class=>'w450'}) -%>
+          <br/>
+          <%= submit_tag t('general.send') -%>
+        </td>
+      </tr>
+    </table>
+  <%  end -%>
+</div>

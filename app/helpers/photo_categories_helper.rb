@@ -1,0 +1,2 @@
+module PhotoCategoriesHelper
+end

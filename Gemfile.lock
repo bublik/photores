@@ -1,0 +1,66 @@
+GEM
+  remote: http://gemcutter.org/
+  remote: http://gems.github.com/
+  remote: http://gems.rubyforge.org/
+  specs:
+    RedCloth (4.2.3)
+    actionmailer (2.3.10)
+      actionpack (= 2.3.10)
+    actionpack (2.3.10)
+      activesupport (= 2.3.10)
+      rack (~> 1.1.0)
+    activerecord (2.3.10)
+      activesupport (= 2.3.10)
+    activeresource (2.3.10)
+      activesupport (= 2.3.10)
+    activesupport (2.3.10)
+    after_commit (1.0.8)
+      activerecord (< 3.0.0)
+    closure-compiler (1.0.0)
+    geokit (1.5.0)
+    hpricot (0.8.3)
+    jammit (0.6.0)
+      closure-compiler (>= 0.1.0)
+      yui-compressor (>= 0.9.1)
+    mbleigh-subdomain-fu (0.5.3)
+    memcache-client (1.8.5)
+    nokogiri (1.4.2)
+    pg (0.10.1)
+    rack (1.1.0)
+    rails (2.3.10)
+      actionmailer (= 2.3.10)
+      actionpack (= 2.3.10)
+      activerecord (= 2.3.10)
+      activeresource (= 2.3.10)
+      activesupport (= 2.3.10)
+      rake (>= 0.8.3)
+    rake (0.8.7)
+    riddle (1.2.2)
+    rmagick (2.13.1)
+    russian (0.2.7)
+    thinking-sphinx (1.4.3)
+      activerecord (>= 1.15.6, < 3.0.0)
+      after_commit (>= 1.0.7)
+      riddle (>= 1.2.2)
+    will_paginate (2.3.12)
+    ym4r (0.6.1)
+    yui-compressor (0.9.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  RedCloth
+  geokit
+  hpricot
+  jammit
+  mbleigh-subdomain-fu
+  memcache-client
+  nokogiri (= 1.4.2)
+  pg
+  rails (= 2.3.10)
+  rmagick (= 2.13.1)
+  russian
+  thinking-sphinx (>= 1.3.13)
+  will_paginate (= 2.3.12)
+  ym4r

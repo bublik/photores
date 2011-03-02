@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: wikis
+#
+#  id           :integer         not null, primary key
+#  user_id      :integer
+#  title        :string(255)
+#  message      :text
+#  created_at   :datetime
+#  updated_at   :datetime
+#  rating_count :integer
+#  rating_total :decimal(, )
+#  rating_avg   :decimal(10, 2)
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  title: 
+  message: MyText
+
+two:
+  user_id: 1
+  title: 
+  message: MyText

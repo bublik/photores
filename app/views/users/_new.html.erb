@@ -1,0 +1,35 @@
+<!--[form:users]-->
+<table class="l"  style="width: 50%">
+  <tr>
+    <td>Логин</td>
+    <td><%= f.text_field 'login'  %></td>
+  </tr>
+  <tr>
+    <td>E-mail адрес:</td>
+    <td><%= f.text_field 'email' %></td>
+  </tr>
+  <tr>
+    <td>Подтвердите адрес E-mail:</td>
+    <td><%= f.text_field 'email_confirmation' %></td>
+  </tr>
+  <tr>
+    <td>Пароль</td>
+    <td><%= f.password_field  'password' ,:size=>"15" %></td>
+  </tr>
+  <tr>
+    <td>Подтвердите пароль</td>
+    <td><%= f.password_field  'password_confirmation' ,:size=>"15" %></td>
+  </tr>
+  <tr>
+    <td colspan="2" class="c">
+      <%= show_simple_captcha(:object=>"user", :distortion => 'high', :label => 'Введите изображенный текст') %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="c">
+      <%= submit_tag(t('general.registration'), :disable_with => 'Загрузка') %>
+    </td>
+  </tr>
+
+</table>
+<!--[eoform:users]-->

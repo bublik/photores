@@ -1,0 +1,15 @@
+<% title('Список фото альбомов')
+keywords("фото, альбом, #{@photo_albums.collect{|a| a.name + ', '}}")
+description(yield(:title))
+%>
+<%= profile_menu %>
+<h1><%= yield(:title) %></h1>
+<div class="m15"><%= link_to('Новый альбом', new_photo_album_path, :class => 'ico ico-page_new') %></div>
+<dl class="table">
+  <% @photo_albums.each do |photo_album| %>
+    <dt><%= link_to(h(photo_album.name), photo_album, :class => 'b') %></dt>
+    <%= content_tag(:dd, link_to(t('general.edit'), edit_photo_album_path(photo_album), :class => 'ico ico-page_edit')) if logged_in? && (photo_album.user.eql?(current_user) || is_admin?) %>
+  <% end %>
+</dl>
+
+

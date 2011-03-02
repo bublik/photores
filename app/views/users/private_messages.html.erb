@@ -1,0 +1,32 @@
+<%= profile_menu %>
+<h1><%= t('general.private_mails')%></h1>
+<table class="fleft">
+  <tr>
+    <td class="pad5">
+      <%= t('general.notice_messages_not_found') if @pmsg.empty? %>
+      <% @pmsg.each do |msg| next if msg.user.nil? %>
+        <div id="msg_<%= msg.id %>">
+          <div class="pad5">
+            <div class="left pad5">
+              <%= image_tag((msg.user.public_avatar), :width => '40px',:align => 'center') + '<br/>'.html_safe+link_to_user(msg.user) %>
+            </div>
+            <div class="pad5">
+              <%= simple_format(msg.data) %>
+            </div>
+          </div>
+          <div class="small clear">
+            <%= msg.created_at.to_formatted_s(:db) %>
+            <%= ' | ' + (msg.read ? 'Прочитал' : link_to_remote('Прочитал',
+                :url => {:controller => 'users', :action => 'read_private_messages',:id => msg},
+                :href =>url_for({:controller => 'users', :action => 'read_private_messages',:id => msg}),
+                :html => {:title => 'Пометить как прочитаннное', :id => "read_pm_#{msg.id}"})) %> |
+            <%= pm_form(msg.user.id, t('general.replay'),'') %> |
+            <%= link_to_remote(t('general.delete'),
+              :url => {:controller => 'users', :action => 'delete_private_messages', :id => msg},
+              :href => url_for({:controller => 'users', :action => 'delete_private_messages', :id => msg})) %>
+          </div>
+        </div>
+      <%end%>
+    </td>
+  </tr>
+</table>

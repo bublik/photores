@@ -1,0 +1,37 @@
+<% title(t('general.users_list'))
+description(t('general.users_list'))%>
+<%= content_tag(:h1, t('general.users_list')) -%>
+<table class="border c">
+  <tr>
+    <th><%=t('general.user') -%></th>
+    <th>&nbsp;</th>
+    <th><%= t('general.activity') %></th>
+  </tr>
+  <% for user in @users -%>
+    <tr>
+      <td>
+        <%= image_tag(user.public_avatar, :alt => user.full_name ) -%>
+        <%=  content_tag(:div, link_to(user.full_name, user_root_url(:subdomain => user.subdomain), :title => "#{user.login}")) -%>
+        <%= content_tag(:div, link_to(' ', edit_user_path(user), :title => t('general.edit'), :class => 'ico ico-page_edit'), :class => "c pad5") if is_admin? -%>
+      </td>
+      <td class="l">
+        <div><big><%=t('general.location') %>:</big> <%= user.location -%></div>
+        <div><big><%=t('general.job') %>:</big> <%= user.job -%></div>
+      </td>
+      <td>
+        <dl class="table w300">
+          <dt><%= t('general.photos') %></dt>
+          <dd><%= user.photos_count %></dd>
+          <dt><%= link_to(t('users.him_messages'), user_messages_url(user, :subdomain => false)) %></dt>
+          <dd><%= user.posts %></dd>
+          <dt><%= link_to(t('users.him_votes'),  user_votes_url(user, :subdomain => false)) %></dt>
+          <dd>&nbsp;</dd>
+          <dt><%=t('general.last_visit') %></dt>
+          <dd><%= user.updated_at.to_s(:db) -%></dd>
+        </dl>
+      </td>
+    </tr>
+  <% end -%>
+</table>
+<%= will_paginate(@users) -%>
+<%= content_tag(:div, link_to(t('general.registration'), {:action => 'new'},:class=>'button'), :class => 'pagination')-%>

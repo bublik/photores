@@ -1,0 +1,19 @@
+<%  tag = @wikis[0].nil? ? '' : @wikis[0].title
+title(tag)
+description(tag)
+keywords(tag)
+%>
+
+<h1>Затегированы <%= link_to(@wikis[0].title, {:anchor => @wikis[0].title}, :class => 's2') unless @wikis[0].nil? %></h1>
+<div>
+  <% @wikis.each do |wiki| %>
+    <%= content_tag(:h4, link_to(wiki.title, wiki_path(wiki, :format => 'html'), :title => wiki.title)) %>
+    <%= strip_tags(wiki.message).mb_chars[0..150] %>
+    <%#= tags_lis(wiki) %>
+    <%= create_by(wiki) %>
+  <% end %>
+</div>
+
+<%= will_paginate @wikis %>
+
+<%= will_paginate(@wikis, :class => 'pagination clear c') %>

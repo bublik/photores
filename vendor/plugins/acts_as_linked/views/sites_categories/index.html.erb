@@ -1,0 +1,21 @@
+<%
+title('Каталог полезных интернет ресурсов')
+description('Каталог полезных интернет ресурсов')
+keywords('')
+-%>
+<h1>Каталог интернет друзей и хороших ресурсов.</h1>
+<ul id="links" style="list-style-image:none; list-style-position:outside; list-style-type:none;">
+  <% for sites_category in @sites_categories %>
+    <li>
+      <div><%= link_to h(sites_category.name), sites_category_path(sites_category.id) %>
+        <%= content_tag(:span, '[' + link_to('ред.', edit_sites_category_path(sites_category)) + ' ' +
+            link_to_if(sites_category.friend_sites.empty?, 'удал.', sites_category, :confirm => 'Are you sure?', :method => :delete) + ']', :style => 'font-size: 70%') if is_admin? -%>
+      </div>
+      <div><%=h sites_category.description %></div>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to('Новый раздел', new_sites_category_path) if is_admin? %>
+
+<%= content_tag(:h3, 'Ожидают модерации') + content_tag(:dl, @waiting_sites.collect{|site| content_tag(:dt, site_row(site), :id => "site_#{site.id}") }) if is_admin? %>

@@ -1,0 +1,12 @@
+<%= bcomments.size %> комментариев
+<% bcomments.each do |bcomment| %>
+  <% div_for(bcomment,:class =>"pad5") do %>
+    <%= simple_format(sanitize(bcomment.body)) %>
+    <div class="small">От: <%= link_to_user(bcomment.user) %> 
+      <%#= link_to 'Show', bcomment %> 
+       <%= ' | '+link_to(t('general.edit'), [:edit, blog, bcomment],  :class => 'ico ico-page_edit') if can_edit(bcomment) %>
+       <%= ' | '+link_to(t('general.delete'), [blog, bcomment],  :class => 'ico ico-page_delete',  :confirm => 'Are you sure?', :method => :delete) if can_edit(bcomment) %>
+    </div>
+  <% end -%>
+<% end -%>
+<%#= link_to 'New bcomment', new_bcomment_path %>

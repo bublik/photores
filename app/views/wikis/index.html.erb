@@ -1,0 +1,9 @@
+<h1>Статьи</h1>
+<%= content_tag(:div, link_to('Написать статью', new_wiki_path), :class => 'r') if current_user %>
+<% @wikis.each do |wiki| %>
+  <%= content_tag(:h3, link_to(wiki.title, wiki_path(wiki, :format => 'html'), :title => wiki.title), :class => 'clear') %>
+  <%= tags_lis(wiki, 'left') %>
+  <%= create_by(wiki, 'left') %>
+<% end %>
+
+<%= will_paginate(@wikis, :class => 'pagination clear c') %>

@@ -1,0 +1,2 @@
+page.replace_html 'photo_row', photo_row(@photo)
+page.visual_effect(:highlight, 'photo_row', :duration => 0.6)

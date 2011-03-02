@@ -1,0 +1,2 @@
+page.replace_html 'flash', @notice
+#page.show 'flash'

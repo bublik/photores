@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: sessions
+#
+#  id         :integer         not null, primary key
+#  session_id :string(255)
+#  data       :text
+#  updated_at :datetime
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: sessions
+#
+#  id         :integer(4)      not null, primary key
+#  session_id :string(255)
+#  data       :text
+#  updated_at :datetime
+#
+
+--- 
+sessions_001: 
+  updated_at: 2008-04-15 14:08:18
+  session_id: d31cc4b71c27c50b62b832245e8274e5
+  id: "1"
+  data: |
+    BAh7CDoOc3ViZG9tYWluMDoJdXNlcmkGIgpmbGFzaElDOidBY3Rpb25Db250
+    cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA
+
+sessions_002: 
+  updated_at: 2008-04-21 11:55:35
+  session_id: 5b97ca913bc0a242430556528de8ade6
+  id: "2"
+  data: |
+    BAh7CDoJdXNlcmkGOg5zdWJkb21haW4wIgpmbGFzaElDOidBY3Rpb25Db250
+    cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA
+

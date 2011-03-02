@@ -1,0 +1,163 @@
+<% 
+title(@photo.title)
+description(@photo.title)
+keywords(@photo.keywords)
+-%>
+
+<div class="medium_photo">
+  <div class="main_image">
+    <%= image_tag(@photo.public_filename(@photo.registred && !logged_in? ? :thumb : :medium),
+      :alt => @photo.alt, :title => @photo.alt, :id => 'photo') %>
+    <div class="desc">
+      <a href="#" class="collapse" title="показать/спрятать доп информацию">Скрыть</a>
+      <div class="block" style="display: none">
+        <h1 id="main_image_title"><%= t('activerecord.models.photo') +': '+ @photo.title %></h1>
+        <small><%= @photo.created_at.to_s(:db) %></small>
+        <p>Снято камерой <%= @photo.photo_profile ? h(@photo.photo_profile.full_description) : '-' %>,
+          размещено в альбомах <%= photo_albums_links(@photo) %>, и разделах <%= photo_cats_links(@photo) %>
+          <%= content_tag(:div, 'Автор закрыл гостевой просмотр и загрузку в большом разрешении ('+ link_to('зарегистрироваться', new_user_path)+ ').') if @photo.registred && !logged_in?  %>
+          <%= content_tag(:div, 'Прошу критики!', :class => 'orange c') if @photo.want_critic %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align: center">
+  <div class="pad5">
+    <a href="#" id='addnotelink' class="ico ico-comment">Добавить анотацию</a>
+    <noindex><%= link_to("жаловаться на работу", complaint_photo_path(@photo), :class => 'ico ico-page_alert', :confirm => 'Вы уверены, что хотите подаловаться?', :title => 'пожаловаться на эту фотографию') %><sup><%= @photo.complaint %></sup></noindex>
+    <%= link_to("скачать фото"  , download_photo_path(@photo), :title => 'скачать фотографию', :class => 'ico ico-icon_download') %><sup><%= @photo.downloads %></sup>
+    <%= link_to_function('постоянная ссылка', "$('#static_links').toggle();", :title => 'Постоянная ссылка для других ресурсов', :class => 'ico ico-icon_link ') %>
+    <div style="display: none" id='static_links' class="w450 pad5">
+      <strong class="orange b">HTML</strong> - для блогов и сайтов
+      <div class="pad5">
+        <textarea cols="60" rows="4"><a href="<%= photo_url(@photo, :html) %>"><img src="<%= 'http://'+APP_CONFIG['domain']+@photo.public_filename(:thumb) %>" alt="<%= @photo.alt %>"/></a></textarea>
+      </div>
+      <strong class="orange b">BBCode</strong> - часто для форумов
+      <div class="pad5">
+        <textarea cols="60" rows="4">
+           [url=<%= photo_url(@photo, :html) %>][img]<%=h 'http://'+APP_CONFIG['domain']+@photo.public_filename(:thumb) %>[/img][/url]
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="center"><%= google_advert_horizont_links %></div>
+  <div class="photo_thumbs">
+    Другие фотографии этого автора<br/>
+    <%= random_user_photos(@photo.user) %>
+  </div>
+</div>
+<div class="clear"></div>
+<%= color_line %>
+<%= google_adv_row %>
+<div class="clear inline" id="photo_row"><%= photo_row(@photo) %></div>
+<div class="clear">
+  <div class="left m15">
+    <dl class="table w300" >
+      <dt>Автор:</dt>
+      <dd><%= link_to_user(@photo.user) %></dd>
+      <dt>Фото:</dt>
+      <dd><b><%= @photo.title %></b></dd>
+      <%= (content_tag(:dt, 'Управление:') + content_tag(:dd, photo_manage(@photo)) if @photo.user.eql?(current_user) || is_admin?) if logged_in? %>
+      <dt>Рейтинг:</dt>
+      <dd id="rate_<%= @photo.id %>"><div class="left"><%= render_rating(@photo) %></div></dd>
+      <%if @photo.contest_id %>
+        <dt>Конкурс:</dt>
+        <dd><%= link_to(@photo.contest.title, @photo.contest) %></dd>
+      <% end %>
+      <dt>Оборудование:</dt>
+      <dd><%= @photo.photo_profile ? h(@photo.photo_profile.full_description) : '-' %></dd>
+      <dt>Размер:</dt>
+      <dd><%= number_to_human_size(@photo.size, :precision => 0) %> <%= "#{@photo.width}x#{@photo.height}" %>px</dd>
+      <!-- <dt>В альбомах:</dt>
+       <dd><%= photo_albums_links(@photo) %></dd> -->
+      <dt>Просмотров:</dt>
+      <dd><%= @photo.views %></dd>
+      <dt>Метки:</dt>
+      <dd><%= photo_tags_links(@photo) %></dd>
+      <dt>Размещено:</dt>
+      <dd><%= @photo.created_at.to_s(:db) %></dd>
+      <!-- <dt>В разделах:</dt>
+      <dd><%= photo_cats_links(@photo) %></dd> -->
+    </dl>
+    <dl id="exif" class="table w300">
+      <%= @photo.exif_to_html %>
+    </dl>
+  </div>
+
+  <div class="pad10 m15 center">
+
+    <%= google_polubaner %>
+    <%= map_block(@map, [450, 170]) %>
+    <div id="comments" class="pad5 mr15">
+      <%= show_photo_comment(@photo) %>
+    </div>
+    <div id="comments_form" class="pad5 b">
+      <%= link_to_remote('Добавить комментарий',
+        :url => photo_comment_path(@photo),
+        :html => { :href => photo_comment_path(@photo), :class => 'ico ico-list_comments orange b'})%>
+    </div>
+    <%= add_new_photo_link %>
+    <div class="show_photo_cats"><%= photo_categories %></div>
+  </div>
+  <div class="right">
+    &nbsp; <!--will be advert -->
+  </div>
+  <br class="clear"/>
+</div>
+
+<div id="noteform" >
+  <form id="NoteAddForm" method="post" action="<%= add_note_path(@photo) %>">
+    <input name="data[Note][x1]" type="hidden" value="" id="NoteX1" />
+    <input name="data[Note][y1]" type="hidden" value="" id="NoteY1" />
+    <input name="data[Note][height]" type="hidden" value="" id="NoteHeight" />
+    <input name="data[Note][width]" type="hidden" value="" id="NoteWidth" />
+    <textarea name="data[Note][note]" id="NoteNote" ></textarea>
+    <div class="submit">
+      <input type="submit" value="Submit" />
+      <input type="button" value="Cancel" id="cancelnote" />
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  //  notes = [{"x1":"10","y1":"10","height":"150","width":"50","note":"This is a note"}, {"x1":"25","y1":"25","height":"70","width":"80","note":"<b>This</b> is a new note This is another note This is a new note"}];
+
+  $(window).load(function () {
+    //$('#photo').imgNotes(); //If your notes data is is not named notes pass it
+<% unless (@photo.registred && !logged_in?)  %>
+      $.getJSON('<%= show_notes_path(@photo) %>', function(data){$('#photo').imgNotes(data)});
+      //$('#tern').imgAreaSelect({ onSelectChange: showaddnote })
+<% end %>
+    $('#cancelnote').click(function(){
+      $('#photo').imgAreaSelect({ hide: true });
+      $('#noteform').hide();
+    });
+
+    $('#addnotelink').click(function(){
+      $('#photo').imgAreaSelect({ onSelectChange: showaddnote, x1: 120, y1: 90, x2: 292, y2: 210 });
+      return false;
+    });
+  });
+
+  function showaddnote (img, area) {
+    imgOffset = $(img).offset();
+    form_left  = parseInt(imgOffset.left) + parseInt(area.x1) - 25;
+    form_top   = parseInt(area.y1) + parseInt(area.height) + 10 ;
+
+    $('#noteform').css({
+      left: form_left + 'px',
+      top: form_top + 'px'
+    });
+
+    $('#noteform').show();
+
+    $('#noteform').css("z-index", 10000);
+    $('#NoteX1').val(area.x1);
+    $('#NoteY1').val(area.y1);
+    $('#NoteHeight').val(area.height);
+    $('#NoteWidth').val(area.width);
+  }
+</script>

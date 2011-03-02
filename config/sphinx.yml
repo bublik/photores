@@ -1,0 +1,13 @@
+development: &my_settings
+  port: 3312
+  enable_star: true
+  min_prefix_len: 0
+  min_infix_len: 1
+  min_word_len: 1
+  morphology: 'stem_ru, stem_en'
+  
+test:
+  <<: *my_settings
+  
+production:
+  <<: *my_settings

@@ -1,0 +1,18 @@
+<h1>Listing priv_messages</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% @priv_messages.each do |priv_message| %>
+  <tr>
+    <td><%= link_to 'Show', priv_message %></td>
+    <td><%= link_to 'Edit', edit_priv_message_path(priv_message) %></td>
+    <td><%= link_to 'Destroy', priv_message, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New priv_message', new_priv_message_path %>

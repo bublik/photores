@@ -1,0 +1,10 @@
+<h1><%= t('general.new')+' '+ t('general.forum') %></h1>
+<div align="center">
+  <% form_for(:forums,@forums,:url=>{:controller=>'forums',:action => 'create'}) do -%>
+    <%= render :partial => 'form' %>
+    <%= submit_tag "Create", :disable_with => 'Загрузка' %>
+  <%  end -%>
+</div>
+<div class="pagination">
+  <%= link_to(t('general.back'), {:controller => 'forums', :action => 'list'}, :class => 'button')%>
+</div>

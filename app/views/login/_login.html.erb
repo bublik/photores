@@ -1,0 +1,15 @@
+<div id="modal_window">
+  <% form_remote_for(:user, :url => {:controller=>'login',:action=>'auth'}, :html => {:id => 'login_form'}) do -%>
+    <dl class="table pad5 w300">
+      <dt>&nbsp;</dt>
+      <dd class="r"><%= link_to_function(' ', "$('#modal_window').remove()", :class => 'ico ico-cancel') %></dd>
+      <dt>Логин:</dt>
+      <dd><%= text_field "user", "login", :size => 20, :class => 'w100' %></dd>
+      <dt>Пароль:</dt>
+      <dd><%= password_field "user", "password", :size => 20, :class => 'w100' %></dd>
+      <dt><%= link_to(t('general.registration'), {:controller => 'users', :action => 'new'}, :class => 'small') -%></dt>
+      <dd><%= link_to(t('general.request_password'), {:controller => 'login', :action => 'form_repassword'}, :class => 'small') -%></dd>
+      <dt><%= submit_tag t('general.enter'), :disable_with => 'Загрузка' %></dt>
+    </dl>
+  <% end -%>
+</div>

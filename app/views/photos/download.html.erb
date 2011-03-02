@@ -1,0 +1,49 @@
+<% title('Загрузка фотографии - ' + @photo.title)
+description('Загрузка фотографии - ' + @photo.title)
+keywords("photo, download, #{@photo.keywords}")
+-%>
+
+<h1>Скачивание фотографии: <strong class="orange"><%=h @photo.title %></strong></h1>
+<div class="tricol">
+  <ul>
+    <li><%= google_advert_block_links %></li>
+    <li>
+      <% form_for( download_photo_path(@photo)) do %>
+        <%= link_to(image_tag(@photo.public_filename(:thumb), :alt => @photo.alt),
+          photo_path(@photo, :html), :title => @photo.alt) %>
+        <%= show_simple_captcha(:distortion => 'high', :label => 'Введите текст:') %>
+        <div class="pad5"><%= submit_tag('Скачать', :disable_with => 'Загрузка')%></div>
+      <% end %>
+    </li>
+    <li>
+      <dl class="table w300" >
+        <dt>Автор:</dt>
+        <dd><%= link_to_user(@photo.user) %></dd>
+        <dt>Фото:</dt>
+        <dd><b><%= @photo.title %></b></dd>
+        <%= (content_tag(:dt, 'Управление:') + content_tag(:dd, photo_manage(@photo)) if @photo.user.eql?(current_user) || is_admin?) if logged_in? %>
+        <dt>Оборудование:</dt>
+        <dd><%= @photo.photo_profile ? h(@photo.photo_profile.full_description) : '-' %></dd>
+        <dt>Размер:</dt>
+        <dd><%= number_to_human_size(@photo.size, :precision => 0) %> <%= "#{@photo.width}x#{@photo.height}" %>px</dd>
+        <dt>В альбомах:</dt>
+        <dd><%= photo_albums_links(@photo) %></dd>
+        <dt>Рейтинг:</dt>
+        <dd id="rate_<%= @photo.id %>"><div class="left"><%= render_rating(@photo) %></div></dd>
+        <%if @photo.contest_id %>
+          <dt>Конкурс:</dt>
+          <dd><%= link_to(@photo.contest.title, @photo.contest) %></dd>
+        <% end %>
+        <dt>Размещено:</dt>
+        <dd><%= @photo.created_at.to_s(:db) %></dd>
+        <dt>Просмотров:</dt>
+        <dd><%= @photo.views %></dd>
+        <dt>Ключевые слова:</dt>
+        <dd><%= photo_tags_links(@photo) %></dd>
+        <dt>В разделах:</dt>
+        <dd><%= photo_cats_links(@photo) %></dd>
+      </dl>
+    </li>
+  </ul>
+</div>
+<%= google_advert_horizont_links %>

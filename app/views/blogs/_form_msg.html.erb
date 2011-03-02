@@ -1,0 +1,12 @@
+<%= javascript_include_tag :fckeditor -%>
+<% form_for(@blog) do |f| %>
+  <dl>
+    <dt><b>Тема:</b> <small>не жалейте слов для описания темы</small></dt>
+    <dd><%= f.text_field :title, :size => '100', :id => 'post_title' %></dd>
+    <dt><b>Теги:</b> <small>разделять пробелами</small></dt>
+    <dd> <%= f.text_field :tag_list, :size => '100'%></dd>
+    <dt><b>Сообщение</b></dt>
+    <dd><%= fckeditor_textarea(:blog, :body, :toolbarSet => 'Simple', :width => '630px', :height => '400px') %></dd>
+    <dd><%= f.submit "Создать" %></dd>
+  </dl>
+<% end %>

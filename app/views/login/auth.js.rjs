@@ -1,0 +1,13 @@
+page.replace_html 'flash', flash[:notice]
+#page.show 'flash'
+
+if @user.nil?
+  page.delay(4) do
+    page.hide 'flash'
+  end
+elsif @user &&  !@user.active
+  page.redirect_to :action => "form_reactivate"
+elsif @user && current_user
+  page.toggle 'modal_window'
+  page.redirect_to session[:referer] || '/'
+end

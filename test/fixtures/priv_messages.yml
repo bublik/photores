@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: priv_messages
+#
+#  id         :integer         not null, primary key
+#  user_id    :integer         not null
+#  to_user_id :integer         not null
+#  title      :text            not null
+#  data       :text
+#  read       :boolean
+#  created_at :datetime
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: priv_messages
+#
+#  id         :integer(4)      not null, primary key
+#  user_id    :integer(4)
+#  to_user_id :integer(4)
+#  title      :text            not null
+#  data       :text
+#  read       :boolean(1)
+#  created_at :datetime
+#
+
+--- {}
+

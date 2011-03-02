@@ -1,0 +1,13 @@
+<div id="about_photo">
+<dl>
+  <dt><b>Камера</b></dt>
+  <dd><%=h @photo_profile.camera_brand.name %></dd>
+  <dt><b>Описание</b></dt>
+  <dd><%=h @photo_profile.description %></dd>
+  <dt><%= link_to 'Edit', edit_photo_profile_path(@photo_profile) %> |
+<%= link_to 'Back', photo_profiles_path %></dt>
+  <dd>
+</dd>
+</dl>
+</div>
+

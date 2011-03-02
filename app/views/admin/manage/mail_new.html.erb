@@ -1,0 +1,14 @@
+<%= render :partial => '/admin/menu'%>
+<div>
+  <h1>Написать письмо пользователям</h1>
+  <% form_for(:mail,:url => {:action => 'mail_send'}) do |f| %>
+    <dl>
+      <dt><b>Сообщение</b></dt>
+      <dd> <%= f.text_area :message, :size => '50x10'%></dd>
+      <dd> Тест: <%= f.check_box :test, {:checked => true} %></dd>
+      <dd>
+        <%= submit_tag "Создать", :disable_with => 'Загрузка'  %>
+      </dd>
+    </dl>
+  <% end %>
+</div>

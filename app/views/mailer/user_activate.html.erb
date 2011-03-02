@@ -1,0 +1,13 @@
+
+Вы зарегистрировались на <%= APP_CONFIG['site_name'] %> <%= APP_CONFIG['domain'] %>
+
+Регистрационная информация:
+
+User Id: <%= @user[:id] %>
+User Login: <%= @user[:login] %>
+Password: <%= @user[:password] %>
+
+Для активации учетной записи перейдите по ссылке 
+http://<%= APP_CONFIG['domain'] %>/login/activate/<%= @user[:code_activate] %>
+
+С уважением администрация http://<%= APP_CONFIG['domain'] %>/

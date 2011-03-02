@@ -1,0 +1,10 @@
+<%= profile_menu if (logged_in? && current_user == @user)  %>
+
+<h2>Друзья для <%= @user.full_name %></h2>
+
+<% if @user.friendships.empty? %>
+  Пока не обзавелся друзьями
+<% end %>
+<dl class="table w50proc">
+  <%= render :partial => (logged_in? && current_user == @user) ?  'friendship_with_edit' : 'friendship' , :collection => @user.friendships %>
+</dl>

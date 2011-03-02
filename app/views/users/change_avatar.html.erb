@@ -1,0 +1,37 @@
+<% title(t('general.avatar')) %>
+<%= profile_menu %>
+<h1><%= yield(:title) %></h1>
+<table class="fleft">
+  <tr>
+    <td>
+      <div id="avatar"><%= image_tag((current_user.public_avatar), :border => 0,:align => 'center') %>
+        <%= link_to_remote(' ',
+          :url => {:action => 'save_avatar', :id => current_user,
+            :private_avatar_id => current_user.private_avatar.id,
+            :private_avatar => 'destroy' }, :class => 'ico ico-delete') if current_user.private_avatar%>
+      </div>
+    </td>
+    <td colspan="3">
+      <div id="div_upload">
+        <% form_for(:avatar,
+          :url => {:controller => 'users', :action => 'upload_avatar'},
+          :html => { :multipart => true },
+          :target => 'iframe_up') do |f| -%>
+          <%= f.file_field( "uploaded_data", :size => 15) %><br/>
+          <%= t('general.upload_avatar_size') %><br/>
+          <%= submit_tag(t('general.upload'), :disable_with => 'Загрузка')%>
+        <% end -%>
+      </div>
+    </td>
+  </tr>
+  <tr class="border"></tr>
+  <% avatar_list.each do |file| -%>
+    <% if avatar_list.index(file).modulo(4).zero? -%>
+      <tr>
+      <% end -%>
+      <td><%= link_to_remote( image_tag("#{file}", :border => 0,  :align => 'left'),
+          :url => { :action => 'save_avatar',:id=>current_user, :avatar => file })%>
+      </td>
+    <% end -%>
+  </tr>
+</table>

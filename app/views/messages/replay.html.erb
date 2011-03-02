@@ -1,0 +1,24 @@
+<h2><%=top_forum_link(@to_replay.forum,'')%></h2>
+<div class="b">Раздел:
+  <%=link_to(@to_replay.forum.name, list_messages_path(:forum => @to_replay.forum.id), :class=>'forum') %> /
+  <%= link_to(@to_replay.name, {:controller => 'messages', :action => 'show',
+      :id => @to_replay.parent_id ||= @to_replay.id, :forum => @to_replay.forum_id}) %>
+</div>
+
+<table class="border c">
+  <tr>
+    <th><%=t('general.replay') %></th>
+  </tr>
+  <tr>
+    <td align="center">
+      <div class="replay bgrow1 message">
+        <% cache("/message/#{@to_replay.cache_key}") do%>
+          <%= sanitize(@to_replay.message) -%>
+        <% end %>
+      </div>
+      <!--start from add post-->
+      <%= render :partial => 'replay', :locals => {:message => @message, :to_replay => @to_replay} %>
+      <!--end from add post-->
+    </td>
+  </tr>
+</table>

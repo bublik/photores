@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: photo_profiles
+#
+#  id              :integer         not null, primary key
+#  user_id         :integer
+#  camera_brand_id :integer
+#  description     :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  is_default      :boolean
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: photo_profiles
+#
+#  id              :integer(4)      not null, primary key
+#  user_id         :integer(4)
+#  camera_brand_id :integer(4)
+#  description     :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  camera_brand_id: 1
+  description: MyString
+
+two:
+  user_id: 1
+  camera_brand_id: 1
+  description: MyString

@@ -1,0 +1,17 @@
+<% form_for(@photo_profile) do |f| %>
+  <div id="about_photo">
+    <%= f.error_messages({:header_message => 'Ошибка при работе с профайлом.',
+        :message => 'Для продолжения исправьте следующее.'}) %>
+    <dl>
+      <dt>Выберите бренд</dt>
+      <dd><%= f.select :camera_brand_id, CameraBrand.find(:all, :order => 'name ASC').collect{|b| [b.name, b.id]} , :selected => (@photo_profile.camera_brand_id ? @photo_profile.camera_brand_id : '1') %></dd>
+
+      <dt>Объектив / другие приспособления</dt>
+      <dd><%= f.text_field :description %></dd>
+    </dl>
+    <br class="clear">
+    <%= submit_tag "Сохранить", :disable_with => 'Загрузка' %>
+  </div>
+<% end %>
+
+<%= link_to 'Назад', photo_profiles_path %>

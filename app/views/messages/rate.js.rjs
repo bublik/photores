@@ -1,0 +1,1 @@
+page.replace_html("rate_#{@message.id}", render_rating(@message))

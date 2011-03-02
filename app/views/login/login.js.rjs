@@ -1,0 +1,5 @@
+page.insert_html :after, 'flash', :partial => 'login'
+page.show 'modal_window'
+page.draggable('modal_window')
+
+page << "$('#login_form').center()"

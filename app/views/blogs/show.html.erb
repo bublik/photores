@@ -1,0 +1,11 @@
+<% title(@blog.title)
+description( @blog_title = @blog.title) %>
+<% keywords(@blog.tags.collect{|t| t.name }.join(', ')+', ' )%>
+<%= render_blog_msg(@blog) %>
+<%= logged_in? ? 
+  render(:partial => 'bcomments/index', :locals => {:bcomments => @blog.bcomments, :blog => @blog}) +
+  '<br clear="all"/>'+
+   render(:partial => 'bcomments/new', :locals => {:blog => @blog, :bcomment => Bcomment.new}) :
+  content_tag(:div, link_to('Зарегистрируйтесь', new_user_path)+' для добавления коментариев')
+%>
+

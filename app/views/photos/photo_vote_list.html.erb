@@ -1,0 +1,6 @@
+<h1><%= @user.full_name %> оценил фотографии</h1>
+<ul class="inline nolist">
+  <% @photos.each do |photo| %>
+    <%= content_tag(:li, small_image_with_rate(photo, @user)) %>
+  <% end %>
+</ul>

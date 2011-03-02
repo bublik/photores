@@ -1,0 +1,13 @@
+<div id="about_photo">
+    <%= f.error_messages({:header_message => 'Ошибка при работе с альбомом.',
+    :message => 'Для продолжения исправьте следующее.'}) %>
+<dl>
+  <dt>Альбом</dt>
+  <dd><%= f.text_field :name %></dd>
+  <dt>Извещать друзей</dt>
+  <dd class="small"><%= f.check_box :frendly %> о новых фотографиях
+  </dd>
+</dl>
+<br class="clear">
+  <%= submit_tag "Сохранить" , :disable_with => 'Загрузка'%>
+</div>

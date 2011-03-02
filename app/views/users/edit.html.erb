@@ -1,0 +1,6 @@
+<% title(t('general.profile')) %>
+<%= profile_menu %>
+<h1><%= yield(:title) %></h1>
+<% form_for(@user, :url => user_path(@user), :html => { :method => :put })  do |f| -%>
+  <%= render :partial => 'form', :locals => {:f => f} -%>
+<% end -%>

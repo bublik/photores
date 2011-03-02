@@ -1,0 +1,55 @@
+server: &server
+  domain: photo.ukrainaonline.net
+  default_lang: ru
+  site_name: 'Клуб пользователей PENTAX'
+  author: 'Voloshin Ruslan'
+  keywords: 'пентакс, pentax, photos,фотографии'
+  description: 'Описание сайта'
+  avatars_dir: '/images/avatars/'
+  min_photo_size: 120
+  email_domain: photo.ukrainaonline.net
+  admin_email: pentax@pentax-club.com.ua
+  exception_from: rubyclub@rubyclub.com.ua
+  exception_to: rebisall@gmail.com
+  webmoney:
+    merchant_secret_key: 'RaIls*KeyfOR!sekRet'
+    #https://merchant.webmoney.ru/conf/purses.asp
+    LMI_PAYEE_PURSE: 'Z407936991171'
+    LMI_MODE: 1
+  google_analytics:
+    nikon-club.com.ua: 'UA-670633-9'
+    canon-club.com.ua: 'UA-670633-10'
+    pentax-club.com.ua: 'UA-670633-11'
+    photo.ukrainaonline.net: 'UA-670633-12'
+    wallpapers-wide.com: 'UA-670633-15'
+  google_verify:
+    nikon-club.com.ua: 'aj_1kaYYLXO5pP3H3u6LhZ9H27jhlnvGuzJvXp0ZIBE'
+    canon-club.com.ua: 'U5LvgDZJS5tNl20tFLx8sEVYWU5XIHopycWwZHZDwYM='
+    pentax-club.com.ua: 'sQruN6UO8yrhG8Jd98Ku1Tr85pc63KawuTXn0vCad5o='
+    photo.ukrainaonline.net: 'ihE2hKBn0hC1SJiTiJZ46VxMOMv/ifqVtoEcVoVksk8='
+    wallpapers-wide.com: 'DqjOJgXFn5CHdhpxuZQnnIY64acw8yW8rDHig8TmQcQ='
+  bigmir_code:
+    nikon-club.com.ua: '16804142'
+    canon-club.com.ua: '16804143'
+    pentax-club.com.ua: '16804144'
+    photo.ukrainaonline.net: '16816966'
+    wallpapers-wide.com: '16817256'
+
+development:
+  <<: *server
+  domain: wallpapers-wide.com 
+test:
+  <<: *server
+
+production:
+  <<: *server
+  webmoney:
+    merchant_secret_key: Set this key on https://merchant.webmoney.ru/conf/purses.asp
+    LMI_PAYEE_PURSE: 'Z407936991171'
+    LMI_MODE: 0
+  domain: wallpapers-wide.com
+  site_name: 'Широкоформатные обои профессионального качества'
+  keywords: 'обои, профессиональные фото, wallpapers, wallpappers, desktop, бесплатно, clipart, фоновые, 1640, 1050, 1440, 900, 1600, 1200, 1920, erotic, best, fullscreen, iboi'
+  description: 'Загрузка и покупка фотографий и заставок большого размера'
+  email_domain: wallpapers-wide.com
+  admin_email: wallpapers@wallpapers-wide.com

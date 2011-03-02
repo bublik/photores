@@ -1,0 +1,24 @@
+<% title('Добавление фотографий') -%>
+<h1><%= yield :title  -%></h1>
+<%= javascript_include_tag('jquery.uploadProgress.js') %>
+<script type="text/javascript">
+  $(function() {
+    $('form').uploadProgress({
+      start:function(){$('#uploading').show();},
+      uploading: function(upload) {
+        $('#percents').html(upload.percents+'%');
+        $('#freceived').html(upload.received/1024);
+        $('#fsize').html(upload.size/1024);
+      },
+      interval: 2000
+    });
+  });
+</script>
+<div id="uploading" class="bar">
+  <div id="progressbar">&nbsp;</div>
+  <div><span id="percents"/>&nbsp;<span id="freceived"/>0/<span id="fsize"/>Kb </div>
+</div>
+
+<% form_for(@photo, new_photo_path, :html => { :multipart => true }, :id => 'upload') do |f| -%>
+  <%= render :partial => 'form', :locals => {:f => f, :photo => @photo, :user => current_user} -%>
+<% end -%>

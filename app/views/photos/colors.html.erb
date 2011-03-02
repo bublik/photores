@@ -1,0 +1,22 @@
+<%
+title('Поиск фотографий по цвету')
+description('Поиск фотографий по цвету')
+keywords('find by colors,поиск по цветам, фотографии одного цвета')
+-%>
+<h1><%= yield :title %></h1>
+
+<script type="text/javascript" src="/javascripts/farbtastic.js"></script>
+<link rel="stylesheet" href="/stylesheets/farbtastic.css" type="text/css" />
+<form action="/photos/colors" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
+  <div id="colorpicker"></div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $.farbtastic('#colorpicker', '#color');
+    });
+  </script>
+  <input type="text" id="color" name="color" value="#<%= "#{@color}" %>" />
+  <%= submit_tag "Найти", :disable_with => 'Поиск' %>
+</form>
+<div id="colorized_photos" class="inline"><%= slide_show_photos_list(@photos, true, true, false) if @photos %></div>
+<%= will_paginate(@photos, :params => params) if @photos %>

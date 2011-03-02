@@ -1,0 +1,13 @@
+<% title(@contest.title)
+description(@contest.title) %>
+
+<h1 class="pad5"><%=h @contest.title %></h1>
+<div>Приз: <%=h @contest.prize %></div>
+<div class="small"><%=h @contest.description %></div>
+<% if @photos.empty? %>
+  <%= content_tag(:h2, 'На данный момент нет участников.')%>
+<% else %>
+  <%= slide_show_photos_list(@photos) %>
+<% end %>
+<%= link_to 'Весе конкурсы', contests_path %>
+

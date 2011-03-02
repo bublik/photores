@@ -1,0 +1,68 @@
+<% title "Форум" %>
+<h1><a href="/" title="<%= APP_CONFIG['site_name'] %>"><%= yield :title %></a></h1>
+<table class="border" >
+  <tr>
+    <th style="width: 5%"></th>
+    <th style="width: 65%">Раздел</th>
+    <th style="width: 20%">Последнее сообщение</th>
+    <th style="width: 5%">Тем</th>
+    <th style="width: 5%">Сообщений</th>
+  </tr>
+  <%if is_admin?  && @forums.size > 1 -%>
+    <tr><td colspan="5">
+        <% form_for :forum, @forums, :url => {:action => 'split'} do |f| %>
+          <%= select('forum','from_id', @forums.collect{|ff| [ff.name, ff.id]}) %>
+          <%= select('forum','to_id',@forums.collect{|ff| [ff.name, ff.id]}) %>
+          <%= submit_tag 'Объединить разделы', :disable_with => 'Загрузка'%>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% @groups.each do |gr| %>
+    <tr>
+      <th></th>
+      <th class="l"><%= gr.name %> <%= link_to('', edit_fgroup_path(gr), :class => 'ico ico-page_edit') if is_admin? -%>
+      </th>
+      <th colspan="3">
+      </th>
+    </tr>
+    <% for forums in gr.forums -%>
+      <tr class="<%= cycle('bgrow1', 'bgrow2')%>">
+        <td class="bgwhite c flist">&nbsp; </td>
+        <td class="l">
+          <h2><%= link_to( forums.name, {:controller=>'messages', :action => 'list', :forum => forums},
+              {:title => forums.description.mb_chars[0,30], :class=>'forum', :rel=>'category tag'}
+            ) %></h2>
+          <%if is_admin? %>
+            <div class ="right">
+              <%= link_to(' ', {:action => 'edit',  :id => forums}, :title => t('general.edit'), :class => 'ico ico-page_edit') -%>
+              <%= link_to(' ', {:action => 'destroy', :id => forums }, :title => t('general.delete'),
+                :confirm => 'Are you sure?', :class => 'ico ico-page_delete') -%>
+            </div>
+          <%end%>
+          <small><%= auto_link(forums.description) %></small>
+        </td>
+        <td class="lp"><%if forums.lastmsg %>
+            <%= link_to( forums.lastmsg.name, {:controller=>'messages',:action => 'show', :id => forums.lastmsg},
+              {:title => truncate(strip_tags(forums.lastmsg.message), :length => 20)})%><br/>
+            <%= distance_of_time_in_words(Time.now(),forums.lastmsg.updated_at)%>
+            <div class="rsmall"> от: <%= link_to_user(forums.lastmsg.user) %>
+            </div>
+          <%else%>
+            <small>Сообщений нет</small>
+          <%end%></td>
+        <td align="center"><%= forums.themes.count %></td>
+        <td align="center"><%= forums.posts.count %></td>
+      </tr>
+    <% end %>
+  <% end -%>
+</table>
+<%= will_paginate @forums %>
+<div class="pagination">
+  <%if is_admin? %>
+    <%=  link_to('Новая группа',new_fgroup_path,:class=>'button') %>
+    <%=  link_to('Новый раздел',{:controller=>'forums', :action => 'new'},:class=>'button') %>
+  <%end%>
+</div>
+<%=  link_to('',  url_for(:controller=>'messages', :action => 'rss',:id=>params[:forum]), :class => 'ico ico-rss')%>
+

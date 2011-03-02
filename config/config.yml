@@ -1,0 +1,65 @@
+server: &server
+  domain: nikon-club.com.ua
+  default_lang: ru
+  site_name: 'Клуб пользователей PENTAX'
+  author: 'Voloshin Ruslan'
+  keywords: 'пентакс, pentax, photos,фотографии'
+  description: 'Описание сайта'
+  avatars_dir: '/images/avatars/'
+  min_photo_size: 120
+  #kb
+  email_domain: photo.ukrainaonline.net
+  admin_email: pentax@pentax-club.com.ua
+  exception_from: rubyclub@rubyclub.com.ua
+  exception_to: rebisall@gmail.com
+  webmoney:
+    merchant_secret_key: 'RaIls*KeyfOR!sekRet'
+    #https://merchant.webmoney.ru/conf/purses.asp
+    LMI_PAYEE_PURSE: 'Z407936991171'
+    LMI_MODE: 1
+  google_analytics:
+    nikon-club.com.ua: 'UA-670633-9'
+    canon-club.com.ua: 'UA-670633-10'
+    pentax-club.com.ua: 'UA-670633-11'
+    photo.ukrainaonline.net: 'UA-670633-12'
+    wallpapers-wide.com: 'UA-670633-15'
+    nikon-club.com.dev: 'UA-670633-9'
+    seonya.com: 'UA-670633-20'
+    juke.com.ua: 'UA-670633-25'
+  google_verify:
+    nikon-club.com.ua: 'aj_1kaYYLXO5pP3H3u6LhZ9H27jhlnvGuzJvXp0ZIBE'
+    canon-club.com.ua: 'bvknQ2h7O65UAGq4m-8gnjlhDb11GbtZ62T7HGuYM0E'
+    pentax-club.com.ua: '4BuZV1p_BDhxaM8_l7oBfb0DzMYW2NhMeB-vKI7iMP4'
+    photo.ukrainaonline.net: 'Dun1wYjVLOmqaeYUEV7xb8ZuyKlxDSHpwBRNaMrKpjM'
+    wallpapers-wide.com: 'DqjOJgXFn5CHdhpxuZQnnIY64acw8yW8rDHig8TmQcQ='
+    seonya.com: 'V9oTMT20YKv4I-66yaVh0EKua5ehCcqbSTWtMh9pFKc'
+    juke.com.ua: 'cuhHDtJopzBEvScqkjf5DUlMF9zx1yBC1SovhbdzSzs'
+  bigmir_code:
+    nikon-club.com.ua: '16804142'
+    canon-club.com.ua: '16804143'
+    pentax-club.com.ua: '16804144'
+    photo.ukrainaonline.net: '16816966'
+    wallpapers-wide.com: '16817256'
+    seonya.com: '16850126'
+    juke.com.ua: '16860566'
+
+development:
+  <<: *server
+  domain: nikon-club.com.dev
+test:
+  <<: *server
+
+production:
+  <<: *server
+  webmoney:
+    merchant_secret_key: Set this key on https://merchant.webmoney.ru/conf/purses.asp
+    LMI_PAYEE_PURSE: 'Z407936991171'
+    LMI_MODE: 0
+  domain: nikon-club.com.ua
+  site_name: 'Фото клуб любителей NIKON'
+  keywords: 'никон, nikon, D40, D60, D80, D80, nikkor'
+  adv_keywords: 'nikon canon pentax nikkor sigma Canon Leica Nikon Pentax Samyang Sigma Sony Tamron Tokina'
+  description: 'Клуб любителей Никон. Возможность пообщаться на форуме разместить свои фотографии и завести свой фото блог.'
+  email_domain: nikon-club.com.ua
+  admin_email: nikon@nikon-club.com.ua
+

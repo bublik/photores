@@ -1,0 +1,22 @@
+<%
+title(@sites_category.name)
+description(@sites_category.description)
+keywords(@sites_category.name)
+-%>
+
+<h1><%=h @sites_category.name %> <%= link_to('edit', edit_sites_category_path(@sites_category)) if is_admin? %></h1>
+<p><%=h @sites_category.description %></p>
+<% if is_admin? %>
+  <%= link_to('Ожидают активации', sites_category_path(@sites_category, :active => 'false')) %>
+  <%= link_to('Активированы', sites_category_path(@sites_category)) %>
+<% end %>
+<ul  style="list-style-image:none; list-style-position:outside; list-style-type:none;">
+<%= @sites.collect do |site|
+  content_tag(:li, site_row(site), :id => "site_#{site.id}")
+end %>
+</ul>
+
+<%= will_paginate(@sites) %>
+
+<%= link_to 'Вначало каталога', sites_categories_path %> |
+<%= link_to 'Добавить сайт', new_sites_category_friend_site_path(@sites_category) %>

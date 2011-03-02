@@ -1,0 +1,2 @@
+page.replace "read_pm_#{@pmsg.id}", "Прочитал"
+page.replace_html 'flash', flash[:notice]

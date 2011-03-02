@@ -1,0 +1,8 @@
+<div id="replay_<%= to_replay.id %>" style="width: 98%;  text-align: center">
+  <% form_for(:message, message, :url => {:controller => 'messages', :action => 'create'}, :html=>{:multipart => true}) do  -%>
+    <%= hidden_field_tag("message[forum_id]", params[:forum]) %>
+    <%= hidden_field_tag("message[parent_id]", to_replay.parent_id ||= to_replay.id) %>
+    <%= render :partial => 'form',:locals => {:re => to_replay.message} %>
+    <%= submit_tag t('general.replay'), :disable_with => 'Загрузка' %>
+  <% end -%>
+</div>

@@ -1,0 +1,40 @@
+<%  title(@user.full_name); description(@user.full_name) %>
+
+<div class="left w450">
+  <%= small_profile(@user) -%>
+  <%= link_to(t('general.edit'), edit_user_path(@user), :class => 'ico ico-page_edit') if can_edit_user(@user) -%>
+  <div>
+    <%= link_to(t('users.him_messages'), user_messages_url(@user, :subdomain => false)) %> |
+    <%= link_to(t('users.him_votes'),  user_votes_url(@user, :subdomain => false)) %>
+  </div>
+  <%= content_tag(:big, t('users.promo')) + simple_format(@user.promo, :class => 'm15' ) %>
+  <%= content_tag(:big, t('users.description')) + simple_format(@user.description, :class => 'm15') %>
+  <%= content_tag(:big, t('users.interests')) + simple_format(@user.interests, :class => 'm15') %>
+  <%= content_tag(:big, t('users.home_page')) + simple_format(auto_link(@user.home_page, :all, :target => '_blank', :rel => 'nofollow'), :class => 'm15') %>
+  <%= content_tag(:big, t('users.job')) + simple_format(@user.job, :class => 'm15' ) %>
+
+  <div class="clear pad5">
+    <%= content_tag(:div, content_tag(:big, 'Записки')) %>
+    <%= blog_last_posts(10) %>
+    <%= will_paginate @blog_posts %>
+  </div>
+
+</div>
+
+<!--Center page-->
+<div class="center w350 ml15">
+  <div class="inline" >
+    <%= user_photo_albums(@user, true) %>
+  </div>
+</div>
+
+<!--Right column-->
+<div class="right w350">
+  <%= privatbank %>
+  <script language="Javascript" type="text/javascript" src="http://<%= APP_CONFIG['domain'] %>/widget_last_photos.js"></script>
+  <hr/>
+  <script language="Javascript" type="text/javascript" src="http://<%= APP_CONFIG['domain'] %>/widget_user_photos.js?login=bublik&limit=9"></script>
+  <hr/>
+  <script language="Javascript" type="text/javascript" src="http://<%= APP_CONFIG['domain'] %>/widget_random_photos.js"></script>
+</div>
+

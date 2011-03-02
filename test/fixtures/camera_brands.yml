@@ -1,0 +1,265 @@
+# == Schema Information
+#
+# Table name: camera_brands
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# == Schema Information
+# Schema version: 20080915133957
+#
+# Table name: camera_brands
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+empty:
+  name: укажите бренд
+13065880:
+  name: Acmepower
+1870843:
+  name: Agfa
+13110543:
+  name: Agfaphoto
+1869979:
+  name: Aiptek
+10713096:
+  name: Airis
+4112951:
+  name: Aito
+13073859:
+  name: ARINA
+13206952:
+  name: Arsenal
+5728649:
+  name: Astra
+1870007:
+  name: BBK
+3333737:
+  name: BenQ
+13073871:
+  name: Benro
+14894636:
+  name: Berlebach
+1870647:
+  name: Canon
+1871071:
+  name: Casio
+13042505:
+  name: Cavei
+4112954:
+  name: Concord
+2597239:
+  name: Contax
+12980753:
+  name: Continent
+6666373:
+  name: Cosmo
+1871267:
+  name: Creative
+12948687:
+  name: Cullmann
+1871279:
+  name: D-link
+1871395:
+  name: Daewoo
+3618694:
+  name: Daisy
+12757856:
+  name: Dicom
+11537504:
+  name: DigiEGO
+13073831:
+  name: Dital Fox
+1871435:
+  name: Epson
+13073827:
+  name: ERA
+14961616:
+  name: Ergo
+7334799:
+  name: Exakta
+13111062:
+  name: Fotomate
+3642480:
+  name: Fuji
+1871211:
+  name: Fujifilm
+1870875:
+  name: Genius
+13065448:
+  name: "Giotto's"
+12980749:  
+  name: Gitzo
+13274777:
+  name: GoPro
+3160701:
+  name: GreenWood
+1871371:
+  name: Grundig
+13065463:
+  name: HAMA
+5732171:
+  name: Hasselblad
+1870743:
+  name: Hitachi
+1870091:
+  name: HP
+3160709:
+  name: Hyundai
+16170878:
+  name: iSpan
+1871027:
+  name: Jenoptik
+1871075:
+  name: JVC
+7609842:
+  name: Kocom
+1871719:
+  name: Kodak
+1871571:
+  name: Konica
+12059614:
+  name: Kowa
+1870111:
+  name: Kyocera
+1870631:
+  name: Leica
+1871499:
+  name: LG
+13065454:
+  name: Libec
+5678095:
+  name: LOGITECH
+1870339:
+  name: Mamiya
+12786817:
+  name: Manfrotto
+6692326:
+  name: Megxon
+6024065:
+  name: Mercury
+5525587:
+  name: Metz
+1870483:
+  name: Minolta
+6024068:
+  name: Minox
+4420394:
+  name: Mirage
+12941941:
+  name: Monsterpod
+1871323:
+  name: Mustek
+10641104:
+  name: Nakomatsu
+1870507:
+  name: Nikon
+15202331:
+  name: Nissin
+6024071:
+  name: Nobby Digital
+1871543:
+  name: Olympus
+1870515:
+  name: Orient
+1871531: 
+  name: Panasonic
+1871591:
+  name: Pentax
+1870163:
+  name: Polaroid
+1870167:
+  name: Praktica
+14103725:
+  name: PRAKTIKA
+1870907:
+  name: Premier
+13118121:
+  name: Quantum
+13065460:
+  name: RANCO
+3321241:
+  name: Ranger Technology
+1870183:
+  name: RCA
+7609837:
+  name: Reefmaster
+1871231:
+  name: Rekam
+1870447:
+  name: Relisys
+1871483:
+  name: Ricoh
+4112952:
+  name: Rollei
+3321245:
+  name: Rovershot
+1871447:
+  name: Samsung
+1871299:
+  name: Sanyo
+13117841:
+  name: Sea and Sea
+13040730:
+  name: Sealife
+6023107:
+  name: Seemann Sub
+1870855:
+  name: Sharp
+4112950:
+  name: Sigma
+4070909:
+  name: Skina
+12941951:
+  name: Slik
+12948678:
+  name: Soligor
+1871023:
+  name: Sony
+13068914:
+  name: Sumdex
+13065883:
+  name: Sunblitz
+12948675:
+  name: Sunpak
+10160621:
+  name: Tamron
+13111018:
+  name: Tanner
+1870947:
+  name: Thomson
+1870931:
+  name: Toshiba
+7743942:
+  name: UFO
+1870823:
+  name: Umax
+13065451:
+  name: UNOMAT
+7316987:
+  name: Vanguard
+12941931:
+  name: Velbon
+13065457:
+  name: Vinten
+3910295:
+  name: Vivanco
+4038022:
+  name: Vivitar
+13207186:
+  name: WEBBERS
+13068823:
+  name: Weifeng
+1870267:
+  name: Yashica
+13272429:
+  name: Yodobashi
+1870499:
+  name: Зенит

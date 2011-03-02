@@ -1,0 +1,13 @@
+<%  tag = @messages[0].nil? ? '' : @messages[0].name
+title(tag)
+description(tag)
+keywords(tag)
+%>
+
+<h1>Затегированы <%= link_to(@messages[0].name,{:anchor=>@messages[0].name},:class=>'s2') unless @messages[0].nil? %></h1>
+
+<div class="c">
+  <%= render :partial => 'messages_table' %>
+</div>
+
+<%= will_paginate @messages %>

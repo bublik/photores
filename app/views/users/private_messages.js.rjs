@@ -1,0 +1,2 @@
+page.replace_html 'tdmanage', :file => 'users/private_messages', :locals => {:pmsg=>@pmsg}
+

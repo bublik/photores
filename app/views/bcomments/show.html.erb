@@ -1,0 +1,18 @@
+<p>
+  <b>User:</b>
+  <%=h @bcomment.user %>
+</p>
+
+<p>
+  <b>Blog:</b>
+  <%=h @bcomment.blog %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @bcomment.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_bcomment_path(@bcomment) if can_edit(@bcomment) %> |
+<%= link_to 'Back', bcomments_path %>

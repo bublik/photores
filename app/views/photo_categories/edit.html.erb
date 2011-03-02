@@ -1,0 +1,20 @@
+<h1>Editing photo_category</h1>
+
+<% form_for(@photo_category) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :identifier %><br />
+    <%= f.text_field :identifier %>
+  </p>
+  <p>
+    <%= submit_tag "Update", :disable_with => 'Загрузка' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @photo_category %> |
+<%= link_to 'Back', photo_categories_path %>

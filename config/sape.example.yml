@@ -1,0 +1,40 @@
+nikon-club.com.ua:
+  advert_host: nikon-club.com.ua
+  user: '97ab6f9a4c02f65e84e3255d304b51b6'
+  charset: "UTF-8"
+  force_show_code: false #true for indexing site
+  cache_lifetime: 3600 # seconds
+  get_links: true
+
+canon-club.com.ua:
+  advert_host: canon-club.com.ua
+  user: '97ab6f9a4c02f65e84e3255d304b51b6'
+  charset: "UTF-8"
+  force_show_code: false #true for indexing site
+  cache_lifetime: 3600 # seconds
+  get_links: true
+
+pentax-club.com.ua:
+  advert_host: pentax-club.com.ua
+  user: '97ab6f9a4c02f65e84e3255d304b51b6'
+  charset: "UTF-8"
+  force_show_code: false #true for indexing site
+  cache_lifetime: 3600 # seconds
+  get_links: true
+
+wallpapers-wide.com:
+  advert_host: wallpapers-wide.com
+  user: '97ab6f9a4c02f65e84e3255d304b51b6'
+  charset: "UTF-8"
+  force_show_code: false #true for indexing site
+  cache_lifetime: 3600 # seconds
+  get_links: true
+
+seonya.com:
+  advert_host: seonya.com
+  user: '97ab6f9a4c02f65e84e3255d304b51b6'
+  charset: "UTF-8"
+  force_show_code: false #true for indexing site
+  cache_lifetime: 3600 # seconds
+  get_links: true
+

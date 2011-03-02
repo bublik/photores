@@ -1,0 +1,4 @@
+page.replace_html 'avatar', image_tag(current_user.public_avatar , :border=>0, :align=>'left') 
+page.replace_html 'flash', @state
+#page.show 'flash'
+#page.visual_effect :highlight, 'flash'

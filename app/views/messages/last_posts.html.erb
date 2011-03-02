@@ -1,0 +1,5 @@
+<% title(t('general.last_posts')); description(t('general.last_posts'))  -%>
+<%= content_tag(:h2, yield(:title)) -%>
+<%= links = will_paginate(@messages) -%>
+<%= content_tag(:dic, render(:partial => 'messages_table'), :class => 'c') -%>
+<%= links -%>

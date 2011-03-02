@@ -1,0 +1,8 @@
+<% title("Редактирование альбома") %>
+
+<% form_for(@photo_album) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f, :album => @photo_album} %>
+<% end %>
+
+<%= link_to 'Перейти в альбом', @photo_album %> |
+<%= link_to 'Список альбомов', user_photo_albums_path(current_user) %>

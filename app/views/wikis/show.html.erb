@@ -1,0 +1,13 @@
+<%= title(@wiki.title)
+description(@wiki.title)
+keywords(@wiki.tag_list.split(' ').join(', '))
+-%>
+
+<%= content_tag(:h1, @wiki.title, :class => 'pad5') %>
+<p class="pad5"><%= @wiki.message %></p>
+<%= 'Присоединены: ' + attachemts_list(@wiki) if @wiki.attachments %>
+<%= tags_lis(@wiki) %>
+<%= create_by(@wiki) %>
+
+
+

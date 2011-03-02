@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @fgroup.name %>
+</p>
+
+<p>
+  <b>Is visible:</b>
+  <%=h @fgroup.is_visible %>
+</p>
+
+
+<%= link_to 'Edit', edit_fgroup_path(@fgroup) %> |
+<%= link_to 'Back', fgroups_path %>

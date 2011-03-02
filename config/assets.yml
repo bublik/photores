@@ -1,0 +1,26 @@
+package_assets: always # (on, off, always)
+embed_images: on # (on, off, datauri)
+template_function: off #_.template # (defaults to the built-in micro-templating)
+#package_path: packages # (defaults to assets)
+javascript_compressor: closure # (yui, closure)
+gzip_assets: on
+compressor_options:
+  compilation_level: SIMPLE_OPTIMIZATIONS
+
+javascripts:
+  workspace:
+    - public/javascripts/jquery-1.4.2.min.js
+    - public/javascripts/jquery-ui-1.7.2.custom.min.js
+    - public/javascripts/jquery.tools.min.js
+    - public/javascripts/jrails.js
+    - public/javascripts/jquery.imgareaselect-0.4.js
+    - public/javascripts/jquery.imgnotes-0.1.js
+    - public/javascripts/application.js
+
+
+stylesheets:
+  common:
+    - public/stylesheets/index.css
+    - public/stylesheets/star_rating.css
+    - public/stylesheets/clubstyle.css
+    - public/stylesheets/imgnotes.css

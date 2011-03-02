@@ -1,0 +1,20 @@
+<% title 'Добавление нового друга' %>
+<h2><%= yield :title %></h2>
+
+<%= error_messages_for :friendship %>
+
+<% form_for(:friendship,
+  :url => user_friends_path(:user_id => current_user,
+    :friend_id => @friend),
+  :html => { :multipart => true }) do |f| %>
+  <p>
+    Выберите нужные пункты в зависимости от уровня вашего знакомства с <strong><%= @friend.full_name %></strong>
+  </p>
+
+  <%= render :partial => 'frend_form', :locals => {:f => f} %>
+
+  <%= f.hidden_field :friend_id %>
+  <p>
+    <%= submit_tag 'Сохранить', :disable_with => 'Загрузка' %> или <%= link_to 'отказаться', user_path(@friend) %>
+  </p>
+<% end %>

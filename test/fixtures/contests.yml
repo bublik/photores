@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: contests
+#
+#  id           :integer         not null, primary key
+#  title        :string(255)     not null
+#  description  :text            not null
+#  prize        :string(255)
+#  sponsor      :text
+#  photo_id     :integer
+#  date_from    :date
+#  date_to      :date
+#  is_completed :boolean
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  description: MyText
+  prize: MyString
+  sponsor: MyText
+  photo_id: 1
+  date_from: 2008-10-13
+  date_to: 2008-10-13
+  is_completed: false
+
+two:
+  title: MyString
+  description: MyText
+  prize: MyString
+  sponsor: MyText
+  photo_id: 1
+  date_from: 2008-10-13
+  date_to: 2008-10-13
+  is_completed: false

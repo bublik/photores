@@ -1,0 +1,37 @@
+ActiveSape
+==========
+Плагин написан для биржи ссылок SAPE.ru.
+при установке плагина появится файл настройки
+
+  APP/config/sape.yml
+
+advert_host: "rubyclub.com.ua" # your domain
+charset: "UTF-8"
+force_show_code: false
+cache_lifetime: 3600 # seconds
+get_links: false
+
+
+
+перед настройкой или индексацией установите директиву 
+force_show_code: true 
+Для постоянного просмотра проверочного кода.
+
+Перед индексацией выключите 
+force_show_code: false
+
+
+
+
+
+Example
+=======
+
+Добавьте в шаблон страницы следующий код для индексации и показа ссылок
+<%= show_sape_links(3) %>
+Если вы хотите использовать блочный показ ссылок можно задать второй параметр для смещения.
+ show_sape_links(count = 100, offset = 0)
+
+
+
+Copyright (c) 2008 [Voloshin and Tikhomirov], released under the MIT license

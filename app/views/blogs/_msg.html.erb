@@ -1,0 +1,19 @@
+<h1 class="pad5 forum"> <%= link_to( h(blog.title), blog_path(blog,:html)) %> </h1>
+<div class="b small"> 
+  <%= content_tag(:span, blog.created_at.to_s(:long), :class => 'ico ico-date') %>
+  <%= content_tag(:span, link_to_user(blog.user),  :class => 'ico ico-user') %>
+  <%= content_tag(:span, "комментарии #{blog.bcomments.count}", :class => 'ico ico-comment') %>
+</div>
+<div class="pad5" ><%= blog.body %></div>
+<div class="pad5">
+  <%= content_tag(:span, '', :class => 'ico ico-tag_blue') -%>
+  <%= blog.tags.collect{|t|
+    link_to(t.name, {:controller => 'blogs', :action => 'tag', :id => t.name}, :title => t.name, :rel => 'tag')
+  }.join(', ')  if(blog.tags.length > 0)%>
+</div>
+<%#= bookmark_button %>
+<div class="small"> 
+  <%= link_to(t('general.show')+'Подробней', blog_path(blog,:html), :class => 'ico ico-page_find') %>
+  <%= link_to(t('general.edit'), edit_blog_path(blog),  :class => 'ico ico-page_edit') if can_edit(blog) %>
+  <%= link_to(t('general.delete'), blog, :class => 'ico ico-page_delete', :confirm => 'Are you sure?', :method => :delete) if can_edit(blog) %>
+</div>

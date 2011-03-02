@@ -1,0 +1,93 @@
+<% title('') %>
+<div class = "tricol">
+  <ul id="row1" class="ui-sortable">
+    <% cache("/photo/categories_#{@photos.first.cache_key}") do %>
+      <li class="pad5" id="col_1">
+        <h2>Фото жанры</h2>
+        <%= photo_categories %>
+      </li>
+    <% end unless @photos.empty? %>
+    <li class="inline pad5" id="col_todo">
+      <h2>Новая работа</h2>
+      <% if @photos.count.eql?(0) %>
+        <h3>Фотографий на данный момент нет</h3>
+      <% else -%>
+        <%= link_to(image_tag(@photos.first.public_filename(:thumb), :alt => @photos.first.alt, :style => 'max-width: 300px;'),
+          photo_path(@photos.first, :html), :title => @photos.first.alt) %>
+      <% end %>
+      <%= add_new_photo_link %>
+    </li>
+    <li  class="pad5" id="col_fixed">
+      <div style="float: left">
+        <h2>Наши конкурсы</h2>
+        <%= contests_list %>
+        <h2>Фишка</h2>
+        <div><%= link_to('Поиск фото по цветам','/photos/colors') %></div>
+        <div><%= link_to('Пополнение мобильного онлайн', mobile_path) %></div>
+      </div>
+      <div class="clear">
+        <div class="left"><%= site_activity %></div>
+        <div class="right"><noindex><%= banner_advert %></noindex></div>
+      </div>
+    </li>
+  </ul>
+  <!-- next row -->
+  <ul class="clear">
+    <% cache("/photo/last_photos_#{@photos.first.cache_key}") do %>
+      <li class="inline pad5">
+        <h2>Новые фотографии</h2>
+        <%= content_tag(:ul, @photos.collect{|p| content_tag(:li, small_image(p, false, false))} ) %>
+      </li>
+    <% end unless @photos.empty? %>
+    <li class="inline pad5">
+      <h2>Топ комментируемых</h2>
+      <%= photo_ratings('comment') %>
+    </li>
+    <li class="inline pad5">
+      <h2>Топ просматриваемых</h2>
+      <%= photo_ratings('show') %>
+    </li>
+  </ul>
+  <ul class="clear inline">
+    <li class="inline pad5">
+      <h2>На форуме</h2>
+      <%= forum_last_posts(7) %>
+    </li>
+    <li class="pad5">
+      <h2>Комментарии</h2>
+      <%= last_photo_comments(10) %>
+    </li>
+    <li class="inline pad5">
+      <h2>В блогах</h2>
+      <%= blog_last_posts(10) %>
+    </li>
+  </ul>
+
+  <ul class="clear inline">
+    <li class="inline pad5">
+      <h2>Топ закачиваемых</h2>
+      <%= photo_ratings('download') %>
+    </li>
+    <li class="inline pad5">
+
+      <h2>Наши друзья</h2>
+      <div><%#= photo_ratings('complaint') %></div>
+      <h2>Реклама</h2>
+      <div><%= show_sape_links(5) %></div>
+      <%= google_advert_block_links %>
+
+    </li>
+    <li class="inline pad5">
+      <h2>Активность</h2>
+      <%= last_activity(10) %>
+    </li>
+  </ul>
+
+  <ul class="clear inline">
+    <li class="inline pad5">
+      <h2>Сейчас на сайте</h2>
+      <%= online %>
+    </li>
+  </ul>
+</div>
+<br class="clear" />

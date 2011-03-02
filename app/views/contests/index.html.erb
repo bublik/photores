@@ -1,0 +1,26 @@
+<% title('Фото конкурсы')
+description("Список фото конкурсов с призами от #{APP_CONFIG['site_name']}") %>
+
+<h1>Наши фото конкурсы</h1>
+<%= link_to 'Обявить новый конкурс', new_contest_path if is_admin?%>
+
+<% @contests.each do |contest| %>
+  <div class="left pad5">
+    <h2><%= link_to(contest.title, contest_path(contest)) %></h2>
+    <div class="small">C <%= contest.date_from %> по <%= contest.date_to %>.<br />
+    Состояние: <%= contest.is_completed ? 'закончен' : '<b>открыт</b>' %></div>
+    <div><%= contest.description %>
+    <% if is_admin? %>
+      <%= link_to('Изменить', edit_contest_path(contest)) %>
+      <%= link_to('Удалить', contest, :confirm => 'Are you sure?', :method => :delete) if contest.photo_id.blank? %>
+    <% end %>
+    </div>
+    <div>Приз: <%=h contest.prize %></div>
+    <%= content_tag(:div, contest.sponsor) unless contest.sponsor.blank?  %>
+  </div>
+  <div class="right w300">
+    <%=  small_image(contest.photo) unless contest.photo_id.blank? %>
+  </div>
+<% end %>
+
+<%= will_paginate @contests %>

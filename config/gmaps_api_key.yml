@@ -1,0 +1,19 @@
+#Fill here the Google Maps API keys for your application
+#In this sample:
+#For development and test, we have only one possible host (localhost:3000), so there is only a single key associated with the mode.
+#In production, the app can be accessed through 2 different hosts: thepochisuperstarmegashow.com and exmaple.com. There then needs a 2-key hash. If you deployed to one host, only the API key would be needed (as in development and test).
+
+development:
+ ABQIAAAAVfliZqV1ip5ywvAt39VG5BSaqEcvWvAr7_I0Y3LwzGK0z3vvXBRT8E8WuHNzCUWJGnZ4M8_UL2kM1g
+
+test:
+ ABQIAAAAzMUFFnT9uH0xq39J0Y4kbhTJQa0g3IQ9GZqIMmInSLzwtGDKaBR6j135zrztfTGVOm2QlWnkaidDIQ
+
+production:
+ nikon-club.com.ua: ABQIAAAAVfliZqV1ip5ywvAt39VG5BQWIsbLNlBEcVSTOE40sa6q3TrhART7jrFunKnxwf6c8erou65hpPs_Xg
+ canon-club.com.ua: ABQIAAAAVfliZqV1ip5ywvAt39VG5BQZm3JANVIW1UbmDxWIgi--8xVPdhS9rBQ0Ndvn4JGDRIPGRF95oE0OJw
+ pentax-club.com.ua: ABQIAAAAVfliZqV1ip5ywvAt39VG5BSSifQNbeRpp5pq81bAAnhf7QEGhxRCDbUqjRavuLwLoT8yCnNIAS1f8A
+ seonya.com: ABQIAAAAVfliZqV1ip5ywvAt39VG5BTbj3SmtydjxaQeVPlpjPiDAfgdlhQK-XaJPdTP3TqHAcgCLieE2D_VuQ
+ photo.ukrainaonline.net: ABQIAAAAVfliZqV1ip5ywvAt39VG5BQYzN4YIRE_R6nHBHxxG4yjtFyaKRQKgixtrp0TDxVemN78Z8gLBPYBtw
+ juke.com.ua: ABQIAAAAVfliZqV1ip5ywvAt39VG5BTp73e_iet4eLLEOAc5aDR1rsySDBR1YP8wgbR7r1xFXzl7LdJ_M-waWQ
+ addfoto.ru: ABQIAAAAVfliZqV1ip5ywvAt39VG5BRh9HI518aI4OVDXda4p2rX1uA7xRTbnIWtbaCwHKeW2mNngzMrPCCfJg
