@@ -1,1 +1,14 @@
 .idea/*
+.bundle
+config/*.yml
+# db/schema.rb
+log/*
+tmp/**/*
+nbproject
+tmp
+autotest
+coverage/*
+.idea
+public/stylesheets/all.css
+public/javascripts/all.js
+
