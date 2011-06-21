@@ -4,8 +4,8 @@ template_function: off #_.template # (defaults to the built-in micro-templating)
 #package_path: packages # (defaults to assets)
 javascript_compressor: closure # (yui, closure)
 gzip_assets: on
-compressor_options:
-  compilation_level: SIMPLE_OPTIMIZATIONS
+#compressor_options:
+  #compilation_level: SIMPLE_OPTIMIZATIONS
 
 javascripts:
   workspace:

@@ -71,8 +71,8 @@ keywords(@photo.keywords)
       <dd><%= @photo.photo_profile ? h(@photo.photo_profile.full_description) : '-' %></dd>
       <dt>Размер:</dt>
       <dd><%= number_to_human_size(@photo.size, :precision => 0) %> <%= "#{@photo.width}x#{@photo.height}" %>px</dd>
-      <!-- <dt>В альбомах:</dt>
-       <dd><%= photo_albums_links(@photo) %></dd> -->
+      <dt>В альбомах:</dt>
+      <dd><%= photo_albums_links(@photo) %></dd>
       <dt>Просмотров:</dt>
       <dd><%= @photo.views %></dd>
       <dt>Метки:</dt>

@@ -2,7 +2,7 @@ source 'http://gemcutter.org'
 source 'http://gems.github.com'
 source 'http://gems.rubyforge.org'
 
-gem 'rails', '2.3.10'
+gem 'rails', '2.3.11'
 gem 'pg'
 
 
