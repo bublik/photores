@@ -5,7 +5,7 @@ class FckeditorController < ActionController::Base
 
   UPLOAD_FOLDER = "/uploads"
 
-  UPLOADED_ROOT = RAILS_ROOT + "/public" + UPLOAD_FOLDER
+  UPLOADED_ROOT = Rails.root + "/public" + UPLOAD_FOLDER
 
   MIME_TYPES = [
     "image/jpg",
@@ -178,7 +178,7 @@ class FckeditorController < ActionController::Base
   def log_upload
     log "FCKEDITOR - #{params[:NewFile]}"
     log "FCKEDITOR - UPLOAD_FOLDER: #{UPLOAD_FOLDER}"
-    log "FCKEDITOR - #{File.expand_path(RAILS_ROOT)}/public#{UPLOAD_FOLDER}/" +
+    log "FCKEDITOR - #{File.expand_path(Rails.root)}/public#{UPLOAD_FOLDER}/" +
         "#{@new_file.original_filename}"
   end
 
@@ -222,7 +222,7 @@ class FckeditorController < ActionController::Base
 
   def check_path(path)
     exp_path = File.expand_path path
-    if exp_path !~ %r[^#{File.expand_path(RAILS_ROOT)}/public#{UPLOAD_FOLDER}]
+    if exp_path !~ %r[^#{File.expand_path(Rails.root)}/public#{UPLOAD_FOLDER}]
       @errorNumber = 403
       throw Exception.new
     end

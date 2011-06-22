@@ -19,7 +19,7 @@ class ProgectController < ApplicationController
 
   def dir
     #render links to other sites
-    @files = Dir["#{RAILS_ROOT}/public/doc/*.*"].collect{|file| file.split('/').last }
+    @files = Dir["#{Rails.root}/public/doc/*.*"].collect{|file| file.split('/').last }
   end
 
   def group

@@ -1,0 +1,37 @@
+= raw google_analytix_adds
+.header
+  %h2{:style => "display: none;"}= link_to(APP_CONFIG['site_name'], root_url(:subdomain => false), :title => APP_CONFIG['site_name'])
+  %span#topprofile
+    = link_to(t('general.main'), root_url(:subdomain => false), :class => 'ico ico-home')
+    |
+    %noindex
+      = link_to('Translate', "http://www.google.com/translate?u=#{request.env['REQUEST_URI']}&amp;hl=en&amp;ie=UTF8&amp;langpair=ru|en", :rel => 'nofollow', :class => 'ico ico-translate')
+    \&nbsp; &nbsp;&nbsp;&nbsp;
+    - if logged_in?
+      = link_to(t('general.profile'), edit_user_path(current_user), :title => current_user.full_name, :class => 'ico ico-profile')
+      = link_to('мой сайт', user_root_url(:subdomain => current_user.subdomain), :title => 'мой сайт', :class => 'ico ico-icon_link')
+      = link_to(current_user.new_priv_messages.to_s, {:controller => :users, :action => :private_messages, :id => current_user},  :class => 'ico ico-icon_email')
+      = link_to('альбомы', user_photo_albums_path(current_user), :class => 'ico ico-folder_images')
+      = link_to(t('photo.title'), new_photo_path, :class => 'ico ico-image_new')
+      = link_to('статья', new_blog_path, :class => 'ico ico-page_new' )
+      = link_to('альбом', new_photo_album_path, :class => 'ico ico-folder_new')
+      = link_to(t('general.exit'), logout_url, :remote => true, :class => 'ico ico-logout', :title => t('general.exit') )
+
+    - else
+      = link_to(t('general.enter'), login_url, {:class => 'ico ico-icon_security', :title => t('general.enter'), :remote => true} )
+    \&nbsp;
+  = content_tag(:h2, menu_links('header') , :id => 'topmenu', :class => 'topmenu')
+  = link_to(image_tag("/images/#{APP_CONFIG['domain']}-button.gif", :alt => APP_CONFIG['site_name'] ),                           |
+    root_url(:subdomain => false),  {:rel => 'home', :id => 'logo', :title => "на главную #{APP_CONFIG['site_name']}"}) |
+  .block_search
+    .indent_search
+      = form_for(@search, :as => :search,  :url => url_for({:action=>"find", :controller=>"finder"})) do
+        %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
+        %input{:name => "search_word", :size => "15", :type => "text"}
+        %input{:checked => "true", :name => "ftype", :type => "radio", :value => "photos"}
+        фото
+        %input{:name => "ftype", :type => "radio", :value => "messages"}
+        форум
+        %input{:name => "ftype", :type => "radio", :value => "blogs"}
+        блоги
+        = submit_tag(t('general.find'))

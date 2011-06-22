@@ -22,7 +22,7 @@ class Wiki < ActiveRecord::Base
 
   validates_length_of :title, :minimum => 3
   validates_length_of :message, :minimum => 40
-  named_scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
+  scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
   
   @@per_page = 10
   @@total_entries = 15

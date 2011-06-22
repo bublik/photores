@@ -1,10 +1,11 @@
 module ApplicationHelper
   include AuthenticatedSystem
   include CounterAndAdvert
-  
+  include UrlHelper
+
   @@icons = {}
   alias_method :can_edit_message, :can_edit
-  
+
   #  def msg_to_html(mesg); message_sanitize(mesg); end
   def title(text); content_for(:title){ (text.blank? ? '' : "#{h(text)} - ") + APP_CONFIG['site_name'] }; end
   def description(text); content_for(:description){ (text.blank? ? '' : "#{h(text)} - ") + APP_CONFIG['keywords'] };  end
@@ -20,7 +21,7 @@ module ApplicationHelper
       link_to('Статьи', wikis_url(:subdomain => false)),
       link_to('Конкурсы', contests_url(:subdomain => false)),
       link_to('Каталог ресурсов', sites_categories_url(:subdomain => false)),
-      (logged_in? ? '' : link_to( t('general.registration'), new_user_url(:subdomain => false)))].join(' | ') +
+      (logged_in? ? '' : link_to( t('general.registration'), new_user_url(:subdomain => false)))].join(' | ').html_safe +
       (is_admin? ? link_to( 'Управление', {:controller => '/admin/manage', :subdomain => false} ) : '')
   end
 
@@ -35,15 +36,16 @@ module ApplicationHelper
     #rss << auto_discovery_link_tag('atom', "/#{controller}.atom", {:title => "#{APP_CONFIG['site_name']} #{controller} Atom"})
     rss << auto_discovery_link_tag('rss', "/#{controller}.rss", {:title => "#{APP_CONFIG['site_name']} #{controller} Rss", :id => "gallery"}) if ['blogs', 'photos'].include?(controller)
     rss << auto_discovery_link_tag('rss', {:controller => 'messages', :action => 'rss', :id => params[:forum]}, {:title => "#{APP_CONFIG['site_name']} Rss"})
+    rss.html_safe
   end
-  
+
   def contests_list
     Contest.current_konkurses.collect{|contest|
       content_tag(:div, link_to(contest.title, contest_url(contest,:html)) +
           '<br/> до финала осталось'.html_safe + distance_of_time_in_words(Time.now(), contest.date_to))
-    }.to_s + content_tag(:div, link_to( 'журнал', contests_url, :class => 'small'))
+    }.to_s.html_safe + content_tag(:div, link_to( 'журнал', contests_url, :class => 'small'))
   end
-  
+
   #Установка статуса пользователей
   def user_mode(flag, h = nil)
     #/*1-admin 2-user 3-moderator */
@@ -55,7 +57,7 @@ module ApplicationHelper
     mode[flag]; return unless h
     content_tag(:span, mode[flag][:text], :style => "color: #{mode[flag][:color]}")
   end
-   
+
   def hot_tags(type = 'all', order = 'count', show_type = 'block', limit = 10, title = true)
     lnks = ''
     case order
@@ -63,7 +65,7 @@ module ApplicationHelper
       order = 'count desc'
     when 'random'
       #for postgresql
-      order = 'random()' 
+      order = 'random()'
       #for mysql
       #order = 'rand()'
       limit = 10
@@ -112,15 +114,15 @@ module ApplicationHelper
 
   def mesg_tags(mesg)
     mesg.tags.collect{|t|  link_to(t.name, tagging_url(CGI.escape(t.name)),
-        :class => 's3', :title => t.name, :rel => 'tag')}.join(', ') if (mesg.tags.length > 0) 
+        :class => 's3', :title => t.name, :rel => 'tag')}.join(', ') if (mesg.tags.length > 0)
   end
-  
+
   def link_to_user_blog(user, style_class = nil)
     (user && !user.blogs.empty?) ? link_to('Его блог', user_root_url(:subdomain => user.subdomain), :title => user.full_name, :rel => 'nofollow', :class => style_class) : ''
   end
 
   def pm_form(user_id, text = t('general.replay_priv'), css_class = 'button')
-    link_to_remote(text, {:url => new_priv_message_path(:id => user_id)}, :class => css_class)
+    link_to(text, new_priv_message_path(:id => user_id), :remote => true, :class => css_class)
   end
 
   def flash_and_find(flash, contr = nil)
@@ -128,6 +130,7 @@ module ApplicationHelper
     resp = ''
     resp << content_tag(:div, content_tag(:span, ' ' + image_tag('/images/loading.gif')), :id => 'jsloading', :class => 'loading', :style => 'display: none')
     resp << content_tag(:div, flash[:notice].to_s, :id => 'flash', :style => (flash[:notice].blank? ? 'display:none;' : ''))
+    resp.html_safe
   end
 
 =begin
@@ -144,24 +147,24 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
     content_tag(:div, photo_rows, :class => 'center inline')+
       (paginate ? content_tag(:div, will_paginate(photos), :class => 'clear') : '')
   end
-  
+
   def star_rating(rating, obj_type, id, style_class, allow_rate = true)
     per = rating > 0 ? (rating/5.0)*100 : 0;
     url_meth= "rate_#{obj_type}_path".to_sym
     if allow_rate
       links= [
-        link_to_remote('1',  :url => send(url_meth, {:id => id, :rate => 1}), :html => {:class => "one-star", :title =>"1 звезды из 5"}),
-        link_to_remote('2',  :url => send(url_meth, {:id => id, :rate => 2}), :html => {:class => "two-stars", :title =>"2 звезды из 5"}),
-        link_to_remote('3',  :url => send(url_meth, {:id => id, :rate => 3}), :html => {:class => "three-stars", :title =>"3 звезды из 5"}),
-        link_to_remote('4',  :url => send(url_meth, {:id => id, :rate => 4}), :html => {:class => "four-stars", :title =>"4 звезды из 5"}),
-        link_to_remote('5',  :url => send(url_meth, {:id => id, :rate => 5}), :html => {:class => "five-stars", :title =>"5 звезды из 5"})]
+        link_to('1',  send(url_meth, {:id => id, :rate => 1}), :class => "one-star", :remote => true, :title =>"1 звезды из 5"),
+        link_to('2',  send(url_meth, {:id => id, :rate => 2}), :class => "two-stars", :remote => true, :title =>"2 звезды из 5"),
+        link_to('3',  send(url_meth, {:id => id, :rate => 3}), :class => "three-stars", :remote => true, :title =>"3 звезды из 5"),
+        link_to('4',  send(url_meth, {:id => id, :rate => 4}), :class => "four-stars", :remote => true, :title =>"4 звезды из 5"),
+        link_to('5',  send(url_meth, {:id => id, :rate => 5}), :class => "five-stars", :remote => true, :title =>"5 звезды из 5")]
     end
     r = "<div class=\"inline-rating\">  <ul class=\"#{style_class}\"> <li class=\"current-rating\" style=\"width:#{per}%;\" ></li>"
-    (0..4).each{|i|  r += content_tag(:li,links[i]) } if allow_rate
+    (0..4).each{|i|  r += content_tag(:li, links[i]) } if allow_rate
     r += "</ul></div>"
     r
   end
-  
+
   def render_rating(o, style_class = 'star-rating' )
     can_rate = logged_in? && !o.created_by?(current_user) && !o.rated_by?(current_user)
     o_type = o.class.to_s.downcase
@@ -177,26 +180,26 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
  small_image(photo, slideshow = false, is_editable = true)
 =end
   def small_image(photo, slideshow = false, is_editable = true)
-    manage = content_tag(:div, 
+    manage = content_tag(:div,
       link_to(image_tag('/images/bullet_wrench.gif'), edit_photo_path(photo), :title => 'Редактир.') +
-        link_to_remote(image_tag('/images/bullet_delete.gif'),
-        {:url => photo_url(photo), :method => :delete, :confirm => 'Уверен?'},
-        :href => photo_url(photo), :title => 'Удалить'),
+        link_to(image_tag('/images/bullet_delete.gif'),
+         photo_url(photo), :method => :delete, :confirm => 'Уверен?',
+        :title => 'Удалить', :remote => true),
       :id => "photo_manage#{photo.id}") if is_editable && can_edit(photo)
 
     if slideshow
       resp = link_to(crop_image(photo), photo.public_filename(:medium),
         :title => h(photo.user.full_name+', '+photo.alt),
         :class => 'small slide').html_safe +
-        content_tag(:div, link_to(truncate(h(photo.title), :length => 10), 
+        content_tag(:div, link_to(truncate(h(photo.title), :length => 10),
           photo_url(photo,  {:format => :html, :subdomain => false}),
-          :title => 'перейти '+ sanitize(photo.alt.mb_chars[0..20])))
-        
+          :title => 'перейти '+ sanitize(photo.alt.mb_chars[0..20]))).html_safe
+
     else
-      resp = link_to(crop_image(photo).html_safe + content_tag(:div, truncate(h(photo.title), :length => 10)),
+      resp = link_to(crop_image(photo).html_safe + content_tag(:div, truncate(h(photo.title), :length => 10)).html_safe,
         photo_url(photo, {:format => :html, :subdomain => false}), :title => h(photo.alt), :class => 'small')
     end
-    "#{resp} #{manage}"
+    "#{resp} #{manage}".html_safe
   end
 
   def crop_image(photo)
@@ -211,23 +214,23 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
     '<div class="simple_overlay" id="gallery" style="display: none">
     <a class="prev">prev</a> <a class="next">next</a>
     <div class="info"></div><img class="progress" src="/images/loading.gif" />
-</div>'
+</div>'.html_safe
   end
-  
+
   def small_image_with_rate(photo, user = nil)
     rate = 0
     if photo.rated?
-      rate = user ? photo.ratings.collect{|r| r.rating if r.rater_id.eql?(user.id)}.to_s.to_i : photo.rating_average 
+      rate = user ? photo.ratings.collect{|r| r.rating if r.rater_id.eql?(user.id)}.to_s.to_i : photo.rating_average
     end
     small_image(photo, true, false) + '<br/>' + star_rating(rate, 'photo', photo.id, 'small-star', false)
   end
-  
+
   def add_new_photo_link
-    content_tag(:div, 'Добавить '+link_to('фотку', new_photo_path, :class => 'b', :rel => 'nofollow') +
-        (logged_in? ? ' / '+ link_to('альбомчик', new_photo_album_path, :class => 'b', :rel => 'nofollow' ) : '.'),
+    content_tag(:div, 'Добавить '.html_safe + link_to('фотку', new_photo_path, :class => 'b', :rel => 'nofollow') +
+        (logged_in? ? ' / '.html_safe + link_to('альбомчик', new_photo_album_path, :class => 'b', :rel => 'nofollow' ) : '.'),
       :class => 'pad5')
   end
-  
+
   def small_profile(user,photo_albums = false)
     content_tag(:span, "#{user_avatar(user)}<br/>
     #{icq_button(user) + skype_button(user)}
@@ -260,8 +263,7 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
     content_tag(:ul,
       PhotoCategory.all.collect{|c|
         content_tag(:li,
-          photo_category_link(c) + ' ' +
-            content_tag(:sup, cnt[c.id].to_i, :class => 'small') )}.to_s)
+          photo_category_link(c) + content_tag(:sup, cnt[c.id].to_i, :class => 'small'))}.to_s.html_safe)
   end
 
 =begin
@@ -280,13 +282,13 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
         end
         txt
       end
-      
+
       return content_tag(:div, content_tag(:big, 'Альбомы'), :class => 'clear') +
         content_tag(:ul, albums_data.collect{|al| content_tag(:li, al)}, :class => 'nolist')
     end
     ''
   end
-  
+
 =begin
   Рейтинги
   * Топ просмативаемых
@@ -297,6 +299,7 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
 =end
   def photo_ratings(type = nil)
     return unless type
+    ps = ''
     case type
     when 'show'
       #Топ 10 просмативаемых
@@ -314,9 +317,9 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
       #максимальне колличество жалоб к этим фотографиям
       ps = Photo.parents.top_complaints.limit(4)
     end
-    ps.empty? ? '<!-- no data-->' : content_tag(:ul, ps.collect{|p| content_tag(:li, small_image(p, false, false))} )
+    ps.empty? ? '<!-- no data-->'.html_safe : content_tag(:ul, ps.collect{|p| content_tag(:li, small_image(p, false, false)) }.to_s.html_safe)
   end
-  
+
   #Последние 10 постов в блогах
   def blog_last_posts(limit = 15)
     @blog_posts = Blog.paginate(:all,
@@ -329,7 +332,7 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
         concat truncate(strip_tags(b.body), :length => 40)
         concat user_and_time_distance(b)
       end
-    end
+    end.to_s.html_safe
   end
   #Последние 10 постов на форуме
   def forum_last_posts(limit = 15)
@@ -339,7 +342,7 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
         concat truncate(strip_tags(m.message), :length => 40)
         concat user_and_time_distance(m)
       end
-    end
+    end.to_s.html_safe
   end
 
   def last_photo_comments(limit = 15, size = 40)
@@ -348,17 +351,17 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
         text = (size ? sanitize(coment.comment).mb_chars[0..size] : sanitize(coment.comment))
         content_tag(:div, link_to(text, photo_path(coment.photo, :html), :title => sanitize(coment.photo.alt))) + user_and_time_distance(coment)
       end
-    end
+    end.to_s.html_safe
   end
-  
+
   def last_activity(limit = 15)
     User.activity(limit).collect do |user|
       div_for(user, :class => 'pad5') do
         concat content_tag(:strong, user.full_name)+ ' / '
-        concat content_tag(:span, distance_of_time_in_words(Time.now(), user.last_activity_at) + ' тому ', :class => 'small') 
+        concat content_tag(:span, distance_of_time_in_words(Time.now(), user.last_activity_at) + ' тому ', :class => 'small')
         concat content_tag(:div, user.last_activity)
       end
-    end
+    end.to_s.html_safe
   end
 
   def site_activity
@@ -390,8 +393,10 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
       menu << (sape.blank? ? '' : content_tag(:div, "Реклама: #{sape}", :class => 'menu'))
       menu << content_tag(:div, controller_hot_tags(controller, false), :class => 'pad5') unless params[:action].eql?('index')
     end
-    menu << content_tag(:div,'Права на все фотографии принадлежат их авторам. Использование работ в комерческих целях без согласия автора - запрещено!<br/>
-      Использование материалов разрешено с активной ссылкой на страницу с оригиналом.')
+    menu << content_tag(:div,
+                        'Права на все фотографии принадлежат их авторам.<br/>
+      Использование работ в комерческих целях без согласия автора - запрещено!<br/>
+      Использование материалов разрешено с активной ссылкой на страницу с оригиналом.'.html_safe)
     menu << content_tag(:div, menu_links('footer'), :class => 'menu') unless current_subdomain
     menu << content_tag(:div, link_to(APP_CONFIG['site_name'],progect_url(:action=>'about', :subdomain => false)) +' : '+
         mail_to("Voloshin Ruslan <rebisall@gmail.com>", "Контакты", :encode => "hex"), :class => 'small menu')
@@ -418,7 +423,7 @@ slide_show_photos_list(photos, paginate = true, login = false, editable = true)
   def msg_icon
     return @@icons  unless  @@icons.empty?
     i = 0
-    dir = Dir["#{RAILS_ROOT}/public/images/icons/*{gif,jpg,jpeg,png}"]
+    dir = Dir["#{Rails.root}/public/images/icons/*{gif,jpg,jpeg,png}"]
     dir.sort.each {|file| @@icons[i += 1] = '/images/icons/'+file.split('/').pop }
     return @@icons
   end
@@ -434,7 +439,7 @@ google_ad_height = 90;
 </script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>'
+</script>'.html_safe
   end
 
   def google_adv_row
@@ -448,11 +453,11 @@ google_ad_height = 15;
 </script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>'
+</script>'.html_safe
   end
-  
+
   def privatbank
     '<big>Услуги Приватбанка</big>
-<script src="https://partner.privatbank.ua/wv1.js" type="text/javascript" charset="UTF-8" partner_main_id="9861683826" chanalname="null" chanalcomment="null"></script>'
+<script src="https://partner.privatbank.ua/wv1.js" type="text/javascript" charset="UTF-8" partner_main_id="9861683826" chanalname="null" chanalcomment="null"></script>'.html_safe
   end
 end

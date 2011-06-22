@@ -20,11 +20,13 @@ class Blog < ActiveRecord::Base
   validates_uniqueness_of :title
   validates_length_of :title, :minimum => 5
   validates_presence_of :body
-  named_scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
+  scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
     
   cattr_reader :per_page
   @@per_page = 5
-  
+
+  after_create :update_activity
+
   define_index do
     indexes :title, :sortable => true
     indexes :body
@@ -42,8 +44,8 @@ class Blog < ActiveRecord::Base
     self.user_id.eql?(user.id)
   end
 
-
-  def after_create
+  private
+  def update_activity
     self.user.update_attribute(:last_activity, 'Добавил новую запись в своем блоге')
   end
 end

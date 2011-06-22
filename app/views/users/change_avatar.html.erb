@@ -5,10 +5,10 @@
   <tr>
     <td>
       <div id="avatar"><%= image_tag((current_user.public_avatar), :border => 0,:align => 'center') %>
-        <%= link_to_remote(' ',
-          :url => {:action => 'save_avatar', :id => current_user,
-            :private_avatar_id => current_user.private_avatar.id,
-            :private_avatar => 'destroy' }, :class => 'ico ico-delete') if current_user.private_avatar%>
+        <%= link_to(' ', {:action => 'save_avatar', :id => current_user,
+                          :private_avatar_id => current_user.private_avatar.id,
+                          :private_avatar => 'destroy' },
+                         {:class => 'ico ico-delete', :remote => true}) if current_user.private_avatar%>
       </div>
     </td>
     <td colspan="3">
@@ -29,8 +29,8 @@
     <% if avatar_list.index(file).modulo(4).zero? -%>
       <tr>
       <% end -%>
-      <td><%= link_to_remote( image_tag("#{file}", :border => 0,  :align => 'left'),
-          :url => { :action => 'save_avatar',:id=>current_user, :avatar => file })%>
+      <td><%= link_to( image_tag("#{file}", :border => 0,  :align => 'left'),
+          { :action => 'save_avatar',:id=>current_user, :avatar => file }, {:remote => true})%>
       </td>
     <% end -%>
   </tr>

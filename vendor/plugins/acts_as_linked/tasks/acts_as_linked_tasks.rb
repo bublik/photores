@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), '../lib/migrate/create_sites_categorie
 require File.join(File.dirname(__FILE__), '../lib/migrate/create_friend_sites')
 
 namespace :linked do
-  Rake::Task[:environment].invoke if defined?(RAILS_ROOT)
+  Rake::Task[:environment].invoke if defined?(Rails.root)
 
   desc "Add tables [Sites, FriendSites]"
   task :migrate_up do

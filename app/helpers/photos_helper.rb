@@ -39,12 +39,12 @@ module PhotosHelper
 
   def photo_tags_links(photo)
     return '&nbsp;' if photo.tags.empty?
-    photo.tags.collect{ |t| link_to(h(t.name), photo_tag_path(CGI.escape(t.name)), :title => h(t.name))+', '}
+    photo.tags.collect{ |t| link_to(h(t.name), photo_tag_path(CGI.escape(t.name)), :title => h(t.name))+', '}.to_s.html_safe
   end
   
   def photo_cats_links(photo)
     return '&nbsp;' if photo.photo_categories.empty?
-    photo.photo_categories.collect{|c| photo_category_link(c)+', '}
+    photo.photo_categories.collect{|c| photo_category_link(c)+', '}.to_s.html_safe
   end
   
   def photo_category_link(c)
@@ -53,6 +53,7 @@ module PhotosHelper
   
   def photo_albums_links(photo)
     return '&nbsp;' if photo.photo_albums.empty?
+
     photo.photo_albums.collect{|t| link_to(h(t.name), photo_album_url(t,{:format => :html, :subdomain => false}), :title => h(t.name))+', '}
   end
   
@@ -72,21 +73,19 @@ module PhotosHelper
   
   def rotate_buttons(photo,page = nil)
     {'anticlockwise' => 'против',  'clockwise' => 'по'}.collect{ |k,v|
-      link_to_remote('',
-        :url => photo_rotate_path(photo.id, k, page),
-        :href => photo_rotate_path(photo.id, k, page),
-        :html => {:title => 'повернуть на 90 градусов '+ v +' часовой стрелке',
-          :class => "ico ico-arrow_rotate_#{k}"}) + ' '
+      link_to('',
+        photo_rotate_path(photo.id, k, page),
+        :title => 'повернуть на 90 градусов '+ v +' часовой стрелке',
+          :class => "ico ico-arrow_rotate_#{k}", :remote => true) + ' '
     }.to_s
   end
   
   def update_photo_row(photo, to ='right')
-    link_to_remote((to.eql?('right') ? ' ' : ' ' ),
-      :href => photo_row_path(photo.id),
-      :url => photo_row_path(photo.id),
-      :loading => visual_effect(:fade),
-      :html => {:class => to.eql?('right') ? "nextPage #{to}" : "prevPage #{to}",
-        :title => "#{to.eql?('right') ? 'следующие' : 'предыдущие' } фотографии"})
+    link_to((to.eql?('right') ? ' ' : ' ' ),
+      photo_row_path(photo.id),
+      {:class => to.eql?('right') ? "nextPage #{to}" : "prevPage #{to}",
+       :remote => true,
+       :title => "#{to.eql?('right') ? 'следующие' : 'предыдущие' } фотографии"})
   end
 
   def show_photo_comment(photo)
@@ -109,10 +108,9 @@ module PhotosHelper
     content_tag(:span,
       {'delete' => 'удалить',  'new' => 'разместить'}.collect{ |k,v|
         next if c.is_approved && k.eql?('new')
-        link_to_remote(v,
-          :url => photo_manage_comment_path(photo.id, k , c.id),
-          :href => photo_manage_comment_path(photo.id, k , c.id),
-          :html => {:title => 'коментарий '+ v , :class => "ico ico-note_#{k}"}) + ' '
+        link_to(v,
+          photo_manage_comment_path(photo.id, k , c.id),
+          :title => 'коментарий '+ v , :class => "ico ico-note_#{k}", :remote => true) + ' '
       }.to_s, :id => "manage_comment_#{c.id}")
   end
   

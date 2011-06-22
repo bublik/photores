@@ -1,4 +1,4 @@
-class FriendSitesController < ApplicationController
+class FriendSitesController < ActionController::Base
   before_filter :load_category
 
   # GET /friend_sites

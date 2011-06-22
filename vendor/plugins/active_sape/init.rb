@@ -1,6 +1,6 @@
 require 'active_sape'
 module SapeHelper
-  sape_options = YAML.load_file("#{RAILS_ROOT}/config/sape.yml")
+  sape_options = YAML.load_file("#{Rails.root}/config/sape.yml")
   @@sape = {}
 
   sape_options.keys.each do |host|

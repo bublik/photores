@@ -1,0 +1,147 @@
+- title(@photo.title)
+- description(@photo.title)
+- keywords(@photo.keywords)
+.medium_photo
+  .main_image
+    = image_tag(@photo.public_filename(@photo.registred && !logged_in? ? :thumb : :medium), |
+      :alt => @photo.alt, :title => @photo.alt, :id => 'photo')                             |
+    .desc
+      %a.collapse{:href => "#", :title => "\320\277\320\276\320\272\320\260\320\267\320\260\321\202\321\214/\321\201\320\277\321\200\321\217\321\202\320\260\321\202\321\214 \320\264\320\276\320\277 \320\270\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\321\216"} Скрыть
+      .block{:style => "display: none"}
+        %h1#main_image_title= t('activerecord.models.photo') +': '+ @photo.title
+        %small= @photo.created_at.to_s(:db)
+        %p
+          Снято камерой
+          -#= @photo.photo_profile ? h(@photo.photo_profile.full_description) : '-'
+          ,размещено в альбомах
+          -#= photo_albums_links(@photo)
+          ,и разделах
+          -#= photo_cats_links(@photo)
+          = content_tag(:div, 'Автор закрыл гостевой просмотр и загрузку в большом разрешении ('+ link_to('зарегистрироваться', new_user_path)+ ').') if @photo.registred && !logged_in?
+          = content_tag(:div, 'Прошу критики!', :class => 'orange c') if @photo.want_critic
+%div{:style => "text-align: center"}
+  .pad5
+    %a#addnotelink.ico.ico-comment{:href => "#"} Добавить анотацию
+    %noindex/
+    = link_to("жаловаться на работу", complaint_photo_path(@photo), :class => 'ico ico-page_alert', :confirm => 'Вы уверены, что хотите подаловаться?', :title => 'пожаловаться на эту фотографию')
+    %sup= @photo.complaint
+    = link_to("скачать фото"  , download_photo_path(@photo), :title => 'скачать фотографию', :class => 'ico ico-icon_download')
+    %sup= @photo.downloads
+    = link_to_function('постоянная ссылка', "$('#static_links').toggle();", :title => 'Постоянная ссылка для других ресурсов', :class => 'ico ico-icon_link ')
+    #static_links.w450.pad5{:style => "display: none"}
+      %strong.orange.b HTML
+      \- для блогов и сайтов
+      .pad5
+        %textarea{:cols => "60", :rows => "4"}/
+        %a{:href => photo_url(@photo, :html)}
+          %img{:alt => @photo.alt, :src => 'http://'+APP_CONFIG['domain']+@photo.public_filename(:thumb)}/
+      %strong.orange.b BBCode
+      \- часто для форумов
+      .pad5
+        %textarea{:cols => "60", :rows => "4"}
+          [url=#{photo_url(@photo, :html)}][img]#{h 'http://'+APP_CONFIG['domain']+@photo.public_filename(:thumb)}[/img][/url]
+  .center= google_advert_horizont_links
+  .photo_thumbs
+    Другие фотографии этого автора
+    %br/
+    -#= random_user_photos(@photo.user)
+.clear
+= color_line
+= google_adv_row
+#photo_row.clear.inline= photo_row(@photo)
+.clear
+  .left.m15
+    %dl.table.w300
+      %dt Автор:
+      %dd= link_to_user(@photo.user)
+      %dt Фото:
+      %dd
+        %b= @photo.title
+      = (content_tag(:dt, 'Управление:') + content_tag(:dd, photo_manage(@photo)) if @photo.user.eql?(current_user) || is_admin?) if logged_in?
+      %dt Рейтинг:
+      %dd{:id => "rate_#{@photo.id}"}
+        .left= render_rating(@photo)
+      - if @photo.contest_id
+        %dt Конкурс:
+        %dd= link_to(@photo.contest.title, @photo.contest)
+      %dt Оборудование:
+      %dd= @photo.photo_profile ? h(@photo.photo_profile.full_description) : '-'
+      %dt Размер:
+      %dd
+        = number_to_human_size(@photo.size, :precision => 0)
+        = "#{@photo.width}x#{@photo.height}"
+        px
+      %dt В альбомах:
+      %dd= photo_albums_links(@photo)
+      %dt Просмотров:
+      %dd= @photo.views
+      %dt Метки:
+      %dd= photo_tags_links(@photo)
+      %dt Размещено:
+      %dd= @photo.created_at.to_s(:db)
+      /
+        <dt>В разделах:</dt>
+        <dd><haml:loud> photo_cats_links(@photo) </haml:loud></dd>
+    %dl#exif.table.w300
+      = @photo.exif_to_html
+  .pad10.m15.center
+    = google_polubaner
+    = map_block(@map, [450, 170])
+    #comments.pad5.mr15
+      = show_photo_comment(@photo)
+    #comments_form.pad5.b
+      = link_to('Добавить комментарий', photo_comment_path(@photo), {:remote => true, :class => 'ico ico-list_comments orange b'})
+    = add_new_photo_link
+    .show_photo_cats= photo_categories
+  .right
+    \&nbsp;
+    / will be advert
+  %br.clear/
+#noteform
+  %form#NoteAddForm{:action => add_note_path(@photo), :method => "post"}
+    %input#NoteX1{:name => "data[Note][x1]", :type => "hidden", :value => ""}/
+    %input#NoteY1{:name => "data[Note][y1]", :type => "hidden", :value => ""}/
+    %input#NoteHeight{:name => "data[Note][height]", :type => "hidden", :value => ""}/
+    %input#NoteWidth{:name => "data[Note][width]", :type => "hidden", :value => ""}/
+    %textarea#NoteNote{:name => "data[Note][note]"}
+    .submit
+      %input{:type => "submit", :value => "Submit"}/
+      %input#cancelnote{:type => "button", :value => "Cancel"}/
+:javascript
+  //  notes = [{"x1":"10","y1":"10","height":"150","width":"50","note":"This is a note"}, {"x1":"25","y1":"25","height":"70","width":"80","note":"<b>This</b> is a new note This is another note This is a new note"}];
+
+  $(window).load(function () {
+    //$('#photo').imgNotes(); //If your notes data is is not named notes pass it
+  - unless (@photo.registred && !logged_in?)
+    $.getJSON('<%= show_notes_path(@photo) %>', function(data){$('#photo').imgNotes(data)});
+    //$('#tern').imgAreaSelect({ onSelectChange: showaddnote })
+  - end
+    $('#cancelnote').click(function(){
+      $('#photo').imgAreaSelect({ hide: true });
+      $('#noteform').hide();
+    });
+
+    $('#addnotelink').click(function(){
+      $('#photo').imgAreaSelect({ onSelectChange: showaddnote, x1: 120, y1: 90, x2: 292, y2: 210 });
+      return false;
+    });
+  });
+
+  function showaddnote (img, area) {
+    imgOffset = $(img).offset();
+    form_left  = parseInt(imgOffset.left) + parseInt(area.x1) - 25;
+    form_top   = parseInt(area.y1) + parseInt(area.height) + 10 ;
+
+    $('#noteform').css({
+      left: form_left + 'px',
+      top: form_top + 'px'
+    });
+
+    $('#noteform').show();
+
+    $('#noteform').css("z-index", 10000);
+    $('#NoteX1').val(area.x1);
+    $('#NoteY1').val(area.y1);
+    $('#NoteHeight').val(area.height);
+    $('#NoteWidth').val(area.width);
+  }

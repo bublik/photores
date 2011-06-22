@@ -60,7 +60,7 @@ class Upload < ApplicationController
     
     debug.nil? ? @debug=nil : @debug = debug
     
-    rails_dir="#{RAILS_ROOT}"
+    rails_dir="#{Rails.root}"
     logger.debug('PWD  '+rails_dir) if @debug
     if location.nil?
       @location =rails_dir+'/'+@@location+'/'
@@ -151,7 +151,7 @@ return file name after write
   
   #chek esist file
   def exist?(file)
-    file="#{RAILS_ROOT}"+'/public/'+file
+    file="#{Rails.root}"+'/public/'+file
     if File.exists?(file)
       return true
     else
@@ -160,7 +160,7 @@ return file name after write
   end
   
   def self.destroy(file)
-    remove_file="#{RAILS_ROOT}"+'/public/'+file
+    remove_file="#{Rails.root}"+'/public/'+file
     logger.info("Inspect drop file: #{remove_file.inspect}")  if @debug
     
     if File.exists?(remove_file)

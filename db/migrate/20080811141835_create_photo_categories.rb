@@ -8,7 +8,7 @@ class CreatePhotoCategories < ActiveRecord::Migration
     end
     
     PhotoCategory.reset_column_information
-    YAML.load_file("#{RAILS_ROOT}/test/fixtures/photo_categories.yml").each do |k, cat|
+    YAML.load_file("#{Rails.root}/test/fixtures/photo_categories.yml").each do |k, cat|
       c = PhotoCategory.find_or_create_by_identifier(cat['identifier'])
       c.update_attributes(cat)
     end

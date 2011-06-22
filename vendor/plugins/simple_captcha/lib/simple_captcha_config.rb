@@ -8,7 +8,7 @@ module SimpleCaptcha #:nodoc
     private
     
     def simple_captcha_image_path #:nodoc
-      "#{RAILS_ROOT}/vendor/plugins/simple_captcha/assets/images/simple_captcha/"
+      "#{Rails.root}/vendor/plugins/simple_captcha/assets/images/simple_captcha/"
     end
     
     def simple_captcha_key #:nodoc

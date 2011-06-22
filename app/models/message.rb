@@ -36,9 +36,9 @@ class Message < ActiveRecord::Base
   has_many :replays, :class_name => "Message",  :foreign_key => "parent_id", :include => [:user, :attachments, :tags], :order  => 'id ASC', :dependent => :destroy
   has_many :attachments, :as => :attachable, :dependent => :destroy
 
-  named_scope :describers, lambda{ |p_id| {:conditions => ['described = 1 AND ? IN (id,parent_id)', p_id]}}
-  named_scope :topics, :conditions => "parent_id is null"
-  named_scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
+  scope :describers, lambda{ |p_id| {:conditions => ['described = 1 AND ? IN (id,parent_id)', p_id]}}
+  scope :topics, :conditions => "parent_id is null"
+  scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
   
   validates_length_of :name, :minimum => 3, :if => Proc.new { |msg| msg.parent_id.nil? }
   validates_length_of :message, :minimum => 4
@@ -51,10 +51,15 @@ class Message < ActiveRecord::Base
     #    set_property :delta => true
   end
 
-  def before_validation
+  before_validation :preset_message
+  after_create :update_notify
+  after_destroy :update_counters
+
+  def preset_message
     self.name = '' if self.name.nil?
   end
-  def after_create
+
+  def update_notify
     self.user.increment!(:posts)
     unless self.parent.nil?
       self.parent.increment!(:posts)
@@ -62,7 +67,7 @@ class Message < ActiveRecord::Base
     self.user.update_attribute(:last_activity, 'Написал новое сообщение на форуме')
   end
   
-  def after_destroy
+  def update_counters
     #down posts for message owner
     unless self.parent.nil?
       #Удаляем ответ

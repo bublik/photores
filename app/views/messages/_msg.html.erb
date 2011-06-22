@@ -6,11 +6,7 @@
         <%= link_to(t('general.edit'), edit_message_path(mesg), :class=>'button') %>
         <%= link_to(t('general.delete'), mesg, :confirm => 'Уверен?', :method => :delete , :class => 'button') %>
       <% end -%>
-      <%= link_to_remote(t('general.replay'), {
-          :url => replay_message_path(mesg, :forum => mesg.forum_id),
-          :success => "Effect.ScrollTo('replay_block');"},
-        :href => replay_message_path(mesg, :forum => mesg.forum_id),
-        :class => 'button') if mesg.openclose.eql?(0) %>
+      <%= link_to(t('general.replay'), replay_message_path(mesg, :forum => mesg.forum_id), :remote => true, :class => 'button') if mesg.openclose.eql?(0) %>
       <%= link_to('IP', {:controller=>'messages', :action=>'show_ip', :id => mesg.id}, :title => mesg.ip, :class=>'button') if is_admin? %>
     <% end %>
   </th>

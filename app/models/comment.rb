@@ -20,9 +20,9 @@ class Comment < ActiveRecord::Base
   validates_presence_of :comment
   validates_associated :user
   
-  named_scope :approved, :conditions => {:is_approved => true}#, :order => 'id DESC'
-  named_scope :photo, :conditions => {:commentable_type => 'Photo'}
-  named_scope :ptoday, lambda {{:conditions => ['created_at > ? AND commentable_type = \'Photo\'', Time.now.ago(24.hours)]}}
+  scope :approved, :conditions => {:is_approved => true}#, :order => 'id DESC'
+  scope :photo, :conditions => {:commentable_type => 'Photo'}
+  scope :ptoday, lambda {{:conditions => ['created_at > ? AND commentable_type = \'Photo\'', Time.now.ago(24.hours)]}}
   
   def before_save
     sanitar = HTML::FullSanitizer.new

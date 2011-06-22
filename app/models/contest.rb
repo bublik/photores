@@ -21,8 +21,7 @@ class Contest < ActiveRecord::Base
 
   validates_presence_of :title, :description, :prize
   #Фильтр для выбора конкурсов при загрузки фото
-  named_scope :current_konkurses, :conditions => ['date_from <= ?  AND ? <= date_to  AND is_completed != ?', Time.now , Time.now , true]
-
+  scope :current_konkurses, :conditions => ['date_from <= ?  AND ? <= date_to  AND is_completed != ?', Time.now , Time.now , true]
 
   def to_param
     "#{self.id}-#{self.title.gsub(/[\W]/,'-')}"

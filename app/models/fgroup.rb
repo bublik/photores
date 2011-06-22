@@ -11,7 +11,7 @@
 
 class Fgroup < ActiveRecord::Base
   has_many :forums
-  named_scope :vissible, :conditions => {:is_visible => true}
+  scope :vissible, :conditions => {:is_visible => true}
   validates_presence_of :name
   
 end

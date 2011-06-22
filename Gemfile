@@ -2,15 +2,17 @@ source 'http://gemcutter.org'
 source 'http://gems.github.com'
 source 'http://gems.rubyforge.org'
 
-gem 'rails', '2.3.11'
+gem 'rails', '3.0.7'
+
 gem 'pg'
 
+gem 'haml', '>= 3.0.24'
 
 gem 'jammit'
-gem 'thinking-sphinx', '>= 1.3.13', :require => 'thinking_sphinx'
-gem 'will_paginate', '2.3.12'
-gem 'mbleigh-subdomain-fu', :require => 'subdomain-fu'
-gem 'russian', :require => 'russian'
+gem 'thinking-sphinx', '>= 2.0.5', :require => 'thinking_sphinx'
+gem 'will_paginate', '>= 3.0.pre2'
+#gem 'subdomain-fu', '>= 1.0.0.beta2', :require => 'subdomain-fu'
+gem 'russian', :git => 'git://github.com/yaroslav/russian.git'
 gem 'RedCloth', :require => "redcloth"
 gem 'hpricot'
 gem 'memcache-client', :require => 'memcache'
@@ -22,3 +24,6 @@ gem 'rmagick', '2.13.1'
 # bundler requires these gems in all environments
 gem "nokogiri", "1.4.2"
 gem "geokit"
+
+gem 'rspec'
+gem 'rspec-rails'

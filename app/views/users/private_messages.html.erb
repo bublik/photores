@@ -16,14 +16,12 @@
           </div>
           <div class="small clear">
             <%= msg.created_at.to_formatted_s(:db) %>
-            <%= ' | ' + (msg.read ? 'Прочитал' : link_to_remote('Прочитал',
-                :url => {:controller => 'users', :action => 'read_private_messages',:id => msg},
-                :href =>url_for({:controller => 'users', :action => 'read_private_messages',:id => msg}),
-                :html => {:title => 'Пометить как прочитаннное', :id => "read_pm_#{msg.id}"})) %> |
+            <%= ' | ' + (msg.read ? 'Прочитал' : link_to('Прочитал',
+                 {:controller => 'users', :action => 'read_private_messages',:id => msg},
+                 {:remote => true, :title => 'Пометить как прочитаннное', :id => "read_pm_#{msg.id}"})) %> |
             <%= pm_form(msg.user.id, t('general.replay'),'') %> |
-            <%= link_to_remote(t('general.delete'),
-              :url => {:controller => 'users', :action => 'delete_private_messages', :id => msg},
-              :href => url_for({:controller => 'users', :action => 'delete_private_messages', :id => msg})) %>
+            <%= link_to(t('general.delete'),
+              {:controller => 'users', :action => 'delete_private_messages', :id => msg}, {:remote => true}) %>
           </div>
         </div>
       <%end%>

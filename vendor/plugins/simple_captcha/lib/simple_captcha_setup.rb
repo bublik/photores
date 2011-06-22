@@ -35,7 +35,7 @@ module SimpleCaptcha #:nodoc
     end
 
     def self.write_migration_content
-      copy_to_path = File.join(RAILS_ROOT, "db", "migrate")
+      copy_to_path = File.join(Rails.root, "db", "migrate")
       migration_filename = 
         Dir.entries(copy_to_path).collect do |file|
           number, *name = file.split("_")
@@ -47,11 +47,11 @@ module SimpleCaptcha #:nodoc
 
     def self.copy_view_file
       puts "Copying SimpleCaptcha view file."
-      mkdir(File.join(RAILS_ROOT, "app/views/simple_captcha")) unless File.exist?(File.join(RAILS_ROOT, "app/views/simple_captcha"))
+      mkdir(File.join(Rails.root, "app/views/simple_captcha")) unless File.exist?(File.join(Rails.root, "app/views/simple_captcha"))
       view_file = @version == :old ? '_simple_captcha.rhtml' : '_simple_captcha.erb'
       FileUtils.cp_r(
         File.join(File.dirname(__FILE__), "../assets/views/simple_captcha/_simple_captcha.erb"),
-        File.join(RAILS_ROOT, "app/views/simple_captcha/", view_file)
+        File.join(Rails.root, "app/views/simple_captcha/", view_file)
       )
       puts "================================DONE==========================================="
     end

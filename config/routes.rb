@@ -1,69 +1,140 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :wikis
+require 'subdomain'
 
-  Jammit::Routes.draw(map)
+Photores::Application.routes.draw do
+  resources :wikis
 
-  map.resources :priv_messages
-  map.resources :contests
-  map.resources :photo_profiles
-  map.resources :camera_brands
-  map.resources :attachments
-  map.resources :users
-  map.resources :bcomments
+  resources :priv_messages
+  resources :contests
+  resources :photo_profiles
+  resources :camera_brands
+  resources :attachments
+  resources :users
+  resources :bcomments
 
-  map.forum_list '/forums/list', :controller => 'forums', :action=>'list'
+  match '/forums/list' => 'forums#list', :as => :forum_list
 
-  map.messages_rss '/messages/rss', :controller => 'messages', :action => 'rss'
-  map.resources :messages, :member => {:replay => :any }, :collection => {:list => :get, :last_posts => :get}
-  map.rate_message '/messages/:id/rate/:rate', :controller => 'messages', :action => 'rate'
-  map.tagging '/messages/tag/*tag_name', :controller => 'messages',:action => 'tag'
-  map.wiki_tag '/wiki/tag/*tag_name', :controller => 'wikis',:action => 'tag'
-  map.user_messages '/user/:id/messages', :controller => 'messages', :action => 'user_msg_list'
-  map.user_votes '/user/:id/votes', :controller => 'messages', :action => 'user_vote_list'
-  map.user_widget '/user/:id/widget', :controller => 'users', :action => 'widget'
+  match '/messages/rss' => 'messages#rss', :as => :messages_rss
+  resources :messages,
+            :member => {:replay => :any },
+            :collection => {:list => :get, :last_posts => :get}
+  match '/messages/:id/rate/:rate' => 'messages#rate', :as => :rate_message
+  match '/messages/tag/*tag_name' => 'messages#tag', :as => :tagging
+  match '/wiki/tag/*tag_name' => 'wikis#tag', :as => :wiki_tag
+  match '/user/:id/messages' => 'messages#user_msg_list', :as => :user_messages
+  match '/user/:id/votes' => 'messages#user_vote_list', :as => :user_votes
+  match '/user/:id/widget' => 'users#widget', :as => :user_widget
     
-  map.resources :photos, :member => {:download => :any, :complaint => :any}, :collection => { :colors => :any }
-  map.resources :photo_albums
-  map.resources :photo_categories
-  map.resources :blogs
-  map.resources :fgroups
-  map.login '/login', :controller => 'login', :action => 'login'
-  map.logout '/logout', :controller => 'login', :action => 'logout'
-  map.mobile '/mobile_payment', :controller => 'progect', :action => 'mobile'
-
-  map.resources :users do |user|
-    user.resources :blogs
-    user.resources :photo_albums
-    user.resources :friends
+  resources :photos do
+    member do
+      get 'download'
+      get 'complaint'
+    end
+    collection do
+      get 'colors'
+    end
   end
-  map.search '/search/*word', :controller => 'finder', :action => 'find'
-  map.resources :blogs, :has_many => :bcomments
-  map.blogtag '/blogs/tag/*id', :controller => 'blogs', :action => 'tag'
-  map.rate_blog '/blogs/:id/rate/:rate', :controller => 'blogs', :action => 'rate'
-  map.user_root '', :controller => 'users', :action => 'show', :conditions => { :subdomain => /.+/ }
-  map.root :controller => "photos", :action => 'index'
+
+  resources :photo_albums
+  resources :photo_categories
+  resources :blogs
+  resources :fgroups
+  match '/login' => 'login#login', :as => :login
+  match '/logout' => 'login#logout', :as => :logout
+  match '/mobile_payment' => 'progect#mobile', :as => :mobile
+
+  resources :users do
+    resources :blogs
+    resources :photo_albums
+    resources :friends
+  end
+  resources :blogs, :has_many => :bcomments
+
+  match '/search/*word' => 'finder#find', :as => :search
+
+  match '/blogs/tag/*id' => 'blogs#tag', :as => :blogtag
+  match '/blogs/:id/rate/:rate' => 'blogs#rate', :as => :rate_blog
+
+  root :to => 'photos#index'
+  constraints(Subdomain) do
+	match '/' => 'users#show', :as => :user_root
+  end
+
+  #user_root '', :controller => 'users', :action => 'show', :conditions => { :subdomain => /.+/ }
 
 
-  map.resources :sites_categories, :has_many => :friend_sites
-  map.friend_site_activate '/friend_sites_activation/:id/:state', :controller => 'friend_sites', :action => 'activation'
-  map.friend_site_remote_validation '/friend_sites_validation/:id', :controller => 'friend_sites', :action => 'remote_validation'
+  resources :sites_categories, :has_many => :friend_sites
+  match '/friend_sites_activation/:id/:state' => 'friend_sites#activation', :as => :friend_site_activate
+  match '/friend_sites_validation/:id' => 'friend_sites#remote_validation', :as => :friend_site_remote_validation
   
-  map.progect '/project/:action', :controller => 'progect'
-  map.rate_photo '/photos/:id/rate/:rate', :controller => 'photos', :action => 'rate'
-  map.photo_row '/photo_row/:id', :controller => 'photos', :action => 'photo_row'
-  map.show_notes '/photo_notes/:id.:format', :controller => 'photos', :action => 'show_notes'
-  map.add_note '/photo_notes/add/:id', :controller => 'photos', :action => 'add_note'
-  map.photo_rotate '/photo_rotate/:id/:to/*page', :controller => 'photos', :action => 'rotate'
-  map.photo_tag '/photos/tag/*tag_name', :controller => 'photos', :action => 'tag'
-  map.photo_comment '/photos/add_comment/:id', :controller => 'photos', :action => 'add_comment'
-  map.photo_manage_comment '/photo_comment/:id/:change_to/:comment_id', :controller => 'photos', :action => 'manage_comment'
-  map.photo_vote '/photo/vote_list/:id', :controller => 'photos', :action => 'photo_vote_list'
+  match '/project/:action' => 'progect', :as => :progect
+  match '/photos/:id/rate/:rate' => 'photos#rate', :as => :rate_photo
+  match '/photo_row/:id' => 'photos#photo_row', :as => :photo_row
+  match '/photo_notes/:id.:format' => 'photos#show_notes', :as => :show_notes
+  match '/photo_notes/add/:id' => 'photos#add_note', :as => :add_note
+  match '/photo_rotate/:id/:to/*page' => 'photos#rotate', :as => :photo_rotate
+  match '/photos/tag/*tag_name' => 'photos#tag', :as => :photo_tag
+  match '/photos/add_comment/:id' => 'photos#add_comment', :as => :photo_comment
+  match '/photo_comment/:id/:change_to/:comment_id' => 'photos#manage_comment', :as => :photo_manage_comment
+  match '/photo/vote_list/:id' => 'photos#photo_vote_list', :as => :photo_vote
   
   
-  map.sitemap '/sitemap.xml', :controller => 'sitemap', :action => 'xml'
-  map.simple_captcha '/simple_captcha/:action', :controller => 'simple_captcha'
-  # map.connect ':controller/:action/:id.:format', :format => 'html'
-  map.connect ':controller/:action/:id'#
-    
-  map.connect '*path', :controller => 'error' #page not found
+  match '/sitexml' => 'sitemap#xml', :as => :sitemap
+  match '/simple_captcha/:action' => 'simple_captcha', :as => :simple_captcha
+
+  match "/:controller(/:action(/:id))(.:format)"
+
+  # Sample of regular route:
+  #   match 'products/:id' => 'catalog#view'
+  # Keep in mind you can assign values other than :controller and :action
+
+  # Sample of named route:
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # This route can be invoked with purchase_url(:id => product.id)
+
+  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
+
+  # Sample resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
+
+  # Sample resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
+
+  # Sample resource route with more complex sub-resources
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', :on => :collection
+  #     end
+  #   end
+
+  # Sample resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
+
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  # root :to => "welcome#index"
+
+  # See how all your routes lay out with "rake routes"
+
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  # match ':controller(/:action(/:id(.:format)))'
+
 end

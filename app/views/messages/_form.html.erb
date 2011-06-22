@@ -31,9 +31,8 @@
       <td class="l">
         <% @message.attachments.each do |attach| -%>
           <div id='attach_<%= attach.id %>' class="small">
-            <%= attach.title + ' '+ link_to_remote('',
-              :url => {:controller => 'attachments', :action => 'destroy', :id => attach}, 
-              :method => :delete, :html => {:class => 'ico ico-cancel'}) %><br/>
+            <%= attach.title + ' '+ link_to('', {:controller => 'attachments', :action => 'destroy', :id => attach},
+              {:remote => true, :method => :delete, :class => 'ico ico-cancel'}) %><br/>
           </div>
         <% end -%>
       </td>

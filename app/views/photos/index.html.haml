@@ -1,0 +1,69 @@
+- title('')
+.tricol
+  %ul#row1.ui-sortable
+    - cache("/photo/categories_#{@photos.first.cache_key}") do
+      %li#col_1.pad5
+        %h2 Фото жанры
+        = photo_categories
+    - end unless @photos.empty?
+    %li#col_todo.inline.pad5
+      %h2 Новая работа
+      - if @photos.count.eql?(0)
+        %h3 Фотографий на данный момент нет
+      - else
+        = link_to(image_tag(@photos.first.public_filename(:thumb), :alt => @photos.first.alt, :style => 'max-width: 300px;'), |
+          photo_path(@photos.first, :html), :title => @photos.first.alt)                                                      |
+      = add_new_photo_link
+    %li#col_fixed.pad5
+      %div{:style => "float: left"}
+        %h2 Наши конкурсы
+        = contests_list
+        %h2 Фишка
+        %div= link_to('Поиск фото по цветам','/photos/colors')
+        %div= link_to('Пополнение мобильного онлайн', mobile_path)
+      .clear
+        .left= site_activity
+        .right
+          %noindex/
+          = banner_advert
+  / next row
+  %ul.clear
+    - cache("/photo/last_photos_#{@photos.first.cache_key}") do
+      %li.inline.pad5
+        %h2 Новые фотографии
+        = content_tag(:ul, @photos.collect{|p| content_tag(:li, small_image(p, false, false))}.to_s.html_safe )
+    - end unless @photos.empty?
+    %li.inline.pad5
+      %h2 Топ комментируемых
+      = photo_ratings('comment')
+    %li.inline.pad5
+      %h2 Топ просматриваемых
+      = photo_ratings('show')
+  %ul.clear.inline
+    %li.inline.pad5
+      %h2 На форуме
+      = forum_last_posts(7)
+    %li.pad5
+      %h2 Комментарии
+      = last_photo_comments(10)
+    %li.inline.pad5
+      %h2 В блогах
+      = blog_last_posts(10)
+  %ul.clear.inline
+    %li.inline.pad5
+      %h2 Топ закачиваемых
+      = photo_ratings('download')
+    %li.inline.pad5
+      %h2 Наши друзья
+      %div
+      %h2 Реклама
+      %div= show_sape_links(5)
+      = google_advert_block_links
+    %li.inline.pad5
+      %h2 Активность
+      = last_activity(10)
+  %ul.clear.inline
+    %li.inline.pad5
+      %h2 Сейчас на сайте
+      = online
+%br.clear/

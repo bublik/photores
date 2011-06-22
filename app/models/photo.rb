@@ -97,19 +97,17 @@ class Photo < ActiveRecord::Base
   validates_associated :photo_albums
   validates_as_attachment
 
-  named_scope :thumbnails, lambda{ |type| {:conditions => ['thumbnail = ?',type]}}
-  named_scope :limit, lambda{ |limit| {:limit => limit}}
-  named_scope :order, lambda{ |type| {:order => type}} #type = 'column ASC'
-  named_scope :parents, lambda{{ :conditions => {:parent_id => nil, :is_moderated => true}, :order => 'id DESC'}}
-  named_scope :random, lambda{{ :order => 'random()'}}
-  named_scope :parent, lambda {{:conditions => {:parent_id => self.id}}}
-  named_scope :this_week, lambda {{:conditions => ['updated_at > ?', Time.now - 7.days]}}
-  named_scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
-  named_scope :this_moths, lambda {{:conditions => ['updated_at > ?', Time.now - 30.days]}}
-  named_scope :this_week_downloads, lambda {{:conditions => ['downloads > 0 AND download_at > ?', Time.now - 7.days]}} #.at_beginning_of_week
-  named_scope :this_moths_downloads, lambda {{:conditions => ['downloads > 0 AND download_at > ?', Time.now - 30.days]}}
-  named_scope :this_moths_comments, lambda {{:conditions => ['comment_at > ?', Time.now - 30.days]}}
-  named_scope :top_complaints, :conditions => 'complaint > 0', :order => 'complaint DESC'
+  scope :thumbnails, lambda{ |type| {:conditions => ['thumbnail = ?',type]}}
+  scope :parents, lambda{{ :conditions => {:parent_id => nil, :is_moderated => true}, :order => 'id DESC'}}
+  scope :random, lambda{{ :order => 'random()'}}
+  #scope :parent, lambda{{ :conditions => {:parent_id => self.id }}}
+  scope :this_week, lambda {{:conditions => ['updated_at > ?', Time.now - 7.days]}}
+  scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
+  scope :this_moths, lambda {{:conditions => ['updated_at > ?', Time.now - 30.days]}}
+  scope :this_week_downloads, lambda {{:conditions => ['downloads > 0 AND download_at > ?', Time.now - 7.days]}} #.at_beginning_of_week
+  scope :this_moths_downloads, lambda {{:conditions => ['downloads > 0 AND download_at > ?', Time.now - 30.days]}}
+  scope :this_moths_comments, lambda {{:conditions => ['comment_at > ?', Time.now - 30.days]}}
+  scope :top_complaints, :conditions => 'complaint > 0', :order => 'complaint DESC'
   
   define_index do
     indexes :title, :sortable => true
@@ -141,9 +139,7 @@ class Photo < ActiveRecord::Base
   
   def after_save
     self.user.update_attribute(:last_activity, current_state) if is_parent? && current_state
-  end
-
-  after_attachment_saved do |record|
+    record = self
     #Создание строк с гистограммой для уменьшенной фотки
     if record.thumbnail.eql?('thumb')
       img = Magick::Image.read(record.full_filename).first
@@ -267,7 +263,8 @@ ORDER BY COUNT(photo_id) DESC) ORDER BY created_at DESC"
   end
 
   def keywords
-    self.tags.collect{|t| t.name+', ' } + self.title.to_s.split("\s").collect{|word| word+', '}
+    #self.tag_list.collect{|t| t.name+', ' } +
+        self.title.to_s.split("\s").collect{|word| word+', '}
   end
 
   def to_param

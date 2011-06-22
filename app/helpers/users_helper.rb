@@ -59,7 +59,7 @@ module UsersHelper
   #TODO add possibility user make private avatar
   def avatar_list
     return @@list unless @@list.empty?
-    @dir = Dir["#{RAILS_ROOT}/public/"+APP_CONFIG['avatars_dir']+"/*{gif,jpg,jpeg,png}"]
+    @dir = Dir["#{Rails.root}/public/"+APP_CONFIG['avatars_dir']+"/*{gif,jpg,jpeg,png}"]
     @dir.sort.each {|file|  @@list << APP_CONFIG['avatars_dir']+file.split("/").pop   }
     return @@list
   end

@@ -70,13 +70,15 @@ class User < ActiveRecord::Base
   validates_length_of :home_page, :maximum => 100, :allow_nil => true
   validates_length_of :location, :maximum => 100, :allow_nil => true
 
-  named_scope :active, :conditions => 'active = true', :order => 'id ASC'
-  named_scope :random,  :conditions => 'active = true',:order => 'random()'
-  named_scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
+  scope :active, :conditions => 'active = true', :order => 'id ASC'
+  scope :random,  :conditions => 'active = true',:order => 'random()'
+  scope :today, lambda {{:conditions => ['created_at > ?', Time.now.ago(24.hours)]}}
   
   cattr_reader :per_page
   @@per_page = 10
   @@default_avatar = '/images/avatars/noimg.gif'
+  before_create :preset
+  before_save :user_updates
 
   def self.grand_admin(user)
     user.privilegies = 1
@@ -97,7 +99,7 @@ Update subdomain for stupid users
     self.update_attribute(:active, true)
   end
   
-  def before_create
+  def preset
     #Инициализируем начальные установки пользователя
     self.avatar = @@default_avatar
     self.privilegies = 3
@@ -109,7 +111,7 @@ Update subdomain for stupid users
     self.code_activate = User.md5(Time.now.to_s)
   end
   
-  def before_save
+  def user_updates
     if self.subdomain.blank?
       self.subdomain = self.login
     elsif self.subdomain.match(/http:\/\/([a-z0-9]+)\..*/i)
@@ -161,7 +163,7 @@ Update subdomain for stupid users
   end
 
   def random_photos(limit = 5)
-    photos.find(:all, :limit => limit, :order => 'random()')
+    photos.limit(limit).order('random()')
   end
 
   private

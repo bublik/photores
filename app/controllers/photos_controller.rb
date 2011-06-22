@@ -332,7 +332,8 @@ class PhotosController < ApplicationController
   
   protected
   def init_photo
-    @photo = Photo.find(params[:id].to_i, :include => [:photo_categories, :user, :photo_albums, :photo_profile, :comments])
+    @photo = Photo.find(params[:id].to_i)
+    logger.debug("PHOTO: ==========> "+@photo.inspect)
     redirect_to(photo_path(@photo.parent, :html), :status => 301) and return unless @photo.is_parent?
     unless @photo
       flash[:notice] = 'Такой фотографии нет.'

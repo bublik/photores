@@ -2,18 +2,10 @@ module CounterAndAdvert
 
   def google_verify_code
     return '' if APP_CONFIG['google_verify'][APP_CONFIG['domain']].blank?
-    '<meta name="verify-v1" content="'+APP_CONFIG['google_verify'][APP_CONFIG['domain']]+'" />'
+    '<meta name="verify-v1" content="'+APP_CONFIG['google_verify'][APP_CONFIG['domain']]+'" />'.html_safe
   end
   
   def google_analytix_adds
-    if request.host.match('addfoto.ru')
-      return ' <!--LiveInternet counter--><script type="text/javascript"><!--
-new Image().src = "//counter.yadro.ru/hit?r"+
-escape(document.referrer)+((typeof(screen)=="undefined")?"":
-";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-";"+Math.random();//--></script><!--/LiveInternet-->'
-    end
     return '' if APP_CONFIG['google_analytics'][APP_CONFIG['domain']].blank?
     '<script type="text/javascript">
       window.google_analytics_uacct = "'+APP_CONFIG['google_analytics'][APP_CONFIG['domain']]+'";
@@ -21,12 +13,6 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
   end
   
   def google_analytics
-    if request.host.match('addfoto.ru')
-     return '<!--LiveInternet logo--><a href="http://www.liveinternet.ru/click"
-target="_blank"><img src="//counter.yadro.ru/logo?14.1"
-title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня"
-alt="" border="0" width="88" height="31"/></a><!--/LiveInternet-->'
-    end
     return '' if APP_CONFIG['google_analytics'][APP_CONFIG['domain']].blank?
     '<script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -38,7 +24,7 @@ var pageTracker = _gat._getTracker("'+APP_CONFIG['google_analytics'][APP_CONFIG[
 pageTracker._setDomainName(".'+APP_CONFIG['domain'].html_safe+'");
 pageTracker._trackPageview();
 } catch(err) {}
-</script>'
+</script>'.html_safe
   end
 
   def google_advert_horizont_links

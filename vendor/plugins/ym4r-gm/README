@@ -55,9 +55,9 @@ Conversely, the YM4R gem does not need the plugin to work.
 Install like any other Rails plugin:
 	ruby script/plugin install svn://rubyforge.org/var/svn/ym4r/Plugins/GM/trunk/ym4r_gm
 
-As part of the installation procedure, the JavaScript files found in the <tt>PLUGIN_ROOT/javascript</tt> directory will be copied to the <tt>RAILS_ROOT/public/javascripts/</tt> directory. 
+As part of the installation procedure, the JavaScript files found in the <tt>PLUGIN_ROOT/javascript</tt> directory will be copied to the <tt>Rails.root/public/javascripts/</tt> directory.
 
-Moreover a <tt>gmaps_api_key.yml</tt> file will also be created in the <tt>RAILS_ROOT/config/</tt> folder. If this file already exists (installed for example by a previous version of the plugin), nothing will be done to it, so you can keep your configuration data even after updating the plugin. This file is a YAML representation of a hash, similar to the <tt>database.yml</tt> file in that the primary keys in the file are the different environments (development, test, production), since you will probably need to have different Google Maps API keys depending on that criteria (for example: a key for localhost for development and test; a key for your host for production). If you don't have any special need, there will be only one key associated with each environment. If however, you need to have multiple keys (for example if your app will be accessible from multiple URLs, for which you need different keys), you can also associate a hash to the environment, whose keys will be the different hosts. In this case, you will need to pass a value to the <tt>:host</tt> key when calling the method <tt>GMap.header</tt> (usually <tt>@request.host</tt>).
+Moreover a <tt>gmaps_api_key.yml</tt> file will also be created in the <tt>Rails.root/config/</tt> folder. If this file already exists (installed for example by a previous version of the plugin), nothing will be done to it, so you can keep your configuration data even after updating the plugin. This file is a YAML representation of a hash, similar to the <tt>database.yml</tt> file in that the primary keys in the file are the different environments (development, test, production), since you will probably need to have different Google Maps API keys depending on that criteria (for example: a key for localhost for development and test; a key for your host for production). If you don't have any special need, there will be only one key associated with each environment. If however, you need to have multiple keys (for example if your app will be accessible from multiple URLs, for which you need different keys), you can also associate a hash to the environment, whose keys will be the different hosts. In this case, you will need to pass a value to the <tt>:host</tt> key when calling the method <tt>GMap.header</tt> (usually <tt>@request.host</tt>).
 
 ==Migration from the YM4R gem versions <= 0.4.1
 Apart from the installation of the plugin detailed above, you will also need to delete the instructions to require the file and include the Ym4r::GoogleMaps module in your controllers:
@@ -327,7 +327,7 @@ The other constructor arguments have the same meaning as PreTiledLayer. Here is 
     	  y = @params[:y]
     	  z = @params[:z]
     	  begin
-            send_file "#{RAILS_ROOT}/public/tiles/tile_#{z}_#{x}_#{y}.png" , 
+            send_file "#{Rails.root}/public/tiles/tile_#{z}_#{x}_#{y}.png" ,
 		:type => 'image/png', :disposition => 'inline'
           rescue Exception
             render :nothing => true

@@ -11,7 +11,7 @@ class PhotoObserver < ActiveRecord::Observer
   #Отсылать автору для коментариев, изменения рейтинга и жалоб
   def after_update(photo)
     return unless photo.is_parent?
-    photo.user.subscribed
+    #photo.user.subscribed
 
     if photo.current_state.eql?(Photo.states[:complaint])
       Photomailer.deliver_complaint_photo(photo, photo.user) if photo.user.subscribed

@@ -1,4 +1,4 @@
-class SitesCategoriesController < ApplicationController
+class SitesCategoriesController < ActionController::Base
   # GET /sites_categories
   # GET /sites_categories.xml
   def index
